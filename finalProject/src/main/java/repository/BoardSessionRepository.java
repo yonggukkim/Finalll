@@ -47,7 +47,13 @@ public class BoardSessionRepository extends AbstractRepository {
 		try {
 			System.out.println("Repository" + qna.getQnaNum());
 			String statement = namespace + ".selectQnaByConditionList";
-			return sqlSession.selectList(statement, qna);
+			List<Qna> list = sqlSession.selectList(statement, qna);
+			for(Object o : list) {
+				Qna qna1 = (Qna)o;
+				System.out.println("count"+qna1.getQnaCount());
+				System.out.println("qnanum"+qna1.getQnaNum());
+			}
+			return list;
 		} finally {
 			sqlSession.close();
 		}

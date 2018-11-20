@@ -18,10 +18,19 @@ public class BoardController {
 	@Autowired
 	private BoardService boardService;
 
+	@RequestMapping(value="/notice_board", method = RequestMethod.GET)
+	public String handleStep1(Qna qna, Model model) {
+		List<Qna> list = boardService.selectQnaList(qna);
+		model.addAttribute("list",list);
+		model.addAttribute("bodyPage", "notice_board.jsp");
+		return "main";
+	}
+	
 	@RequestMapping(value = "/qna_insert", method = RequestMethod.GET)
 	public String qnaInsertGet(Qna qna, Model model) {
 		System.out.println("GET INSERT");
-		return "qnaBoard/qna_insert";
+		model.addAttribute("bodyPage", "qnaBoard/qna_insert.jsp");
+		return "main";
 	}
 
 	@RequestMapping(value = "/qna_insert", method = RequestMethod.POST)
@@ -35,13 +44,13 @@ public class BoardController {
 			model.addAttribute("list", list);
 			System.out.println(qna.getQnaNum());
 			System.out.println(list.size());
-			return "redirect:qna_list";
+			return "redirect:notice_board";
 		} else {
-			return "qnaBoard/qna_insert";
+			return "redirect:main";
 		}
 	}
 
-	@RequestMapping(value = "qna_list", method = RequestMethod.GET)
+	/*@RequestMapping(value = "qna_list", method = RequestMethod.GET)
 	public String qnaListGet(Qna qna, Model model) {
 		System.out.println("Get list");
 		List<Qna> list = boardService.selectQnaList(qna);
@@ -52,8 +61,8 @@ public class BoardController {
 		}else {
 			return "qnaBoard/qna_list";
 		}
-	}
-	
+	}*/
+	/*
 	@RequestMapping(value = "qna_list", method = RequestMethod.POST)
 	public String qnaListPost(Qna qna, Model model) {
 		System.out.println("Get list");
@@ -65,7 +74,7 @@ public class BoardController {
 		}else {
 			return "qnaBoard/qna_list";
 		}
-	}
+	}*/
 	
 	@RequestMapping(value = "qna_detail", method = RequestMethod.GET)
 	public String qnaDetailGet(@RequestParam(value = "qnaSubject", defaultValue = "false") String qnaSubject, Qna qna, Model model) {

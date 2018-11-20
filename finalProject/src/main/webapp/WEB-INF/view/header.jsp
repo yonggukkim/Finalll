@@ -81,7 +81,7 @@
               <a class="nav-link" href="intro">회사소개</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">커뮤니티</a>
+              <a class="nav-link" href="notice_board">커뮤니티</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="logout">로그아웃</a>

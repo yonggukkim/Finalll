@@ -18,21 +18,12 @@
 			property="qnaContent" />
 		<result column="qna_file" jdbcType="VARCHAR"  property="qnaFile" />
 		<result column="qna_pw" jdbcType="VARCHAR"  property="qnaPw" />
-		<result column="qna_Count " jdbcType="BIGINT"  property="qnaCount" />
+		<result column="qna_Count" jdbcType="INTEGER"  property="qnaCount" />
 	</resultMap>
 
 <select id="selectQnaByConditionOne" parameterType="Qna" resultMap="qnaMap">
 		SELECT
-		QNA_NUM
-		MEMBER_NUM, 
-		STAFF_NUMBER,
-		QNA_DATE,
-		QNA_SUBJECT,
-		QNA_CONTENT,
-		QNA_FILE,
-		QNA_PW,
-		QNA_COUNT
-		FROM QNA
+		QNA_NUM, MEMBER_NUM, STAFF_NUMBER, QNA_DATE, QNA_SUBJECT, QNA_CONTENT, QNA_FILE, QNA_PW, QNA_COUNT FROM QNA
 		<where>
 			<if test="qnaSubject != null">
 				qna_subject = #{qnaSubject}
@@ -41,17 +32,7 @@
 	</select>
 	
 <select id="selectQnaByConditionList" parameterType="Qna" resultMap="qnaMap">
-		SELECT
-		QNA_NUM
-		MEMBER_NUM, 
-		STAFF_NUMBER,
-		QNA_DATE,
-		QNA_SUBJECT,
-		QNA_CONTENT,
-		QNA_FILE,
-		QNA_PW,
-		QNA_COUNT
-		FROM QNA
+		SELECT QNA_NUM, MEMBER_NUM, STAFF_NUMBER, QNA_DATE, QNA_SUBJECT, QNA_CONTENT, QNA_FILE, QNA_PW, QNA_COUNT FROM QNA
 </select>
 	
  	<insert id="insertQna" parameterType="Qna">

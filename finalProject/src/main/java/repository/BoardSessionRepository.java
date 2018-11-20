@@ -31,11 +31,22 @@ public class BoardSessionRepository extends AbstractRepository {
 		}
 	}
 
-	public List<Qna> selectQnaByCondition(Qna qna) {
+	public Qna selectQnaByConditionOne(Qna qna) {
+		SqlSession sqlSession = getSqlSessionFactory().openSession();
+		try {
+			System.out.println("Repository" + qna.getQnaSubject());
+			String statement = namespace + ".selectQnaByConditionOne";
+			return sqlSession.selectOne(statement, qna);
+		} finally {
+			sqlSession.close();
+		}
+	}
+	
+	public List<Qna> selectQnaByConditionList(Qna qna) {
 		SqlSession sqlSession = getSqlSessionFactory().openSession();
 		try {
 			System.out.println("Repository" + qna.getQnaNum());
-			String statement = namespace + ".selectQnaByCondition";
+			String statement = namespace + ".selectQnaByConditionList";
 			return sqlSession.selectList(statement, qna);
 		} finally {
 			sqlSession.close();
@@ -58,10 +69,10 @@ public class BoardSessionRepository extends AbstractRepository {
 		}
 	}
 
-	public Integer deleteQna(String qnaNum) {
+	public Integer deleteQna(String qnaSubject) {
 		SqlSession sqlSession = getSqlSessionFactory().openSession();
 		try {
-			int result = sqlSession.delete(String.format("%s.deleteQna", namespace), qnaNum);
+			int result = sqlSession.delete(String.format("%s.deleteQna", namespace), qnaSubject);
 			if (result > 0)
 				sqlSession.commit();
 			else
@@ -71,5 +82,4 @@ public class BoardSessionRepository extends AbstractRepository {
 			sqlSession.close();
 		}
 	}
-
 }

@@ -46,7 +46,7 @@
 					</thead>
 					<tbody>
 						<form:form commandName="qna" action="qna_insert">
-							<form:hidden path="qnaNum" value="2" />
+							<form:hidden path="qnaNum" />
 							<form:hidden path="memberNum" value="2" />
 							<form:hidden path="staffNumber" value="2" />
 							<form:hidden path="qnaCount" value="2" />

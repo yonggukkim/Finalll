@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-
+	pageEncoding="UTF-8" import="model.Qna, java.util.*"%>
+<%
+	request.setCharacterEncoding("utf-8");
+	Qna qna = (Qna)request.getAttribute("qna");
+%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -26,32 +29,7 @@
 <link href="http://localhost:8080/finalProject/css/scrolling-nav.css" rel="stylesheet">
 
 </head>
-
 <body id="page-top">
-
-	<!-- Navigation -->
-	<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top"
-		id="mainNav">
-		<div class="container">
-			<a class="navbar-brand js-scroll-trigger" href="#page-top">기프트립 </a>
-			<button class="navbar-toggler" type="button" data-toggle="collapse"
-				data-target="#navbarResponsive" aria-controls="navbarResponsive"
-				aria-expanded="false" aria-label="Toggle navigation">
-				<span class="navbar-toggler-icon"></span>
-			</button>
-			<div class="collapse navbar-collapse" id="navbarResponsive">
-				<ul class="navbar-nav ml-auto">
-					<li class="nav-item"><a class="nav-link js-scroll-trigger"
-						href="#about">로그인</a></li>
-					<li class="nav-item"><a class="nav-link js-scroll-trigger"
-						href="#services">회원가입</a></li>
-					<li class="nav-item"><a class="nav-link js-scroll-trigger"
-						href="#contact">마이페이지</a></li>
-				</ul>
-			</div>
-		</div>
-	</nav>
-
 	<section id="services" class="bg-light">
 		<div class="container">
 			<div class="row">
@@ -61,39 +39,40 @@
 						<h2>질문글상세보기</h2>
 							<tr>
 								<th scope="col" style="width: 90px">글쓴이</th>
-								<td>글쓴이입니다</td>
+								<td><%= qna.getMemberNum() %></td>
 								<th scope="col">작성일</th>
-								<td>2018-11-12</td>
+								<td><%= qna.getQnaDate() %></td>
 							</tr>
 						</thead>
 						<tbody>
-							<form action="" method="post" encType="multiplart/form-data">
-								<tr>
+							<tr>
 									<th scope="col">제목</th>
-									<td>제목입니다</td>
+									<td><%= qna.getQnaSubject() %></td>
 									<th scope="col">조회수</th>
-									<td>조회수입니다</td>
+									<td><%= qna.getQnaCount() %></td>
 								</tr>
 								<tr>
 									<th rowspan="5" scope="row">내용</th>
-									<td rowspan="5" colspan="5">내용d입니다내용d입니다내용d입니다내용d입니다내용d입니다내용d입니다내용d입니다내용d입니다내용d입니다내용d입니다내용d입니다내용d입니다내용d입니다내용d입니다내용d입니다내용d입니다내용d입니다내용d입니다내용d입니다내용d입니다내용d입니다내용d입니다내용d입니다내용d입니다내용d입니다내용d입니다내용d입니다내용d입니다내용d입니다내용d입니다내용d입니다내용d입니다내용d입니다내용d입니다내용d입니다내용d입니다</td>
+									<td rowspan="5" colspan="5"><%=qna.getQnaContent() %></td>
 								</tr>
 						</tbody>
 						<tfoot>
 							<tr>
 								<th scope="row">첨부파일</th>
-								<td colspan="3">첨부파일입니다</td>
+								<td colspan="3"><%= qna.getQnaFile() %></td>
 							</tr>
 							<tr>
 								<th scope="row">댓글</th>
 								<td colspan="3">댓글입니다</td>
 							</tr>
 							<tr>
-								<td colspan="5" scope="row"><input type="button"
-									value="글 목록" class=" " onclick="" /></td>
+								<td colspan="5" scope="row">
+									<a href="qna_modify"><input type="button" value="글 수정" /></a>
+									<a href="qna_delete"><input type="button" value="글 삭제" /></a>
+									<a href="qna_list"><input type="button" value="글 목록" /></a>
+								</td>
 							</tr>
 						</tfoot>
-						</form>
 					</table>
 				</div>
 			</div>
@@ -132,29 +111,6 @@
 				</div>
 			</div>
 	</section>
-
-	<!-- Footer -->
-	<footer class="py-5 bg-dark">
-		<div class="container">
-			<p class="m-0 text-center text-white">Copyright &copy; Your
-				Website 2017</p>
-		</div>
-		<!-- /.container -->
-	</footer>
-
-<!-- 	<!-- Bootstrap core JavaScript -->
-	<script
-		src="http://localhost:8080/finalProject/vendor/jquery/jquery.min.js"></script>
-	<script
-		src="http://localhost:8080/finalProject/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-	Plugin JavaScript
-	<script
-		src="http://localhost:8080/finalProject/vendor/jquery-easing/jquery.easing.min.js"></script>
-
-	Custom JavaScript for this theme
-	<script
-		src="http://localhost:8080/finalProject/js/scrolling-nav.js"></script> -->
 </body>
 
 </html>

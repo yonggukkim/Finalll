@@ -20,53 +20,8 @@
 		<result column="qna_pw" jdbcType="VARCHAR"  property="qnaPw" />
 		<result column="qna_Count " jdbcType="BIGINT"  property="qnaCount" />
 	</resultMap>
-<!-- 
-	<resultMap type="Notice" id="noticeMap">
-		<id column="notice_num" jdbcType="VARCHAR" property="noticeNum" />
-		<id column="staff_number" jdbcType="VARCHAR" property="staffNumber" />
-		<result column="notice_date" jdbcType="TIMESTAMP"
-			property="noticeDate" />
-		<result column="notice_subject" jdbcType="VARCHAR"
-			property="noticeSubject" />
-		<result column="notice_content" jdbcType="VARCHAR"
-			property="noticeContent" />
-		<result column="notice_file" jdbcType="VARCHAR"
-			property="noticeFile" />
-		<result column="notice_pw" jdbcType="VARCHAR"
-			property="noticePw" />
-		<result column="notice_count " jdbcType="BIGINT"
-			property="noticeCount" />
-	</resultMap>
 
-
-	<resultMap type="Review" id="reviewMap">
-		<id column="review_num" jdbcType="VARCHAR" property="reviewNum" />
-		<id column="pkg_num" jdbcType="VARCHAR" property="pkgNum" />
-		<id column="member_num" jdbcType="VARCHAR" property="memberNum" />
-		<result column="review_date" jdbcType="TIMESTAMP"
-			property="reviewDate" />
-		<result column="review_content" jdbcType="VARCHAR"
-			property="reviewContent" />
-		<result column="review_file" jdbcType="VARCHAR"
-			property="reviewFile" />
-		<result column="review_pw" jdbcType="VARCHAR"
-			property="reviewPw" />
-		<result column="review_Count " jdbcType="BIGINT"
-			property="reviewCount" />
-		<result column="review_Rating" jdbcType="BIGINT"
-			property="reviewRating" />
-	</resultMap>
-
-	<resultMap type="SelfPlanNumber" id="selfPlanNumberMap">
-		<id column="self_plan_number" jdbcType="VARCHAR"
-			property="selfPlanNumber" />
-		<id column="self_total_order" jdbcType="VARCHAR"
-			property="selfTotalOrder" />
-		<id column="member_num" jdbcType="VARCHAR" property="memberNum" />
-	</resultMap> 
--->
-
-<select id="selectQnaByCondition" parameterType="Qna" resultMap="qnaMap">
+<select id="selectQnaByConditionOne" parameterType="Qna" resultMap="qnaMap">
 		SELECT
 		QNA_NUM
 		MEMBER_NUM, 
@@ -79,16 +34,30 @@
 		QNA_COUNT
 		FROM QNA
 		<where>
-			<if test="qnaNum != null">
-				qna_num = #{qnaNum}
+			<if test="qnaSubject != null">
+				qna_subject = #{qnaSubject}
 			</if>
 		</where>
 	</select>
 	
+<select id="selectQnaByConditionList" parameterType="Qna" resultMap="qnaMap">
+		SELECT
+		QNA_NUM
+		MEMBER_NUM, 
+		STAFF_NUMBER,
+		QNA_DATE,
+		QNA_SUBJECT,
+		QNA_CONTENT,
+		QNA_FILE,
+		QNA_PW,
+		QNA_COUNT
+		FROM QNA
+</select>
+	
  	<insert id="insertQna" parameterType="Qna">
 		insert into
 		QNA(QNA_NUM, MEMBER_NUM, STAFF_NUMBER, QNA_DATE, QNA_SUBJECT, QNA_CONTENT, QNA_FILE, QNA_PW, QNA_COUNT)
-		values(#{qnaNum}, #{memberNum}, #{staffNumber}, #{qnaDate}, #{qnaSubject}, #{qnaContent}, #{qnaFile}, #{qnaPw},#{qnaCount})
+		values((select count(qna_num)+1 from QNA), #{memberNum}, #{staffNumber}, #{qnaDate}, #{qnaSubject}, #{qnaContent}, #{qnaFile}, #{qnaPw},#{qnaCount})
 	</insert>
  
 

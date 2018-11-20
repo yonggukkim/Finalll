@@ -1,10 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8" import="model.Qna"%>
+	pageEncoding="UTF-8" import="model.Qna, java.util.*"%>
 
 <%
 	request.setCharacterEncoding("utf-8");
-	Qna qna = (Qna) request.getAttribute("qna");
-	System.out.println(qna);
+	List list = (List) request.getAttribute("list");
 %>
 
 <!DOCTYPE html>
@@ -88,13 +87,20 @@
 							</tr>
 						</thead>
 						<tbody>
+							<%
+								for ( int i = 0; i < list.size(); i++) {
+									Qna qna = (Qna)list.get(i);
+							%>
 							<tr>
 								<th scope="row"><%=qna.getQnaNum()%></th>
 								<td><%=qna.getMemberNum()%></td>
-								<td><a href="#"><%=qna.getQnaSubject()%></a></td>
+								<td><a href="qna_detail?qnaSubject=<%=qna.getQnaSubject()%>"><%=qna.getQnaSubject()%></a></td>
 								<td><%=qna.getQnaDate()%></td>
 								<td><%=qna.getQnaCount()%></td>
 							</tr>
+							<%
+							}
+							%>
 						</tbody>
 					</table>
 					<div class="container">

@@ -19,12 +19,16 @@ public class BoardService {
 		System.out.println("service   " + qna.getMemberNum());
 		return boardRepository.insertQna(qna);
 	}
-
-	public List<Qna> selectQna(Qna qna) {
+	public List<Qna> selectQnaList(Qna qna) {
 		System.out.println("service   " + qna.getQnaNum());
-		return boardRepository.selectQnaByCondition(qna);
+		return boardRepository.selectQnaByConditionList(qna);
 	}
 
+	public Qna selectQnaOne(Qna qna) {
+		System.out.println("service"+qna.getQnaSubject());
+		return boardRepository.selectQnaByConditionOne(qna);
+	}
+	
 	public Integer updateQna(Qna qna) {
 		System.out.println("service   " + qna.getQnaNum());
 		return boardRepository.updateQna(qna);

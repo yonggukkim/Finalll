@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC 
+	"-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="repository.mapper.BoardMapper">
+	<cache />
+
+ 
+	<resultMap type="Qna" id="qnaMap">
+		<id column="qna_num" jdbcType="VARCHAR" property="qnaNum" />
+		<id column="member_num" jdbcType="VARCHAR"  property="memberNum" />
+		<id column="staff_number" jdbcType="VARCHAR"  property="staffNumber" />
+		<result column="qna_date" jdbcType="TIMESTAMP" property="qnaDate" />
+		<result column="qna_subject" jdbcType="VARCHAR" 
+			property="qnaSubject" />
+		<result column="qna_content" jdbcType="VARCHAR" 
+			property="qnaContent" />
+		<result column="qna_file" jdbcType="VARCHAR"  property="qnaFile" />
+		<result column="qna_pw" jdbcType="VARCHAR"  property="qnaPw" />
+		<result column="qna_Count " jdbcType="BIGINT"  property="qnaCount" />
+	</resultMap>
+<!-- 
+	<resultMap type="Notice" id="noticeMap">
+		<id column="notice_num" jdbcType="VARCHAR" property="noticeNum" />
+		<id column="staff_number" jdbcType="VARCHAR" property="staffNumber" />
+		<result column="notice_date" jdbcType="TIMESTAMP"
+			property="noticeDate" />
+		<result column="notice_subject" jdbcType="VARCHAR"
+			property="noticeSubject" />
+		<result column="notice_content" jdbcType="VARCHAR"
+			property="noticeContent" />
+		<result column="notice_file" jdbcType="VARCHAR"
+			property="noticeFile" />
+		<result column="notice_pw" jdbcType="VARCHAR"
+			property="noticePw" />
+		<result column="notice_count " jdbcType="BIGINT"
+			property="noticeCount" />
+	</resultMap>
+
+
+	<resultMap type="Review" id="reviewMap">
+		<id column="review_num" jdbcType="VARCHAR" property="reviewNum" />
+		<id column="pkg_num" jdbcType="VARCHAR" property="pkgNum" />
+		<id column="member_num" jdbcType="VARCHAR" property="memberNum" />
+		<result column="review_date" jdbcType="TIMESTAMP"
+			property="reviewDate" />
+		<result column="review_content" jdbcType="VARCHAR"
+			property="reviewContent" />
+		<result column="review_file" jdbcType="VARCHAR"
+			property="reviewFile" />
+		<result column="review_pw" jdbcType="VARCHAR"
+			property="reviewPw" />
+		<result column="review_Count " jdbcType="BIGINT"
+			property="reviewCount" />
+		<result column="review_Rating" jdbcType="BIGINT"
+			property="reviewRating" />
+	</resultMap>
+
+	<resultMap type="SelfPlanNumber" id="selfPlanNumberMap">
+		<id column="self_plan_number" jdbcType="VARCHAR"
+			property="selfPlanNumber" />
+		<id column="self_total_order" jdbcType="VARCHAR"
+			property="selfTotalOrder" />
+		<id column="member_num" jdbcType="VARCHAR" property="memberNum" />
+	</resultMap> 
+-->
+
+<select id="selectQnaByCondition" parameterType="Qna" resultMap="qnaMap">
+		SELECT
+		QNA_NUM
+		MEMBER_NUM, 
+		STAFF_NUMBER,
+		QNA_DATE,
+		QNA_SUBJECT,
+		QNA_CONTENT,
+		QNA_FILE,
+		QNA_PW,
+		QNA_COUNT
+		FROM QNA
+		<where>
+			<if test="qnaNum != null">
+				qna_num = #{qnaNum}
+			</if>
+		</where>
+	</select>
+	
+ 	<insert id="insertQna" parameterType="Qna">
+		insert into
+		QNA(QNA_NUM, MEMBER_NUM, STAFF_NUMBER, QNA_DATE, QNA_SUBJECT, QNA_CONTENT, QNA_FILE, QNA_PW, QNA_COUNT)
+		values(#{qnaNum}, #{memberNum}, #{staffNumber}, #{qnaDate}, #{qnaSubject}, #{qnaContent}, #{qnaFile}, #{qnaPw},#{qnaCount})
+	</insert>
+ 
+
+</mapper>

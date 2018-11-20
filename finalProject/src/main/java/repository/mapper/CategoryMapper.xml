@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC
+	"-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace="repository.mapper.CategoryMapper">
+<cache />
+<resultMap type="Continent" id="continentMap">
+	<id column="continent_name" jdbcType="VARCHAR" property="continentName" />
+</resultMap>
+<select id="continentSelect" resultMap="continentMap">
+	SELECT continent_name FROM continent
+</select>
+
+<resultMap type="Country" id="countryMap">
+	<id column="country_num" jdbcType="VARCHAR" property="countryNum" />
+	<result column="country_name" jdbcType="VARCHAR" property="countryName"/>
+	<result column="continent_name" jdbcType="VARCHAR" property="continentName"/>
+</resultMap>
+<select id="countrySelect" parameterType="Continent" resultMap="countryMap">
+	SELECT 	country_num, country_name, continent_name FROM country WHERE continent_name = #{continentName}
+</select>
+
+<resultMap type="City" id="cityMap">
+	<id column="city_num" jdbcType="VARCHAR" property="cityNum" />
+	<result column="continent_name" jdbcType="VARCHAR" property="continentName"/>
+	<result column="country_num" jdbcType="VARCHAR" property="countryNum"/>
+	<result column="city_name" jdbcType="VARCHAR" property="cityName"/>
+</resultMap>
+<select id="citySelect" parameterType="Country" resultMap="cityMap">
+	SELECT city_num, continent_name, country_num, city_name FROM city WHERE continent_name = #{continentName} AND country_num = #{countryNum}
+</select>
+</mapper>

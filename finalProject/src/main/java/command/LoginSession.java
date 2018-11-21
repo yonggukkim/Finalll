@@ -5,11 +5,20 @@ import java.util.Date;
 
 @SuppressWarnings("serial")
 public class LoginSession implements Serializable {
+	private String commandNum;
 	private String commandId;
 	private String commandPw;
 	private String commandName;
 	private String commandDvice;
 	private boolean commandCookie;
+	public String getCommandNum() {
+		return commandNum;
+	}
+
+	public void setCommandNum(String commandNum) {
+		this.commandNum = commandNum;
+	}
+
 	public boolean isCommandCookie() {
 		return commandCookie;
 	}

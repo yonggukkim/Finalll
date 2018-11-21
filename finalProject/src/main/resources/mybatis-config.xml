@@ -13,6 +13,8 @@
 		<typeAlias type="model.Continent" alias="Continent" />
 		<typeAlias type="model.Country" alias="Country" />
 		<typeAlias type="model.City" alias="City" />
+		<typeAlias type="model.Activitys" alias="Activity" />
+		<!-- <typeAlias type="model.Restore" alias="Restore" /> -->
 	</typeAliases>
 	<!-- db컨넥션 -->
 	<environments default="development">
@@ -32,5 +34,6 @@
 		<mapper resource="repository/mapper/BoardMapper.xml" />
  		<mapper resource="repository/mapper/LoginMapper.xml" />
  		<mapper resource="repository/mapper/CategoryMapper.xml" />
+ 		<mapper resource="repository/mapper/ActivityMapper.xml" />
 	</mappers>
 </configuration>

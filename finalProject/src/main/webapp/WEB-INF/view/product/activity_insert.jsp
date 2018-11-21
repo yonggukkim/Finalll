@@ -4,6 +4,7 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%
 	List list = (List)request.getAttribute("list");
+// 	Activity activity = (Activity)request.getAttribute("activity");
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -43,6 +44,39 @@
 			}
 		});
 	}
+	
+	 $(document).ready(function(){
+		    
+	        $("#add").click(function(){
+	            
+	            $("#addfile").append("<a href='#' class='cancel'>&nbsp;X&nbsp;</a><input type='file' name='files'/><br>");
+	            
+	            $(".cancel").click(function(){
+	                
+	                $(this).next().next().remove();
+	                $(this).next().remove();
+	                $(this).remove();    
+	            });    
+	        });
+	        
+	       /*  $("#insBtn").click(function(){
+	            
+	            if(confirm("입력값을 등록하시겠습니까?")){
+	            
+	            $("form").attr("action","${path}/board_kyu.do?method=insert");
+	            $("form").submit();
+	        
+	            }
+	            
+	        });
+	        
+	        //조회 jquery
+	        $("#mainBtn").click(function(){
+	            
+	            $(location).attr("href","${path}/board_kyu.do?method=list");
+	            
+	        }); */
+	    });
 </script>
 <body>
 	<section id="services" class="bg-light">
@@ -53,9 +87,8 @@
 						<thead>
 							<h2>액티비티 상품등록</h2>
 						</thead>
-						<tbody>
-							<form:form commandName="activity" action="activity_insert"
-								enctype="Multipart/form-data">
+						<tbody><%-- enctype="Multipart/form-data" --%>
+							<form:form commandName="activity" action="activity_insert" >
 								<tr>
 								<td><div>
 									<select id="continent" name="continentName"
@@ -73,7 +106,6 @@
 								<td><div id="country"></div></td>
 								<td><div id="city"></div></td>
 								</tr>
-								<form:hidden path="activityNum" value="1" />
 								<tr>
 									<th>상품명 :</th>
 									<td colspan="2"><form:input path="activityName" /></td>
@@ -83,10 +115,10 @@
 									<td colspan="2"><form:input path="activityPrice" /></td>
 								</tr>
 								<tr>
-								<tr>
-									<th>이미지파일 :</th>
-									<td colspan="2"><input type="file" name="activityFile" /></td>
-								</tr>
+								<!-- <tr>
+									<th>첨부파일추가 <a href="#" id="add">(클릭)</a></th>
+                					<td colspan="2" id="addfile" ><a href="#" class="cancel">&nbsp;X&nbsp;</a><input type="file" name="files"/><br></td>
+								</tr> -->
 								<tr>
 									<th>종류 :</th>
 									<td colspan="2"><form:select path="activityCate">
@@ -116,7 +148,7 @@
 								<tr>
 									<td colspan="3"><input type="submit" value="등록" /> <a
 										href="#"><input type="button" value="글 목록" /></a></td>
-								</tr>
+								</tr> 
 							</form:form>
 					</table>
 				</div>

@@ -52,6 +52,7 @@
 								<tr>
 									<th><form:label path="commandId">아이디 : </form:label></th>
 									<td><form:input path="commandId" />
+									<form:hidden path="commandNum" /></td>
 									<form:hidden path="commandName" /></td>
 								</tr>
 								<tr>

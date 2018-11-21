@@ -19,6 +19,7 @@ public class CategoryRepository extends AbstractRepository{
 		try {
 			System.out.println("Repository1");
 			String statement = namespace + ".continentSelect";
+			
 			return sqlSession.selectList(statement);
 		} finally {
 			sqlSession.close();

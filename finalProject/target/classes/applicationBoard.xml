@@ -18,5 +18,6 @@
 	<bean id="loginService" class="service.LoginService" />
 	<bean id="categoryService" class="service.CategoryService" />
 	<bean id="categoryRepository" class="repository.CategoryRepository" />
-
+	<bean id="activityService" class="service.ActivityService" />
+	<bean id="activityRepository" class="repository.ActivityRepository" />
 </beans>	

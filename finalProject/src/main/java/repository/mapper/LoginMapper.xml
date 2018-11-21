@@ -7,6 +7,7 @@
 	<cache />
 	
 <resultMap type="LoginSession" id="loginSessionMap">
+	<id jdbcType="VARCHAR" property="commandNum" column="MEMBER_NUM" />
 	<result jdbcType="VARCHAR" property="commandId" column="MEMBER_ID"/>
 	<result jdbcType="VARCHAR" property="commandPw" column="MEMBER_PW"/>
 	<result jdbcType="VARCHAR" property="commandName" column="MEMBER_NAME"/>
@@ -14,10 +15,10 @@
 </resultMap>	
 
 <select id="comparisonLogin" parameterType="LoginSession" resultMap="loginSessionMap">
-select member_id, member_pw, member_name, member_dvice from member
+select member_num, member_id, member_pw, member_name, member_dvice from member
 WHERE member_id = #{commandId} and member_pw = #{commandPw}
 union
-select staff_id, staff_pw, staff_name, staff_dvice from staff
+select staff_number, staff_id, staff_pw, staff_name, staff_dvice from staff
 WHERE staff_id = #{commandId} and staff_pw = #{commandPw}
 </select>
 <update id="keepLogin" parameterType="Map">

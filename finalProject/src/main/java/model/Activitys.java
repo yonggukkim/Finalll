@@ -1,21 +1,50 @@
 package model;
 
 import java.io.Serializable;
+import java.util.Date;
+
+import org.springframework.web.multipart.MultipartFile;
 @SuppressWarnings("serial")
-public class Activity implements Serializable{
+public class Activitys implements Serializable{
 	private String activityNum; // 액티비티 등록번호
 	private String staffNumber; // 직원번호
 	private String activityName; // 액티비티 이름
 	private Long activityPrice; // 액티비티 가격
-	private String activityFile; // 액티비티 상품이미지 파일이름
 	private String activityCate; // 액티비티 종류
 	private String activityContent; // 액티비티 상품설명내용
 	private String activityCompany; // 액티비티 업체이름
 	private String activityTel; // 액티비티 업체전화번호
 	private String activityPresident; // 액티비티 대표자 이름
+	private Date activityRegdate;
+	private Date activityUptdate;
 	private String continentName; // 대륙이름
 	private String countryNum; // 나라번호
 	private String cityNum; // 도시번호
+//	private MultipartFile[] activityFile; // 액티비티 상품이미지 파일이름
+	public Activitys(String activityNum, String staffNumber, String activityName, Long activityPrice,
+			String activityCate, String activityContent, String activityCompany, String activityTel,
+			String activityPresident, Date activityRegdate, Date activityUptdate, String continentName,
+			String countryNum, String cityNum) {
+		super();
+		this.activityNum = activityNum;
+		this.staffNumber = staffNumber;
+		this.activityName = activityName;
+		this.activityPrice = activityPrice;
+		this.activityCate = activityCate;
+		this.activityContent = activityContent;
+		this.activityCompany = activityCompany;
+		this.activityTel = activityTel;
+		this.activityPresident = activityPresident;
+		this.activityRegdate = activityRegdate;
+		this.activityUptdate = activityUptdate;
+		this.continentName = continentName;
+		this.countryNum = countryNum;
+		this.cityNum = cityNum;
+//		this.activityFile = activityFile;
+	}
+	public Activitys() {
+		super();
+	}
 	public String getActivityNum() {
 		return activityNum;
 	}
@@ -39,12 +68,6 @@ public class Activity implements Serializable{
 	}
 	public void setActivityPrice(Long activityPrice) {
 		this.activityPrice = activityPrice;
-	}
-	public String getActivityFile() {
-		return activityFile;
-	}
-	public void setActivityFile(String activityFile) {
-		this.activityFile = activityFile;
 	}
 	public String getActivityCate() {
 		return activityCate;
@@ -76,6 +99,18 @@ public class Activity implements Serializable{
 	public void setActivityPresident(String activityPresident) {
 		this.activityPresident = activityPresident;
 	}
+	public Date getActivityRegdate() {
+		return activityRegdate;
+	}
+	public void setActivityRegdate(Date activityRegdate) {
+		this.activityRegdate = activityRegdate;
+	}
+	public Date getActivityUptdate() {
+		return activityUptdate;
+	}
+	public void setActivityUptdate(Date activityUptdate) {
+		this.activityUptdate = activityUptdate;
+	}
 	public String getContinentName() {
 		return continentName;
 	}
@@ -94,4 +129,10 @@ public class Activity implements Serializable{
 	public void setCityNum(String cityNum) {
 		this.cityNum = cityNum;
 	}
+//	public MultipartFile[] getActivityFile() {
+//		return activityFile;
+//	}
+//	public void setActivityFile(MultipartFile[] activityFile) {
+//		this.activityFile = activityFile;
+//	}
 }

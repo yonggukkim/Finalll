@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC 
+	"-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="repository.mapper.ActivityMapper">
+	<cache />
+	<insert id="insertActivity" parameterType="Activity">
+         <selectKey resultType="string" keyProperty="activityNum" order="BEFORE">
+             SELECT ('a'||activity_num.nextval) FROM dual
+         </selectKey>
+         INSERT INTO activity(activity_num, staff_number, activity_name, activity_price, activity_cate, activity_content, activity_company, activity_tel, activity_president, activity_regdate, activity_uptdate, continent_name, country_num, city_num)
+         VALUES(#{activityNum},#{staffNumber},#{activityName},#{activityPrice},
+         #{activityCate},#{activityContent},#{activityCompany},#{activityTel},
+         #{activityPresident},sysdate,sysdate,'아시아','ca1','ca101')
+     </insert>
+
+    <!--  <insert id="insertRestore" parameterType="Restore">
+         INSERT INTO restore VALUES(res_seq.nextval,activity_num.currval,#{fold},#{fileName},sysdate,#{etc})
+     </insert> -->
+</mapper>

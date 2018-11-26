@@ -11,4 +11,5 @@
 	<bean class="controller.GiftController"/>
 	<bean class="controller.ActivityController" />
 	<bean class="controller.HotelController" />
+	<bean class="controller.PkgController" />
 </beans>

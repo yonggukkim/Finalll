@@ -4,21 +4,11 @@
 <%
 	List pkglist = (List)request.getAttribute("list");
 %>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
-<div>
-<select id="pkgcity1" name="CityNum">
+
+<select id="pkgcity1" name="CityNum" onclick="javascript:cp();">
 <% for( Object o : pkglist) { 
 	City city = (City)o;
 %>
 	<option value="<%= city.getCityNum() %>"><%= city.getCityName() %></option>
 <% } %>
 </select>
-</div>
-</body>
-</html>

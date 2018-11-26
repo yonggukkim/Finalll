@@ -27,6 +27,8 @@
 			success : function(result) {
 				$('#pkgcountry').html(result);
 				$('#pkgcity').html("");
+				$('#pkghotelList').html("");
+				$('#pkgactivityList').html("");
 			}
 		});
 	}
@@ -40,29 +42,80 @@
 			data : "continentName=" + num1 + "&countryNum=" + num2,
 			success : function(result) {
 				$('#pkgcity').html(result);
+				$('#pkghotelList').html("");
+				$('#pkgactivityList').html("");
 			}
 		});
 	}
 
-	$(document)
-			.ready(
-					function() {
+	function cp() {
+		var num1 = document.getElementById("pkgcontinent").value;
+		var num2 = document.getElementById("pkgcountry1").value;
+		var num3 = document.getElementById("pkgcity1").value;
+		$.ajax({
+			type : 'post',
+			url : 'photel_list',
+			dataType : 'html',
+			data : "continentName=" + num1 + "&countryNum=" + num2
+					+ "&cityNum=" + num3,
+			success : function(result) {
+				$('#pkghotelList').html(result);
+			}
+		});
+		$.ajax({
+			type : 'post',
+			url : 'pactivity_list',
+			dataType : 'html',
+			data : "continentName=" + num1 + "&countryNum=" + num2
+					+ "&cityNum=" + num3,
+			success : function(result) {
+				$('#pkgactivityList').html(result);
+			}
+		});
+	}
 
-						$("#add")
-								.click(
-										function() {
+	function dp() {
+		var num1 = document.getElementById("pkgcontinent").value;
+		var num2 = document.getElementById("pkgcountry1").value;
+		var num3 = document.getElementById("pkgcity1").value;
+		var num4 = document.getElementById("pkghotellist1").value;
+		$.ajax({
+			type : 'post',
+			url : 'photel_modify',
+			dataType : 'html',
+			data : "continentName=" + num1 + "&countryNum=" + num2
+					+ "&cityNum=" + num3 + "&hotelNum=" + num4,
+			success : function(result) {
+				$('#pkghotelmodify').html(result);
+			}
+		});
+	}
 
-											$("#addfile")
-													.append(
-															"<a href='#' class='cancel'>&nbsp;X&nbsp;</a><input type='file' name='files'/><br>");
-
-											$(".cancel").click(function() {
-
-												$(this).next().next().remove();
-												$(this).next().remove();
-												$(this).remove();
-											});
-										});
+	function ep() {
+		var num1 = document.getElementById("pkgcontinent").value;
+		var num2 = document.getElementById("pkgcountry1").value;
+		var num3 = document.getElementById("pkgcity1").value;
+		var num4 = document.getElementById("pkgactivitylist1").value;
+		$.ajax({
+			type : 'post',
+			url : 'pactivity_modify',
+			dataType : 'html',
+			data : "continentName=" + num1 + "&countryNum=" + num2
+					+ "&cityNum=" + num3 + "&activityNum=" + num4,
+			success : function(result) {
+				$('#pkgactivitymodify').html(result);
+			}
+		});
+	}
+	$(document).ready(function() {
+		$("#add").click(function() {
+			$("#addfile").append("<a href='#' class='cancel'>&nbsp;X&nbsp;</a><input type='file' name='files'/><br>");
+				$(".cancel").click(function() {
+					$(this).next().next().remove();
+					$(this).next().remove();
+					$(this).remove();
+									});
+					});
 
 						/*  $("#insBtn").click(function(){
 						     
@@ -81,7 +134,31 @@
 						     $(location).attr("href","${path}/board_kyu.do?method=list");
 						     
 						 }); */
-					});
+	});
+	
+	/* $(document).ready(function() {
+		$("#teladd").click(function() {
+			$("#teladdfile").append("<a href='#' class='cancel'>&nbsp;X&nbsp;</a><div id="pkghotelList"></div><br>");
+				$(".cancel").click(function() {
+					$(this).next().next().remove();
+					$(this).next().remove();
+					$(this).remove();
+				});
+		});
+
+	});
+	
+	$(document).ready(function() {
+		$("#actadd").click(function() {
+			$("#actaddfile").append("<a href='#' class='cancel'>&nbsp;X&nbsp;</a><div id="pkgactivityList"></div><br>");
+				$(".cancel").click(function() {
+					$(this).next().next().remove();
+					$(this).next().remove();
+					$(this).remove();
+				});
+		});
+
+	}); */
 </script>
 <body>
 	<section id="services" class="bg-light">
@@ -112,6 +189,18 @@
 										</div></td>
 									<td><div id="pkgcountry"></div></td>
 									<td><div id="pkgcity"></div></td>
+								</tr>
+								<tr>
+								</tr>
+								<tr>
+									<!-- <th>호텔추가 <a href="#" id="teladd">(클릭)</a></th> -->
+									<!-- <td colspan="1" id="teladdfile" ><a href="#" class="cancel">&nbsp;X&nbsp;</a> --><td><div id="pkghotelList"></div><!-- <br> --></td>
+									<td colspan="2"><div id="pkghotelmodify"></div></td>
+								</tr>
+								<tr>
+									<!-- <th>액티비티추가 <a href="#" id="actadd">(클릭)</a></th> -->
+									<!-- <td colspan="1" id="actaddfile" ><a href="#" class="cancel">&nbsp;X&nbsp;</a> --><td><div id="pkgactivityList"></div><!-- <br> --></td>
+									<td colspan="2"><div id="pkgactivitymodify"></div></td>
 								</tr>
 								<tr>
 									<th>패키지여행상품명 :</th>
@@ -147,8 +236,8 @@
 								</tr>
 								<tr>
 									<th>내용 :</th>
-									<td colspan="2"><form:textarea path="pkgContent"
-											rows="5" cols="22" /></td>
+									<td colspan="2"><form:textarea path="pkgContent" rows="5"
+											cols="22" /></td>
 								</tr>
 								<tr>
 									<th>최소신청인원 :</th>
@@ -173,7 +262,8 @@
 								<tr>
 									<th>참고전달사항 :</th>
 									<td colspan="2"><form:input path="pkgReference" /></td>
-								</tr>								<tr>
+								</tr>
+								<tr>
 									<th>날씨정보 :</th>
 									<td colspan="2"><form:input path="pkgWeatherInfo" /></td>
 								</tr>

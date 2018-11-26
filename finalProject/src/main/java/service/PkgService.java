@@ -14,6 +14,9 @@ import org.springframework.web.context.WebApplicationContext;
 
 import command.LoginSession;
 import command.PkgCommand;
+import model.Activitys;
+import model.City;
+import model.Hotel;
 import model.Pkg;
 import model.Restore;
 import repository.PkgRepository;
@@ -96,5 +99,41 @@ public class PkgService /*implements ApplicationContextAware*/ {
 		System.out.println("service detail after : " + p.getPkgNum());
 		System.out.println("service detail after : " + p.getStaffNumber());
 		model.addAttribute("pkgdetail", p);
+	}
+
+	public void hotelSelectPkg(City city, Model model) {
+		System.out.println("service3 " + city.getCountryNum());
+		System.out.println("service3 " + city.getContinentName());
+		System.out.println("service3 " + city.getCityNum());
+		List<Hotel> list = pkgRepository.hotelSelectPkg(city);
+		System.out.println("test"+list);
+		model.addAttribute("list", list);
+	}
+
+	public void activitySelectPkg(City city, Model model) {
+		System.out.println("service3 " + city.getCountryNum());
+		System.out.println("service3 " + city.getContinentName());
+		System.out.println("service3 " + city.getCityNum());
+		List<Activitys> list = pkgRepository.activitySelectPkg(city);
+		System.out.println("test"+list);
+		model.addAttribute("list", list);
+	}
+
+	public void hotelSelectOnePkg(Hotel hotel, Model model) {
+		System.out.println("service3 " + hotel.getCountryNum());
+		System.out.println("service3 " + hotel.getContinentName());
+		System.out.println("service3 " + hotel.getCityNum());
+		Hotel list = pkgRepository.hotelSelectOnePkg(hotel);
+		System.out.println("test"+list);
+		model.addAttribute("list", list);
+	}
+
+	public void activitySelectOnePkg(Activitys activity, Model model) {
+		System.out.println("service3 " + activity.getCountryNum());
+		System.out.println("service3 " + activity.getContinentName());
+		System.out.println("service3 " + activity.getCityNum());
+		Activitys list = pkgRepository.activitySelectOnePkg(activity);
+		System.out.println("test"+list);
+		model.addAttribute("list", list);
 	}
 }

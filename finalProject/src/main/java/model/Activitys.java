@@ -2,6 +2,8 @@ package model;
 
 import java.io.Serializable;
 import java.util.Date;
+
+import org.springframework.web.multipart.MultipartFile;
 @SuppressWarnings("serial")
 public class Activitys implements Serializable{
 	private String activityNum; // 액티비티 등록번호
@@ -18,11 +20,11 @@ public class Activitys implements Serializable{
 	private String continentName; // 대륙이름
 	private String countryNum; // 나라번호
 	private String cityNum; // 도시번호
-//	private MultipartFile[] activityFile; // 액티비티 상품이미지 파일이름
+	private MultipartFile[] activityFile; // 액티비티 상품이미지 파일이름
 	public Activitys(String activityNum, String staffNumber, String activityName, Long activityPrice,
 			String activityCate, String activityContent, String activityCompany, String activityTel,
 			String activityPresident, Date activityRegdate, Date activityUptdate, String continentName,
-			String countryNum, String cityNum) {
+			String countryNum, String cityNum, MultipartFile[] activityFile) {
 		super();
 		this.activityNum = activityNum;
 		this.staffNumber = staffNumber;
@@ -38,7 +40,7 @@ public class Activitys implements Serializable{
 		this.continentName = continentName;
 		this.countryNum = countryNum;
 		this.cityNum = cityNum;
-//		this.activityFile = activityFile;
+		this.activityFile = activityFile;
 	}
 	public Activitys() {
 		super();
@@ -127,10 +129,10 @@ public class Activitys implements Serializable{
 	public void setCityNum(String cityNum) {
 		this.cityNum = cityNum;
 	}
-//	public MultipartFile[] getActivityFile() {
-//		return activityFile;
-//	}
-//	public void setActivityFile(MultipartFile[] activityFile) {
-//		this.activityFile = activityFile;
-//	}
+	public MultipartFile[] getActivityFile() {
+		return activityFile;
+	}
+	public void setActivityFile(MultipartFile[] activityFile) {
+		this.activityFile = activityFile;
+	}
 }

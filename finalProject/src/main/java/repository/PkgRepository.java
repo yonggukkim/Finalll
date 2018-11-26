@@ -5,6 +5,8 @@ import java.util.List;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
+import model.Activitys;
+import model.City;
 import model.Hotel;
 import model.Pkg;
 
@@ -60,6 +62,72 @@ public class PkgRepository extends AbstractRepository{
 			/* res.setCreDate(Calendar.getInstance().getTime()); */
 			Pkg p = sqlSession.selectOne(statement, pkg);
 			return p;
+		} finally {
+			sqlSession.close();
+		}
+	}
+
+	public List<Hotel> hotelSelectPkg(City city) {
+		SqlSession sqlSession = getSqlSessionFactory().openSession();
+		try {
+			System.out.println("Repository3"+city.getContinentName());
+			System.out.println("Repository3"+city.getCountryNum());
+			System.out.println("Repository3"+city.getCityNum());
+			String statement = namespace + ".hotelSelectPkg";
+			List<Hotel> lt = sqlSession.selectList(statement, city);
+			for(Object temp : lt) {
+				Hotel ct = (Hotel)temp;
+				System.out.println("repo hotelSelect getHotelNum : " + ct.getHotelNum());
+			}
+			return lt;
+		} finally {
+			sqlSession.close();
+		}
+	}
+
+	public List<Activitys> activitySelectPkg(City city) {
+		SqlSession sqlSession = getSqlSessionFactory().openSession();
+		try {
+			System.out.println("Repository3"+city.getContinentName());
+			System.out.println("Repository3"+city.getCountryNum());
+			System.out.println("Repository3"+city.getCityNum());
+			String statement = namespace + ".activitySelectPkg";
+			List<Activitys> lt = sqlSession.selectList(statement, city);
+			for(Object temp : lt) {
+				Activitys ct = (Activitys)temp;
+				System.out.println("repo activitySelect getActivityNum : " + ct.getActivityNum());
+			}
+			return lt;
+		} finally {
+			sqlSession.close();
+		}
+	}
+
+	public Hotel hotelSelectOnePkg(Hotel hotel) {
+		SqlSession sqlSession = getSqlSessionFactory().openSession();
+		try {
+			System.out.println("Repository3"+hotel.getContinentName());
+			System.out.println("Repository3"+hotel.getCountryNum());
+			System.out.println("Repository3"+hotel.getCityNum());
+			String statement = namespace + ".hotelSelectOnePkg";
+			Hotel lt = sqlSession.selectOne(statement, hotel);
+				System.out.println("repo hotelSelect getHotelNum : " + lt.getHotelPrice());
+			return lt;
+		} finally {
+			sqlSession.close();
+		}
+	}
+
+	public Activitys activitySelectOnePkg(Activitys activity) {
+		SqlSession sqlSession = getSqlSessionFactory().openSession();
+		try {
+			System.out.println("Repository3"+activity.getContinentName());
+			System.out.println("Repository3"+activity.getCountryNum());
+			System.out.println("Repository3"+activity.getCityNum());
+			String statement = namespace + ".activitySelectOnePkg";
+			Activitys lt = sqlSession.selectOne(statement, activity);
+				System.out.println("repo activitySelect getActivityNum : " + lt.getActivityNum());
+			return lt;
 		} finally {
 			sqlSession.close();
 		}

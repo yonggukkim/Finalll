@@ -7,9 +7,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 @SuppressWarnings("serial")
 public class PkgCommand implements Serializable{
-	private String pkgNum; // 여행상품 등록번호
 	private String guideNum; // 여행상품 담당가이드 등록번호
-	private String staffNumber; // 직원번호
 	private String pkgName; // 여행상품이름
 	private String pkgTheme; // 여행상품테마종류
 	private Long pkgPrice; // 여행상품가격
@@ -24,41 +22,15 @@ public class PkgCommand implements Serializable{
 	private String pkgWeatherInfo; // 여행상품 날씨정보내용
 	private String pkgMeetingPlace; // 여행상품 집합장소
 	private String pkgCate; // 여행구분
-	private Date pkgRegdate; // 여행상품등록날짜
-	private Date pkgUptdate; // 여행상품수정날짜
 	private String cityNum; // 도시번호
 	private String continentName; // 대륙이름
 	private String countryNum; // 나라번호
 //	private MultipartFile[] pkgFile; // 여행상품 이미지파일이름
-	public Date getPkgRegdate() {
-		return pkgRegdate;
-	}
-	public void setPkgRegdate(Date pkgRegdate) {
-		this.pkgRegdate = pkgRegdate;
-	}
-	public Date getPkgUptdate() {
-		return pkgUptdate;
-	}
-	public void setPkgUptdate(Date pkgUptdate) {
-		this.pkgUptdate = pkgUptdate;
-	}
-	public String getPkgNum() {
-		return pkgNum;
-	}
-	public void setPkgNum(String pkgNum) {
-		this.pkgNum = pkgNum;
-	}
 	public String getGuideNum() {
 		return guideNum;
 	}
 	public void setGuideNum(String guideNum) {
 		this.guideNum = guideNum;
-	}
-	public String getStaffNumber() {
-		return staffNumber;
-	}
-	public void setStaffNumber(String staffNumber) {
-		this.staffNumber = staffNumber;
 	}
 	public String getPkgName() {
 		return pkgName;

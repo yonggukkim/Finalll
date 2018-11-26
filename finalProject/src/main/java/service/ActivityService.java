@@ -1,8 +1,13 @@
 package service;
 
 import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.BeansException;
@@ -12,6 +17,10 @@ import org.springframework.context.ApplicationContextAware;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.web.context.WebApplicationContext;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartRequest;
+
+import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 import command.ActivityCommand;
 import command.LoginSession;
@@ -42,17 +51,17 @@ public class ActivityService implements ApplicationContextAware {
 		act.setContinentName(activity.getContinentName());
 		Integer result = activityRepository.insertActivity(act);
 		
-//		upload(activity);
+//		upload(act);
 		model.addAttribute("activity",act);
 		return result;
 	}
 
-	private void upload(Activitys activity) {
-		String cpath = "C:/a01_prg/workspace/javaexp/springboard/WebContent/z01_upload";
-		String path = context.getServletContext().getRealPath("z01_upload");
-		File file;
-		Restore res;
-
+//	private void upload(Activitys activity) {
+//		String cpath = "C:/Users/HKEDU/eclipse-workspace2/.metadata/.plugins/org.eclipse.wst.server.core/tmp1/wtpwebapps/finalProject/WEB-INF/view/files";
+//		String path = context.getServletContext().getRealPath("files");
+//		File file;
+//		Restore res;
+//
 //		for (MultipartFile mf : activity.getActivityFile()) {
 //
 //			file = new File(path, mf.getOriginalFilename());
@@ -74,7 +83,7 @@ public class ActivityService implements ApplicationContextAware {
 //			}
 //
 //		}
-	}
+//	}
 	public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
         
         this.context = (WebApplicationContext) applicationContext;

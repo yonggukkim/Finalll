@@ -133,5 +133,4 @@ public class CategoryRepository extends AbstractRepository{
 			sqlSession.close();
 		}
 	}
-	
 }

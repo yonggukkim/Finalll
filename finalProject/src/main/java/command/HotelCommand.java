@@ -5,8 +5,6 @@ import java.util.Date;
 
 @SuppressWarnings("serial")
 public class HotelCommand implements Serializable{
-	private String hotelNum; // 숙박시설 등록번호
-	private String staffNumber; // 직원번호
 	private String hotelName; // 숙박시설이름
 	private Long hotelPrice; // 숙박시설 가격
 	private String hotelCheckin; // 숙박시설 입실시간
@@ -18,24 +16,10 @@ public class HotelCommand implements Serializable{
 	private String hotelPresident; // 숙박시설대표자이름
 	private String hotelContent; // 숙박시설상품설명내용
 	private String hotelCompany; // 숙박시설업체이름
-	private Date hotelRegdate; // 숙박시설등록날짜
-	private Date hotelUptdate; // 숙박시설수정날짜
 	private String continentName; // 대륙이름
 	private String countryNum; // 나라번호
 	private String cityNum; // 도시번호
 //	private MultipartFile[] hotelFile; // 호텔 파일 이름
-	public String getHotelNum() {
-		return hotelNum;
-	}
-	public void setHotelNum(String hotelNum) {
-		this.hotelNum = hotelNum;
-	}
-	public String getStaffNumber() {
-		return staffNumber;
-	}
-	public void setStaffNumber(String staffNumber) {
-		this.staffNumber = staffNumber;
-	}
 	public String getHotelName() {
 		return hotelName;
 	}
@@ -101,18 +85,6 @@ public class HotelCommand implements Serializable{
 	}
 	public void setHotelCompany(String hotelCompany) {
 		this.hotelCompany = hotelCompany;
-	}
-	public Date getHotelRegdate() {
-		return hotelRegdate;
-	}
-	public void setHotelRegdate(Date hotelRegdate) {
-		this.hotelRegdate = hotelRegdate;
-	}
-	public Date getHotelUptdate() {
-		return hotelUptdate;
-	}
-	public void setHotelUptdate(Date hotelUptdate) {
-		this.hotelUptdate = hotelUptdate;
 	}
 	public String getContinentName() {
 		return continentName;

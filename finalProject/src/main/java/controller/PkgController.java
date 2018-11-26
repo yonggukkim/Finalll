@@ -11,8 +11,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import command.PkgCommand;
+import model.Activitys;
+import model.City;
 import model.Continent;
 import model.Country;
+import model.Hotel;
 import model.Pkg;
 import service.CategoryService;
 import service.PkgService;
@@ -48,6 +51,44 @@ public class PkgController {
 		System.out.println("controller3 "+country.getContinentName());
 		categoryService.citySelectPkg(country, model);
 		return "category/pcity";
+	}
+	
+	@RequestMapping(value="/photel_list", method=RequestMethod.POST)
+	public String hotel(City city, Model model) {
+		System.out.println("controller3 "+city.getCountryNum());
+		System.out.println("controller3 "+city.getContinentName());
+		System.out.println("controller3 "+city.getCityNum());
+		pkgService.hotelSelectPkg(city, model);
+		return "product/pkg_hotel_list";
+	}
+	
+	@RequestMapping(value="/pactivity_list", method=RequestMethod.POST)
+	public String activity(City city, Model model) {
+		System.out.println("controller3 "+city.getCountryNum());
+		System.out.println("controller3 "+city.getContinentName());
+		System.out.println("controller3 "+city.getCityNum());
+		pkgService.activitySelectPkg(city, model);
+		return "product/pkg_activity_list";
+	}
+	
+	@RequestMapping(value="/photel_modify", method=RequestMethod.POST)
+	public String hotel(Hotel hotel, Model model) {
+		System.out.println("controller3 "+hotel.getCountryNum());
+		System.out.println("controller3 "+hotel.getContinentName());
+		System.out.println("controller3 "+hotel.getCityNum());
+		System.out.println("controller3 "+hotel.getHotelNum());
+		pkgService.hotelSelectOnePkg(hotel, model);
+		return "product/pkg_hotel_modify";
+	}
+	
+	@RequestMapping(value="/pactivity_modify", method=RequestMethod.POST)
+	public String activity(Activitys activity, Model model) {
+		System.out.println("controller3 "+activity.getCountryNum());
+		System.out.println("controller3 "+activity.getContinentName());
+		System.out.println("controller3 "+activity.getCityNum());
+		System.out.println("controller3 "+activity.getActivityNum());
+		pkgService.activitySelectOnePkg(activity, model);
+		return "product/pkg_activity_modify";
 	}
 	
 	@RequestMapping(value = "/pkg_insert", method = RequestMethod.POST)

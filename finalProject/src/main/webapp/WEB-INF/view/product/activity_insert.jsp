@@ -86,8 +86,8 @@
 						<thead>
 							<h2>액티비티 상품등록</h2>
 						</thead>
-						<tbody><%-- enctype="Multipart/form-data" --%>
-							<form:form commandName="activity" action="activity_insert" >
+						<tbody><%--  --%>
+							<form:form commandName="activity" action="activity_insert" enctype="Multipart/form-data" >
 								<tr>
 								<td><div>
 									<select id="continent" name="continentName"
@@ -114,10 +114,10 @@
 									<td colspan="2"><form:input path="activityPrice" /></td>
 								</tr>
 								<tr>
-								<!-- <tr>
+								<tr>
 									<th>첨부파일추가 <a href="#" id="add">(클릭)</a></th>
-                					<td colspan="2" id="addfile" ><a href="#" class="cancel">&nbsp;X&nbsp;</a><input type="file" name="files"/><br></td>
-								</tr> -->
+                					<td colspan="2" id="addfile" ><a href="#" class="cancel">&nbsp;X&nbsp;</a><input type="file" name="activityFile"/><br></td>
+								</tr>
 								<tr>
 									<th>종류 :</th>
 									<td colspan="2"><form:select path="activityCate">

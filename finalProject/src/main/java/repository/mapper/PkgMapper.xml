@@ -58,4 +58,83 @@
 		PKG_REVIEW, PKG_CAUTION, PKG_REFERENCE, PKG_WEATHER_INFO, PKG_MEETING_PLACE,
 		PKG_CATE, PKG_REGDATE, PKG_UPTDATE, CONTINENT_NAME, COUNTRY_NUM, CITY_NUM FROM pkg WHERE pkg_num = #{pkgNum}
      </select>
+     
+     <select id="hotelSelectPkg" parameterType="Hotel"
+		resultMap="hotelMap">
+		SELECT HOTEL_NUM, STAFF_NUMBER, HOTEL_NAME, HOTEL_PRICE, HOTEL_CHECKIN,
+		HOTEL_CHECKOUT, HOTEL_BREAKFAST, HOTEL_GRADE, HOTEL_CATE, HOTEL_TEL,
+		HOTEL_PRESIDENT, HOTEL_CONTENT, HOTEL_COMPANY, HOTEL_REGDATE,
+		HOTEL_UPTDATE, CONTINENT_NAME, COUNTRY_NUM, CITY_NUM FROM hotel WHERE city_num = #{cityNum}
+	</select>
+	<resultMap type="Hotel" id="hotelMap">
+		<id column="HOTEL_NUM" jdbcType="VARCHAR" property="hotelNum" />
+		<result column="STAFF_NUMBER" jdbcType="VARCHAR"
+			property="staffNumber" />
+		<result column="HOTEL_NAME" jdbcType="VARCHAR"
+			property="hotelName" />
+		<result column="HOTEL_PRICE" jdbcType="BIGINT"
+			property="hotelPrice" />
+		<result column="HOTEL_CHECKIN" jdbcType="VARCHAR"
+			property="hotelCheckin" />
+		<result column="HOTEL_CHECKOUT" jdbcType="VARCHAR"
+			property="hotelCheckout" />
+		<result column="HOTEL_BREAKFAST" jdbcType="VARCHAR"
+			property="hotelBreakfast" />
+		<result column="HOTEL_GRADE" jdbcType="VARCHAR"
+			property="hotelGrade" />
+		<result column="HOTEL_CATE" jdbcType="VARCHAR"
+			property="hotelCate" />
+		<result column="HOTEL_TEL" jdbcType="VARCHAR"
+			property="hotelTel" />
+		<result column="HOTEL_PRESIDENT" jdbcType="VARCHAR"
+			property="hotelPresident" />
+		<result column="HOTEL_CONTENT" jdbcType="VARCHAR"
+			property="hotelContent" />
+		<result column="HOTEL_COMPANY" jdbcType="VARCHAR"
+			property="hotelCompany" />
+		<result column="HOTEL_REGDATE" jdbcType="DATE"
+			property="hotelRegdate" />
+		<result column="HOTEL_UPTDATE" jdbcType="DATE"
+			property="hotelUptdate" />
+		<result column="CONTINENT_NAME" jdbcType="VARCHAR"
+			property="continentName" />
+		<result column="COUNTRY_NUM" jdbcType="VARCHAR"
+			property="countryNum" />
+		<result column="city_num" jdbcType="VARCHAR" property="cityNum" />
+	</resultMap>
+	
+     <select id="activitySelectPkg" parameterType="Activity" resultMap="activityMap">
+     	SELECT activity_num, staff_number, activity_name, activity_price, activity_cate,
+     	activity_content, activity_company, activity_tel, activity_president, activity_regdate,
+     	activity_uptdate, continent_name, country_num, city_num FROM activity WHERE city_num = #{cityNum}
+     </select>
+     <resultMap type="Activity" id="activityMap">
+     	<id column="activity_num" jdbcType="VARCHAR" property="activityNum"/>
+     	<result column="staff_number" jdbcType="VARCHAR" property="staffNumber"/>
+     	<result column="activity_name" jdbcType="VARCHAR" property="activityName"/>
+     	<result column="activity_price" jdbcType="BIGINT" property="activityPrice"/>
+     	<result column="activity_cate" jdbcType="VARCHAR" property="activityCate"/>
+     	<result column="activity_content" jdbcType="VARCHAR" property="activityContent"/>
+     	<result column="activity_company" jdbcType="VARCHAR" property="activityCompany"/>
+     	<result column="activity_tel" jdbcType="VARCHAR" property="activityTel"/>
+     	<result column="activity_president" jdbcType="VARCHAR" property="activityPresident"/>
+     	<result column="activity_regdate" jdbcType="DATE" property="activityRegdate"/>
+     	<result column="activity_uptdate" jdbcType="DATE" property="activityUptdate"/>
+     	<result column="continent_name" jdbcType="VARCHAR" property="continentName"/>
+     	<result column="country_num" jdbcType="VARCHAR" property="countryNum"/>
+     	<result column="city_num" jdbcType="VARCHAR" property="cityNum"/>
+     </resultMap>
+     
+     <select id="hotelSelectOnePkg" parameterType="Hotel" resultMap="hotelMap">
+     	SELECT HOTEL_NUM, STAFF_NUMBER, HOTEL_NAME, HOTEL_PRICE, HOTEL_CHECKIN,
+		HOTEL_CHECKOUT, HOTEL_BREAKFAST, HOTEL_GRADE, HOTEL_CATE, HOTEL_TEL,
+		HOTEL_PRESIDENT, HOTEL_CONTENT, HOTEL_COMPANY, HOTEL_REGDATE,
+		HOTEL_UPTDATE, CONTINENT_NAME, COUNTRY_NUM, CITY_NUM FROM hotel WHERE hotel_num = #{hotelNum}
+     </select>
+     
+     <select id="activitySelectOnePkg" parameterType="Activity" resultMap="activityMap">
+     	SELECT activity_num, staff_number, activity_name, activity_price, activity_cate,
+     	activity_content, activity_company, activity_tel, activity_president, activity_regdate,
+     	activity_uptdate, continent_name, country_num, city_num FROM activity WHERE activity_num = #{activityNum}
+     </select>
 </mapper>

@@ -5,7 +5,7 @@
 	List list = (List)request.getAttribute("list");
 %>
 
-<select id="country1" name="countryNum" onclick="javascript:ccc();">
+<select id="country1" name="CountryNum" onclick="javascript:ba();">
 <% for( Object o : list) { 
 	Country country = (Country)o; %>
 	<option value="<%= country.getCountryNum() %>"><%= country.getCountryName() %></option>

@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC 
+	"-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="repository.mapper.HotelMapper">
+	<cache />
+	<resultMap type="Hotel" id="hotelMap">
+		<id column="HOTEL_NUM" jdbcType="VARCHAR" property="hotelNum" />
+		<result column="STAFF_NUMBER" jdbcType="VARCHAR"
+			property="staffNumber" />
+		<result column="HOTEL_NAME" jdbcType="VARCHAR"
+			property="hotelName" />
+		<result column="HOTEL_PRICE" jdbcType="BIGINT"
+			property="hotelPrice" />
+		<result column="HOTEL_CHECKIN" jdbcType="VARCHAR"
+			property="hotelCheckin" />
+		<result column="HOTEL_CHECKOUT" jdbcType="VARCHAR"
+			property="hotelCheckout" />
+		<result column="HOTEL_BREAKFAST" jdbcType="VARCHAR"
+			property="hotelBreakfast" />
+		<result column="HOTEL_GRADE" jdbcType="VARCHAR"
+			property="hotelGrade" />
+		<result column="HOTEL_CATE" jdbcType="VARCHAR"
+			property="hotelCate" />
+		<result column="HOTEL_TEL" jdbcType="VARCHAR"
+			property="hotelTel" />
+		<result column="HOTEL_PRESIDENT" jdbcType="VARCHAR"
+			property="hotelPresident" />
+		<result column="HOTEL_CONTENT" jdbcType="VARCHAR"
+			property="hotelContent" />
+		<result column="HOTEL_COMPANY" jdbcType="VARCHAR"
+			property="hotelCompany" />
+		<result column="HOTEL_REGDATE" jdbcType="DATE"
+			property="hotelRegdate" />
+		<result column="HOTEL_UPTDATE" jdbcType="DATE"
+			property="hotelUptdate" />
+		<result column="CONTINENT_NAME" jdbcType="VARCHAR"
+			property="continentName" />
+		<result column="COUNTRY_NUM" jdbcType="VARCHAR"
+			property="countryNum" />
+		<result column="city_num" jdbcType="VARCHAR" property="cityNum" />
+	</resultMap>
+	<select id="selectHotelList" parameterType="Hotel"
+		resultMap="hotelMap">
+		SELECT HOTEL_NUM, STAFF_NUMBER, HOTEL_NAME, HOTEL_PRICE, HOTEL_CHECKIN,
+		HOTEL_CHECKOUT, HOTEL_BREAKFAST, HOTEL_GRADE, HOTEL_CATE, HOTEL_TEL,
+		HOTEL_PRESIDENT, HOTEL_CONTENT, HOTEL_COMPANY, HOTEL_REGDATE,
+		HOTEL_UPTDATE, CONTINENT_NAME, COUNTRY_NUM, CITY_NUM FROM hotel
+	</select>
+
+	<insert id="insertHotel" parameterType="Hotel">
+		<selectKey resultType="string" keyProperty="hotelNum"
+			order="BEFORE">
+			SELECT ('h'||hotel_num.nextval) FROM dual
+		</selectKey>
+		INSERT INTO hotel(HOTEL_NUM, STAFF_NUMBER, HOTEL_NAME, HOTEL_PRICE,
+		HOTEL_CHECKIN,
+		HOTEL_CHECKOUT, HOTEL_BREAKFAST, HOTEL_GRADE, HOTEL_CATE, HOTEL_TEL,
+		HOTEL_PRESIDENT, HOTEL_CONTENT, HOTEL_COMPANY, HOTEL_REGDATE, HOTEL_UPTDATE,
+		CONTINENT_NAME, COUNTRY_NUM, CITY_NUM)
+		VALUES(#{hotelNum},#{staffNumber},#{hotelName},#{hotelPrice},
+		#{hotelCheckin},#{hotelCheckout},#{hotelBreakfast},#{hotelGrade},
+		#{hotelCate},#{hotelTel},#{hotelPresident},#{hotelContent},#{hotelCompany},sysdate,sysdate,'아시아','ca1','ca101')
+	</insert>
+	
+	<select id="selectHotelOne" parameterType="Hotel" resultMap="hotelMap">
+     	SELECT HOTEL_NUM, STAFF_NUMBER, HOTEL_NAME, HOTEL_PRICE, HOTEL_CHECKIN,
+		HOTEL_CHECKOUT, HOTEL_BREAKFAST, HOTEL_GRADE, HOTEL_CATE, HOTEL_TEL,
+		HOTEL_PRESIDENT, HOTEL_CONTENT, HOTEL_COMPANY, HOTEL_REGDATE,
+		HOTEL_UPTDATE, CONTINENT_NAME, COUNTRY_NUM, CITY_NUM FROM hotel WHERE hotel_num = #{hotelNum}
+     </select>
+     
+     <select id="modifyHotelOne" parameterType="Hotel" resultMap="hotelMap">
+     	SELECT HOTEL_NUM, STAFF_NUMBER, HOTEL_NAME, HOTEL_PRICE, HOTEL_CHECKIN,
+		HOTEL_CHECKOUT, HOTEL_BREAKFAST, HOTEL_GRADE, HOTEL_CATE, HOTEL_TEL,
+		HOTEL_PRESIDENT, HOTEL_CONTENT, HOTEL_COMPANY, HOTEL_REGDATE,
+		HOTEL_UPTDATE, CONTINENT_NAME, COUNTRY_NUM, CITY_NUM FROM hotel WHERE hotel_num = #{hotelNum}
+     </select>
+     
+     <update id="updateHotel" parameterType="Hotel">
+     	UPDATE hotel
+     	SET hotel_name = #{hotelName},
+     	hotel_cate = #{hotelCate},
+     	hotel_content = #{hotelContent}
+     	WHERE hotel_num = #{hotelNum}
+     </update>
+     
+     <delete id="deleteHotel" parameterType="Hotel">
+     	DELETE FROM hotel WHERE hotel_num = #{hotelNum}
+     </delete>
+</mapper>

@@ -35,4 +35,43 @@ public class CategoryService {
 		model.addAttribute("list", list);
 	}
 
+	public void continentSelectHotel(Model model) {
+		System.out.println("service1 ");
+		List<Continent> list = categoryRepository.continentSelectHotel();
+		model.addAttribute("list", list);
+	}
+
+	public void countrySelectHotel(Continent continent, Model model) {
+		System.out.println("service2 " + continent.getContinentName());
+		List<Country> list = categoryRepository.countrySelectHotel(continent);
+		model.addAttribute("list", list);
+	}
+
+	public void citySelectHotel(Country country, Model model) {
+		System.out.println("service3 " + country.getCountryNum());
+		System.out.println("service3 " + country.getContinentName());
+		List<City> list = categoryRepository.citySelectHotel(country);
+		System.out.println("test"+list);
+		model.addAttribute("list", list);
+	}
+
+	public void continentSelectPkg(Model model) {
+		System.out.println("service1 ");
+		List<Continent> list = categoryRepository.continentSelectPkg();
+		model.addAttribute("list", list);
+	}
+
+	public void countrySelectPkg(Continent continent, Model model) {
+		System.out.println("service2 " + continent.getContinentName());
+		List<Country> list = categoryRepository.countrySelectPkg(continent);
+		model.addAttribute("list", list);
+	}
+
+	public void citySelectPkg(Country country, Model model) {
+		System.out.println("service3 " + country.getCountryNum());
+		System.out.println("service3 " + country.getContinentName());
+		List<City> list = categoryRepository.citySelectPkg(country);
+		System.out.println("test"+list);
+		model.addAttribute("list", list);
+	}
 }

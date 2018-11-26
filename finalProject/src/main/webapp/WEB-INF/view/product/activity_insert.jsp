@@ -4,7 +4,6 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%
 	List list = (List)request.getAttribute("list");
-// 	Activity activity = (Activity)request.getAttribute("activity");
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -17,12 +16,12 @@
 <title>Insert title here</title>
 </head>
 <script type="text/javascript">
-	function bbb() {
+	function aa() {
 		var num = document.getElementById("continent").value;
 		
 		$.ajax({
 			type : 'post',
-			url : 'country',
+			url : 'actcountry',
 			dataType : 'html',
 			data : "continentName="+num,
 			success : function(result) {
@@ -31,12 +30,12 @@
 			}
 		});
 	}
-	function ccc() {
+	function ba() {
 		var num1 = document.getElementById("continent").value;
 		var num2 = document.getElementById("country1").value;
 		$.ajax({
 			type : 'post',
-			url : 'city',
+			url : 'actcity',
 			dataType : 'html',
 			data : "continentName="+num1+"&countryNum="+num2,
 			success : function(result) {
@@ -92,7 +91,7 @@
 								<tr>
 								<td><div>
 									<select id="continent" name="continentName"
-										onclick="javascript:bbb();">
+										onclick="javascript:aa();">
 										<%
 											for (Object o : list) {
 													Continent continent = (Continent) o;

@@ -53,5 +53,85 @@ public class CategoryRepository extends AbstractRepository{
 			sqlSession.close();
 		}
 	}
+
+	public List<Continent> continentSelectHotel() {
+		SqlSession sqlSession = getSqlSessionFactory().openSession();
+		try {
+			System.out.println("Repository1");
+			String statement = namespace + ".continentSelectHotel";
+			
+			return sqlSession.selectList(statement);
+		} finally {
+			sqlSession.close();
+		}
+	}
+
+	public List<Country> countrySelectHotel(Continent continent) {
+		SqlSession sqlSession = getSqlSessionFactory().openSession();
+		try {
+			System.out.println("Repository2");
+			String statement = namespace + ".countrySelectHotel";
+			return sqlSession.selectList(statement, continent);
+		} finally {
+			sqlSession.close();
+		}
+	}
+
+	public List<City> citySelectHotel(Country country) {
+		SqlSession sqlSession = getSqlSessionFactory().openSession();
+		try {
+			System.out.println("Repository3"+country.getContinentName());
+			System.out.println("Repository3"+country.getCountryNum());
+			String statement = namespace + ".citySelectHotel";
+			List<City> lt = sqlSession.selectList(statement, country);
+			for(Object temp : lt) {
+				City ct = (City)temp;
+				System.out.println("repo citySelect getCountryName : " + ct.getCityName() );
+			}
+			return lt;
+		} finally {
+			sqlSession.close();
+		}
+	}
+
+	public List<Continent> continentSelectPkg() {
+		SqlSession sqlSession = getSqlSessionFactory().openSession();
+		try {
+			System.out.println("Repository1");
+			String statement = namespace + ".continentSelectPkg";
+			
+			return sqlSession.selectList(statement);
+		} finally {
+			sqlSession.close();
+		}
+	}
+
+	public List<Country> countrySelectPkg(Continent continent) {
+		SqlSession sqlSession = getSqlSessionFactory().openSession();
+		try {
+			System.out.println("Repository2");
+			String statement = namespace + ".countrySelectPkg";
+			return sqlSession.selectList(statement, continent);
+		} finally {
+			sqlSession.close();
+		}
+	}
+
+	public List<City> citySelectPkg(Country country) {
+		SqlSession sqlSession = getSqlSessionFactory().openSession();
+		try {
+			System.out.println("Repository3"+country.getContinentName());
+			System.out.println("Repository3"+country.getCountryNum());
+			String statement = namespace + ".citySelectPkg";
+			List<City> lt = sqlSession.selectList(statement, country);
+			for(Object temp : lt) {
+				City ct = (City)temp;
+				System.out.println("repo citySelect getCountryName : " + ct.getCityName() );
+			}
+			return lt;
+		} finally {
+			sqlSession.close();
+		}
+	}
 	
 }

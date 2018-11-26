@@ -1,6 +1,9 @@
 package model;
 
 import java.io.Serializable;
+import java.util.Date;
+
+import org.springframework.web.multipart.MultipartFile;
 @SuppressWarnings("serial")
 public class Pkg implements Serializable{
 	private String pkgNum; // 여행상품 등록번호
@@ -15,12 +18,29 @@ public class Pkg implements Serializable{
 	private Integer pkgMemberCur; // 여행상품 현재신청인원
 	private Integer pkgMemberMax; // 여행상품 마감인원
 	private String pkgReview; // 여행상품 후기내용
-	private String pkgFile; // 여행상품 이미지파일이름
 	private String pkgCaution; // 여행상품 유의사항내용
 	private String pkgReference; // 여행상품 참고전달사항내용
 	private String pkgWeatherInfo; // 여행상품 날씨정보내용
 	private String pkgMeetingPlace; // 여행상품 집합장소
 	private String pkgCate; // 여행구분
+	private Date pkgRegdate; // 여행상품등록날짜
+	private Date pkgUptdate; // 여행상품수정날짜
+	private String cityNum; // 도시번호
+	private String continentName; // 대륙이름
+	private String countryNum; // 나라번호
+//	private MultipartFile[] pkgFile; // 여행상품 이미지파일이름
+	public Date getPkgRegdate() {
+		return pkgRegdate;
+	}
+	public void setPkgRegdate(Date pkgRegdate) {
+		this.pkgRegdate = pkgRegdate;
+	}
+	public Date getPkgUptdate() {
+		return pkgUptdate;
+	}
+	public void setPkgUptdate(Date pkgUptdate) {
+		this.pkgUptdate = pkgUptdate;
+	}
 	public String getPkgNum() {
 		return pkgNum;
 	}
@@ -93,12 +113,6 @@ public class Pkg implements Serializable{
 	public void setPkgReview(String pkgReview) {
 		this.pkgReview = pkgReview;
 	}
-	public String getPkgFile() {
-		return pkgFile;
-	}
-	public void setPkgFile(String pkgFile) {
-		this.pkgFile = pkgFile;
-	}
 	public String getPkgCaution() {
 		return pkgCaution;
 	}
@@ -128,5 +142,23 @@ public class Pkg implements Serializable{
 	}
 	public void setPkgCate(String pkgCate) {
 		this.pkgCate = pkgCate;
+	}
+	public String getCityNum() {
+		return cityNum;
+	}
+	public void setCityNum(String cityNum) {
+		this.cityNum = cityNum;
+	}
+	public String getContinentName() {
+		return continentName;
+	}
+	public void setContinentName(String continentName) {
+		this.continentName = continentName;
+	}
+	public String getCountryNum() {
+		return countryNum;
+	}
+	public void setCountryNum(String countryNum) {
+		this.countryNum = countryNum;
 	}
 }

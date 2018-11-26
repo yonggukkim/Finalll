@@ -1,15 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8" import="model.Qna"%>
-<%
-	
-%>
-
-<%
-	/* request.setCharacterEncoding("utf-8");
-	Qna qna = (Qna) request.getAttribute("qna");
-	System.out.println(qna); */
-%>
-
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -72,11 +62,11 @@
 							data-toggle="tab"> 호텔 <span
 							class="badge badge-primary badge-pill">99</span>
 						</a>
-						<a href="#flight"
+						<!-- <a href="#gift"
 							class="list-group-item d-flex justify-content-between align-items-center"
-							data-toggle="tab"> 항공권 <span
+							data-toggle="tab"> 특산품 <span
 							class="badge badge-primary badge-pill">99</span>
-						</a>
+						</a> -->
 					</ul>
 				</div>
 				<div class="col-lg-8">
@@ -93,9 +83,9 @@
 						<div id="hotel" class="tab-pane container fade">
 							<jsp:include page="hotel_list.jsp"></jsp:include>
 						</div>
-						<div id="flight" class="tab-pane container fade">
-							<jsp:include page="flight_list.jsp"></jsp:include>
-						</div>
+						<%-- <div id="gift" class="tab-pane container fade">
+							<jsp:include page="gift_list.jsp"></jsp:include>
+						</div> --%>
 					</div>
 				</div>
 			</div>

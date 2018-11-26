@@ -1,10 +1,7 @@
 package service;
 
 import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.nio.file.StandardCopyOption;
+import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
@@ -15,8 +12,8 @@ import org.springframework.context.ApplicationContextAware;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.web.context.WebApplicationContext;
-import org.springframework.web.multipart.MultipartFile;
 
+import command.ActivityCommand;
 import command.LoginSession;
 import model.Activitys;
 import model.Restore;
@@ -29,16 +26,24 @@ public class ActivityService implements ApplicationContextAware {
 	@Autowired
 	private ActivityRepository activityRepository;
 
-	public Integer insertActivity(Activitys activity, Model model, HttpSession session) {
+	public Integer insertActivity(ActivityCommand activity, Model model, HttpSession session) {
+		Activitys act = new Activitys();
 		LoginSession loginSession = (LoginSession)session.getAttribute("info");
-		activity.setStaffNumber(loginSession.getCommandNum());
-		System.out.println("service"+ activity.getStaffNumber());
-		System.out.println("service"+ activity.getActivityName());
-		System.out.println("service"+ activity.getActivityContent());
-		Integer result = activityRepository.insertActivity(activity);
-
-		upload(activity);
-		model.addAttribute("activity",activity);
+		act.setStaffNumber(loginSession.getCommandNum());
+		act.setActivityName(activity.getActivityName());
+		act.setActivityCate(activity.getActivityCate());
+		act.setActivityCompany(activity.getActivityCompany());
+		act.setActivityPresident(activity.getActivityPresident());
+		act.setActivityTel(activity.getActivityTel());
+		act.setCityNum(activity.getCityNum());
+		act.setCountryNum(activity.getCountryNum());
+		act.setActivityPrice(activity.getActivityPrice());
+		act.setActivityContent(activity.getActivityContent());
+		act.setContinentName(activity.getContinentName());
+		Integer result = activityRepository.insertActivity(act);
+		
+//		upload(activity);
+		model.addAttribute("activity",act);
 		return result;
 	}
 
@@ -74,4 +79,50 @@ public class ActivityService implements ApplicationContextAware {
         
         this.context = (WebApplicationContext) applicationContext;
     }
+
+	public List<Activitys> selectActivityList(Activitys activity, Model model) {
+		List<Activitys> list = activityRepository.selectActivityList(activity);
+		model.addAttribute("actlist", list);
+		return list;
+	}
+
+	public void selectActivityOne(Activitys activity, Model model) {
+		System.out.println("service detail : " + activity.getActivityNum());
+		Activitys acts = activityRepository.selectActivityOne(activity);
+		System.out.println("service detail after : " + acts.getActivityNum());
+		System.out.println("service detail after : " + acts.getStaffNumber());
+		model.addAttribute("activitydetail", acts);
+	}
+
+	public void modifyActivityOne(String activityNum, Model model) {
+		Activitys act = new Activitys();
+		act = activityRepository.modifyActivityOne(activityNum);
+		model.addAttribute("modify", act);
+	}
+
+	public String updateActivity(Activitys activity, Model model) {
+		Integer result = activityRepository.updateActivity(activity);
+		String u = null;
+		if(result > 0) {
+			model.addAttribute("actlist", activity);
+			u = "redirect:product";
+		}else {
+			model.addAttribute("bodyPage","product/activity_modify.jsp");
+			u = "main";
+		}
+		return u;
+	}
+
+	public String deleteActivity(String activityNum, Model model) {
+		String u = null;
+		Integer result = activityRepository.deleteActivity(activityNum);
+		if(result > 0) {
+			model.addAttribute("result", result);
+			u = "redirect:product";
+		}else {
+			model.addAttribute("bodyPage","product/activity_modify.jsp");
+			u = "main";
+		}
+		return u;
+	}
 }

@@ -20,4 +20,8 @@
 	<bean id="categoryRepository" class="repository.CategoryRepository" />
 	<bean id="activityService" class="service.ActivityService" />
 	<bean id="activityRepository" class="repository.ActivityRepository" />
+	<bean id="hotelService" class="service.HotelService" />
+	<bean id="hotelRepository" class="repository.HotelRepository" />
+	<bean id="pkgService" class="service.PkgService" />
+	<bean id="pkgRepository" class="repository.PkgRepository" />
 </beans>	

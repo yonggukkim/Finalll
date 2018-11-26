@@ -33,10 +33,10 @@ public class MainController {
 	}
 	
 	@RequestMapping(value="/login", method = RequestMethod.POST)
-	public String login1(HttpServletRequest request, LoginSession loginSession, Model model, HttpServletResponse response) {
+	public String login1(HttpServletRequest request, LoginSession loginSession, Model model, HttpServletResponse response, HttpSession session) {
 		System.out.println("login controller"+loginSession.getCommandId());
 		System.out.println("login controller"+loginSession.getCommandPw());
-		return loginService.comparisonLogin(request, loginSession, model, response);
+		return loginService.comparisonLogin(request, loginSession, model, response, session);
 	}
 	
 	@RequestMapping(value="/logout", method = RequestMethod.GET)

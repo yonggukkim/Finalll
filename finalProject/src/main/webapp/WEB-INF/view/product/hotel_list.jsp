@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import="model.*, java.util.*"%>
+<%
+	List list = (List)request.getAttribute("list");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,16 +20,18 @@
 								<th scope="col">작성일</th>
 								<th scope="col">조회수</th>
 							</tr>
-						</thead>
-						<%-- <tbody>
+							<% for (Object o : list) {
+								Hotel hotel = (Hotel)o;	
+							%>
 							<tr>
-								<th scope="row"><%=qna.getQnaNum()%></th>
-								<td><%=qna.getMemberNum()%></td>
-								<td><a href="#"><%=qna.getQnaSubject()%></a></td>
-								<td><%=qna.getQnaDate()%></td>
-								<td><%=qna.getQnaCount()%></td>
+								<th scope="col"><%= hotel.getHotelNum() %></th>
+								<th scope="col"><%= hotel.getStaffNumber() %></th>
+								<th scope="col"><a href="hotel_detail?hotelNum=<%= hotel.getHotelNum() %>"><%= hotel.getHotelName() %></a></th>
+								<th scope="col"><%= hotel.getHotelRegdate() %></th>
+								<th scope="col"><%= hotel.getHotelCate() %></th>
 							</tr>
-						</tbody> --%>
+							<% } %>
+						</thead>
 					</table>
 					<div class="container">
 						<!-- <nav aria-label="Page navigation example">-->
@@ -41,7 +46,7 @@
 						</ul>
 					</div>
 					<div class="form-button">
-						<a href="qna_insert">
+						<a href="hotel_insert">
 							<button type="button" class="button float-right">글쓰기</button>
 						</a>
 					</div>

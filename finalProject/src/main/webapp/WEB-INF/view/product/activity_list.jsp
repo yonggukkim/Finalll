@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import="model.*, java.util.*"%>
+<%
+	List list = (List)request.getAttribute("actlist");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,12 +14,23 @@
 					<table class="table table-hover">
 						<thead>
 							<tr>
-								<th scope="col">글번호</th>
-								<th scope="col">글쓴이</th>
-								<th scope="col">제목</th>
+								<th scope="col">상품번호</th>
+								<th scope="col">등록인</th>
+								<th scope="col">상품명</th>
 								<th scope="col">작성일</th>
-								<th scope="col">조회수</th>
+								<th scope="col">종류</th>
 							</tr>
+							<% for (Object o : list) {
+								Activitys activity = (Activitys)o;	
+							%>
+							<tr>
+								<th scope="col"><%= activity.getActivityNum() %></th>
+								<th scope="col"><%= activity.getStaffNumber() %></th>
+								<th scope="col"><a href="activity_detail?activityNum=<%= activity.getActivityNum() %>"><%= activity.getActivityName() %></a></th>
+								<th scope="col"><%= activity.getActivityRegdate() %></th>
+								<th scope="col"><%= activity.getActivityCate() %></th>
+							</tr>
+							<% } %>
 						</thead>
 					</table>
 					<div class="container">

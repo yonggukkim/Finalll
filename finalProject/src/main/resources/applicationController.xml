@@ -10,4 +10,5 @@
 	<bean class="controller.StaffController" />
 	<bean class="controller.GiftController"/>
 	<bean class="controller.ActivityController" />
+	<bean class="controller.HotelController" />
 </beans>

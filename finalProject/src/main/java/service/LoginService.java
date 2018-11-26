@@ -16,14 +16,13 @@ import repository.LoginRepository;
 
 @Service
 public class LoginService {
-	HttpSession session = null;
+	/*HttpSession session = null;*/
 
 	@Autowired
 	private LoginRepository loginRepository;
 	
-	public String comparisonLogin(HttpServletRequest request, LoginSession loginSession, Model model, HttpServletResponse response) {
+	public String comparisonLogin(HttpServletRequest request, LoginSession loginSession, Model model, HttpServletResponse response, HttpSession session) {
 		String returnURL="";
-		session = request.getSession();
 		if(session.getAttribute("info") != null) {
 			session.removeAttribute("info");
 		}

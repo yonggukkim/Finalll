@@ -6,6 +6,7 @@ public class Guide implements Serializable{
 	private String guideNum; // 여행상품 담당 가이드 등록번호
 	private String guideName; // 여행상품 담당가이드이름
 	private String guidePhone; // 여행상품 담당가이드휴대번호
+	private String guideArea; // 여행상품 담당가이드지역
 	public String getGuideNum() {
 		return guideNum;
 	}
@@ -23,5 +24,11 @@ public class Guide implements Serializable{
 	}
 	public void setGuidePhone(String guidePhone) {
 		this.guidePhone = guidePhone;
+	}
+	public String getGuideArea() {
+		return guideArea;
+	}
+	public void setGuideArea(String guideArea) {
+		this.guideArea = guideArea;
 	}
 }

@@ -1,6 +1,9 @@
 package model;
 
 import java.io.Serializable;
+import java.util.Date;
+
+import org.springframework.web.multipart.MultipartFile;
 @SuppressWarnings("serial")
 public class Hotel implements Serializable{
 	private String hotelNum; // 숙박시설 등록번호
@@ -9,17 +12,19 @@ public class Hotel implements Serializable{
 	private Long hotelPrice; // 숙박시설 가격
 	private String hotelCheckin; // 숙박시설 입실시간
 	private String hotelCheckout; // 숙박시설 퇴실시간
-	private String hotelBreakfast; // 조식여부
+	private boolean hotelBreakfast; // 조식여부
 	private String hotelGrade; // 숙박시설 등급
 	private String hotelCate; // 객실종류
 	private String hotelTel; // 숙박시설업체전화번호
 	private String hotelPresident; // 숙박시설대표자이름
-	private String hotelFile; // 숙박시설상품이미지파일이름
 	private String hotelContent; // 숙박시설상품설명내용
 	private String hotelCompany; // 숙박시설업체이름
+	private Date hotelRegdate; // 숙박시설등록날짜
+	private Date hotelUptdate; // 숙박시설수정날짜
 	private String continentName; // 대륙이름
 	private String countryNum; // 나라번호
 	private String cityNum; // 도시번호
+//	private MultipartFile[] hotelFile; // 호텔 파일 이름
 	public String getHotelNum() {
 		return hotelNum;
 	}
@@ -56,10 +61,10 @@ public class Hotel implements Serializable{
 	public void setHotelCheckout(String hotelCheckout) {
 		this.hotelCheckout = hotelCheckout;
 	}
-	public String getHotelBreakfast() {
+	public boolean isHotelBreakfast() {
 		return hotelBreakfast;
 	}
-	public void setHotelBreakfast(String hotelBreakfast) {
+	public void setHotelBreakfast(boolean hotelBreakfast) {
 		this.hotelBreakfast = hotelBreakfast;
 	}
 	public String getHotelGrade() {
@@ -86,12 +91,6 @@ public class Hotel implements Serializable{
 	public void setHotelPresident(String hotelPresident) {
 		this.hotelPresident = hotelPresident;
 	}
-	public String getHotelFile() {
-		return hotelFile;
-	}
-	public void setHotelFile(String hotelFile) {
-		this.hotelFile = hotelFile;
-	}
 	public String getHotelContent() {
 		return hotelContent;
 	}
@@ -103,6 +102,18 @@ public class Hotel implements Serializable{
 	}
 	public void setHotelCompany(String hotelCompany) {
 		this.hotelCompany = hotelCompany;
+	}
+	public Date getHotelRegdate() {
+		return hotelRegdate;
+	}
+	public void setHotelRegdate(Date hotelRegdate) {
+		this.hotelRegdate = hotelRegdate;
+	}
+	public Date getHotelUptdate() {
+		return hotelUptdate;
+	}
+	public void setHotelUptdate(Date hotelUptdate) {
+		this.hotelUptdate = hotelUptdate;
 	}
 	public String getContinentName() {
 		return continentName;

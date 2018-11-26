@@ -12,7 +12,7 @@
 </head>
 <body>
 <div>
-<select id="city1" name="cityNum">
+<select id="city1" name="CityNum">
 <% for( Object o : list) { 
 	City city = (City)o;
 %>

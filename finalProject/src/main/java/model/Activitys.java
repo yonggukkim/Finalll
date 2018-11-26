@@ -2,8 +2,6 @@ package model;
 
 import java.io.Serializable;
 import java.util.Date;
-
-import org.springframework.web.multipart.MultipartFile;
 @SuppressWarnings("serial")
 public class Activitys implements Serializable{
 	private String activityNum; // 액티비티 등록번호

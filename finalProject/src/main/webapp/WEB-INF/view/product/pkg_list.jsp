@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import="model.*, java.util.*"%>
+<%
+	List list = (List)request.getAttribute("pkglist");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,22 +14,32 @@
 					<table class="table table-hover">
 						<thead>
 							<tr>
-								<th scope="col">글번호</th>
-								<th scope="col">글쓴이</th>
-								<th scope="col">제목</th>
-								<th scope="col">작성일</th>
-								<th scope="col">조회수</th>
+								<th scope="col">패키지여행상품등록번호</th>
+								<th scope="col">등록인</th>
+								<th scope="col">담당가이드이름</th>
+								<th scope="col">여행상품이름</th>
+								<th scope="col">여행상품가격</th>
+								<th scope="col">여행상품여행기간</th>
+								<th scope="col">여행상품등록날짜</th>
+								<th scope="col">여행상품테마종류</th>
+								<th scope="col">여행구분</th>
 							</tr>
-						</thead>
-						<%-- <tbody>
+							<% for (Object o : list) {
+								Pkg pkg = (Pkg)o;	
+							%>
 							<tr>
-								<th scope="row"><%=qna.getQnaNum()%></th>
-								<td><%=qna.getMemberNum()%></td>
-								<td><a href="#"><%=qna.getQnaSubject()%></a></td>
-								<td><%=qna.getQnaDate()%></td>
-								<td><%=qna.getQnaCount()%></td>
+								<th scope="col"><%= pkg.getPkgNum() %></th>
+								<th scope="col"><%= pkg.getStaffNumber() %></th>
+								<th scope="col"><%= pkg.getGuideNum() %></th>
+								<th scope="col"><a href="pkg_detail?pkgNum=<%= pkg.getPkgNum() %>"><%= pkg.getPkgName() %></a></th>
+								<th scope="col"><%= pkg.getPkgPrice() %></th>
+								<th scope="col"><%= pkg.getPkgPeriod() %></th>
+								<th scope="col"><%= pkg.getPkgRegdate() %></th>
+								<th scope="col"><%= pkg.getPkgTheme() %></th>
+								<th scope="col"><%= pkg.getPkgCate() %></th>
 							</tr>
-						</tbody> --%>
+							<% } %>
+						</thead>
 					</table>
 					<div class="container">
 						<!-- <nav aria-label="Page navigation example">-->
@@ -41,7 +54,7 @@
 						</ul>
 					</div>
 					<div class="form-button">
-						<a href="qna_insert">
+						<a href="pkg_insert">
 							<button type="button" class="button float-right">글쓰기</button>
 						</a>
 					</div>

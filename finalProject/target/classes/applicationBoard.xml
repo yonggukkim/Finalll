@@ -24,4 +24,6 @@
 	<bean id="hotelRepository" class="repository.HotelRepository" />
 	<bean id="pkgService" class="service.PkgService" />
 	<bean id="pkgRepository" class="repository.PkgRepository" />
+	<bean id="giftService" class="service.GiftService" />
+	<bean id="giftRepository" class="repository.GiftRepository"/>
 </beans>	

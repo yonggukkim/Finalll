@@ -8,7 +8,8 @@
 		<typeAlias type="model.Qna" alias="Qna" />
 		<typeAlias type="model.Notice" alias="Notice" />
 		<typeAlias type="model.Review" alias="Review" />
-		<typeAlias type="model.SelfPlanNumber" alias="SelfPlanNumber" />
+		<typeAlias type="model.SelfPlanNumber"
+			alias="SelfPlanNumber" />
 		<typeAlias type="command.LoginSession" alias="LoginSession" />
 		<typeAlias type="model.Continent" alias="Continent" />
 		<typeAlias type="model.Country" alias="Country" />
@@ -17,6 +18,8 @@
 		<typeAlias type="model.Hotel" alias="Hotel" />
 		<typeAlias type="model.Pkg" alias="Pkg" />
 		<!-- <typeAlias type="model.Restore" alias="Restore" /> -->
+		<typeAlias type="model.Gift" alias="Gift" />
+		<!-- <typeAlias type="model.Gift_Restore" alias="GR"/> -->
 	</typeAliases>
 	<!-- db컨넥션 -->
 	<environments default="development">
@@ -34,10 +37,11 @@
 	</environments>
 	<mappers>
 		<mapper resource="repository/mapper/BoardMapper.xml" />
- 		<mapper resource="repository/mapper/LoginMapper.xml" />
- 		<mapper resource="repository/mapper/CategoryMapper.xml" />
- 		<mapper resource="repository/mapper/ActivityMapper.xml" />
- 		<mapper resource="repository/mapper/HotelMapper.xml" />
- 		<mapper resource="repository/mapper/PkgMapper.xml" />
+		<mapper resource="repository/mapper/LoginMapper.xml" />
+		<mapper resource="repository/mapper/CategoryMapper.xml" />
+		<mapper resource="repository/mapper/ActivityMapper.xml" />
+		<mapper resource="repository/mapper/HotelMapper.xml" />
+		<mapper resource="repository/mapper/PkgMapper.xml" />
+		<mapper resource="repository/mapper/GiftMapper.xml" />
 	</mappers>
 </configuration>

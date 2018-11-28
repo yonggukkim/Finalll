@@ -56,6 +56,20 @@ public class GiftService /* implements ApplicationContextAware*/{
 		return result;
 	}
 
+	public List<Gift> giftSelectByName(Gift gift) {
+		System.out.println("gift service-giftSelectByName진입");
+		if(gift.getGiftName() != null) {
+			List<Gift> searchedList = giftRepository.giftSelectByName(gift);
+			return searchedList;
+		} else if (gift.getGiftContent() != null) {
+			List<Gift> searchedList = giftRepository.giftSelectByName(gift);
+			return searchedList;
+		} else  return null;
+	
+		
+		
+	}
+
 /*	private void upload(Gift gift) {
 
 		 //1. 물리적으로 stream방식 파일 업로드

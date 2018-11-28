@@ -100,6 +100,20 @@ public class GiftRepository extends AbstractRepository {
 		}
 	}
 
+	public List<Gift> giftSelectByName(Gift gift) {
+		System.out.println("gift repository-giftSelectByName 진입");
+		SqlSession sqlSession = getSqlSessionFactory().openSession();
+		try {
+			String statement = namespace + ".giftSelectByName";
+			List<Gift> searchedList = sqlSession.selectList(statement, gift);
+			System.out.println("gift repository-giftSelectByName 값 주입 성공"  );
+			return  searchedList;
+		} finally {
+			sqlSession.close();
+		}
+		
+	}
+
 /*	public Integer grInsert(GiftRestore gr) {
 		System.out.println("gift repostory - grInsert 진입");
 		SqlSession sqlSession = getSqlSessionFactory().openSession();

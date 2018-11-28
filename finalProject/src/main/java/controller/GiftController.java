@@ -155,4 +155,14 @@ public class GiftController {
 		return "gift_list";
 	}
 
+	@RequestMapping(value="/gift_list_byName", method = RequestMethod.POST)
+	public String giftSearchByName( Gift gift,  Model model) {
+		System.out.println("gift Controller Get 진입");
+		model.addAttribute("bodyPage", "gift/gift_list.jsp");
+		List<Gift> searchedList = giftService.giftSelectByName(gift);
+		System.out.println("searchedList null 여부 확인"+ searchedList);
+		model.addAttribute("list", searchedList);
+		return "main";
+	}
+	
 }

@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC 
+	"-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="repository.mapper.GiftMapper">
+	<cache />
+
+	<resultMap type="Gift" id="giftMap">
+		<id column="gift_num" jdbcType="VARCHAR" property="giftNum" />
+		<result column="gift_name" jdbcType="VARCHAR"
+			property="giftName" />
+		<result column="gift_price" jdbcType="INTEGER"
+			property="giftPrice" />
+		<!-- <result column="gift_file" jdbcType="VARCHAR" property="giftFile" 
+			/> -->
+		<result column="gift_cate" jdbcType="VARCHAR"
+			property="giftCate" />
+		<result column="gift_content" jdbcType="CLOB"
+			property="giftContent" />
+		<result column="gift_company" jdbcType="VARCHAR"
+			property="giftCompany" />
+		<result column="gift_tel" jdbcType="VARCHAR" property="giftTel" />
+		<result column="gift_president" jdbcType="VARCHAR"
+			property="giftPresident" />
+		<result column="continent_name" jdbcType="VARCHAR"
+			property="continentName" />
+		<result column="country_num" jdbcType="VARCHAR"
+			property="countryNum" />
+		<result column="city_num" jdbcType="VARCHAR" property="cityNum" />
+
+	</resultMap>
+
+	<insert id="giftInsert" parameterType="Gift">
+		<selectKey resultType="string" keyProperty="giftNum"
+			order="BEFORE">
+			SELECT ('G'||gift_num.nextval) FROM dual
+		</selectKey>
+		INSERT INTO GIFT
+		(GIFT_NUM,GIFT_NAME,GIFT_PRICE,<!-- GIFT_FILE, -->
+		GIFT_CATE,GIFT_CONTENT,GIFT_COMPANY,GIFT_TEL,GIFT_PRESIDENT,CONTINENT_NAME,COUNTRY_NUM,CITY_NUM)
+		VALUES (#{giftNum},#{giftName},#{giftPrice},<!-- #{giftFile}, -->
+		#{giftCate},#{giftContent},#{giftCompany},#{giftTel},#{giftPresident},#{continentName},#{countryNum},#{cityNum})
+	</insert>
+
+<!-- 	<insert id="giftRestoreInsert" parameterType="GR">
+		<selectKey resultType="string" keyProperty="gfileNum"
+			order="BEFORE">
+			SELECT ('GF'||gfile_num.nextval) FROM dual
+		</selectKey>
+
+
+		INSERT INTO GITF_RESTORE
+		(gfile_num,gfile_name,gfile_path)
+		VALUES
+		('333',#{gfileName},#{gfilePath})
+
+	</insert> -->
+
+
+	<select id="giftSelect" parameterType="Gift" resultMap="giftMap">
+		SELECT
+		GIFT_NUM,GIFT_NAME,GIFT_PRICE,<!-- GIFT_FILE, -->
+		GIFT_CATE,GIFT_CONTENT,GIFT_COMPANY,GIFT_TEL,GIFT_PRESIDENT,CONTINENT_NAME,COUNTRY_NUM,CITY_NUM
+		FROM gift
+	</select>
+
+	<select id="giftSelectByCondition" parameterType="Gift"
+		resultMap="giftMap">
+		SELECT
+		GIFT_NUM,GIFT_NAME,GIFT_PRICE,<!-- GIFT_FILE, -->
+		GIFT_CATE,GIFT_CONTENT,GIFT_COMPANY,GIFT_TEL,GIFT_PRESIDENT,CONTINENT_NAME,COUNTRY_NUM,CITY_NUM
+		FROM gift
+		WHERE GIFT_NUM = #{giftNum}
+
+	</select>
+
+	<delete id="giftSelectDelete" parameterType="Gift">
+		DELETE FROM gift
+		WHERE gift_num = #{giftNum}
+
+	</delete>
+
+
+
+	<update id="giftModify" parameterType="Gift">
+		UPDATE gift
+		<trim prefix="SET" suffixOverrides=",">
+			<if test="giftName != null"> GIFT_NAME = #{giftName},</if>
+			<if test="giftPrice != null">GIFT_PRICE = #{giftPrice},</if>
+			<!-- <if test="giftFile != null">GIFT_FILE = #{giftFile},</if> -->
+			<if test="giftCate != null">GIFT_CATE = #{giftCate},</if>
+			<if test="giftContent != null">GIFT_CONTENT = #{giftContent},</if>
+			<if test="giftCompany != null">GIFT_COMPANY = #{giftCompany},</if>
+			<if test="giftTel != null"> GIFT_TEL = #{giftTel},</if>
+			<if test="giftPresident != null">GIFT_PRESIDENT = #{giftPresident}</if>
+		</trim>
+		WHERE gift_num = #{giftNum}
+	</update>
+
+
+</mapper>
+	

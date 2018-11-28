@@ -17,7 +17,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.multipart.MultipartFile;
 
+import command.ActivityCommand;
 import command.HotelCommand;
+import command.HotelListSession;
 import command.LoginSession;
 import command.PkgCommand;
 import model.Activitys;
@@ -71,8 +73,7 @@ public class PkgService implements ApplicationContextAware {
 	}
 
 	private List<Restore> upload(MultipartFile[] a, String b) {
-//		String cpath = "C:\\Users\\kook7\\eclipse-workspace\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\finalProject\\files";
-		String path = context.getServletContext().getRealPath("files");
+		String path = context.getServletContext().getRealPath("WEB-INF\\view\\files");
 		File file;
 		Restore res;
 		String storedFileName;
@@ -134,15 +135,17 @@ public class PkgService implements ApplicationContextAware {
 		System.out.println("service3 " + hotel.getCountryNum());
 		System.out.println("service3 " + hotel.getContinentName());
 		System.out.println("service3 " + hotel.getCityNum());
+		String res = pkgRepository.hotelRes(hotel);
+		System.out.println("dafsa : "+res);
 		Hotel list = pkgRepository.hotelSelectOnePkg(hotel);
 		List hotelcart = (List)session.getAttribute("hotelcart");
 		if(hotelcart == null) {
 			hotelcart = new ArrayList();
 		}
-		HotelCommand command = null;
+		HotelListSession command = null;
 		boolean newCart = true;
 		for(int i = 0; i < hotelcart.size(); i++) {
-			command = (HotelCommand)hotelcart.get(i);
+			command = (HotelListSession)hotelcart.get(i);
 			if(list.getHotelName().equals(command.getHotelName())) {
 				newCart = false;
 //				command.setHotelPrice(command.getHotelPrice()+command.getHotelPrice());
@@ -150,10 +153,14 @@ public class PkgService implements ApplicationContextAware {
 			}
 		}
 		if(newCart) {
-			command = new HotelCommand();
+			command = new HotelListSession();
+			command.setHotelNum(list.getHotelNum());
+			command.setHotelImage(res);
 			command.setHotelName(list.getHotelName());
-			command.setHotelPrice(list.getHotelPrice());
 			command.setHotelGrade(list.getHotelGrade());
+			command.setHotelCate(list.getHotelCate());
+			command.setHotelCompany(list.getHotelCompany());
+			command.setHotelTel(list.getHotelTel());
 			hotelcart.add(command);
 		}
 		session.setAttribute("hotelcart", hotelcart);
@@ -162,11 +169,34 @@ public class PkgService implements ApplicationContextAware {
 		model.addAttribute("list", list);
 	}
 
-	public void activitySelectOnePkg(Activitys activity, Model model) {
+	public void activitySelectOnePkg(Activitys activity, Model model, HttpSession session) {
 		System.out.println("service3 " + activity.getCountryNum());
 		System.out.println("service3 " + activity.getContinentName());
 		System.out.println("service3 " + activity.getCityNum());
 		Activitys list = pkgRepository.activitySelectOnePkg(activity);
+		List activitycart = (List)session.getAttribute("activitycart");
+		if(activitycart == null) {
+			activitycart = new ArrayList();
+		}
+		ActivityCommand command = null;
+		boolean newCart = true;
+		for(int i = 0; i < activitycart.size(); i++) {
+			command = (ActivityCommand)activitycart.get(i);
+			if(list.getActivityName().equals(command.getActivityName())) {
+				newCart = false;
+//				command.setActivityPrice(command.getActivityPrice()+list.getActivityPrice());
+				System.out.println("cart yes");
+			}
+		}
+		if(newCart) {
+			command = new ActivityCommand();
+			command.setActivityName(list.getActivityName());
+			command.setActivityPrice(list.getActivityPrice());
+			command.setActivityCate(list.getActivityCate());
+			activitycart.add(command);
+		}
+		session.setAttribute("activitycart", activitycart);
+		
 		System.out.println("test"+list);
 		model.addAttribute("list", list);
 	}

@@ -49,11 +49,15 @@
 		HOTEL_UPTDATE, CONTINENT_NAME, COUNTRY_NUM, CITY_NUM FROM hotel
 	</select>
 
+	<select id="selectNum" resultType="String">
+		SELECT ('h'||hotel_num.nextval) FROM dual
+	</select>
+	
 	<insert id="insertHotel" parameterType="Hotel">
-		<selectKey resultType="string" keyProperty="hotelNum"
+		<!-- <selectKey resultType="string" keyProperty="hotelNum"
 			order="BEFORE">
 			SELECT ('h'||hotel_num.nextval) FROM dual
-		</selectKey>
+		</selectKey> -->
 		INSERT INTO hotel(HOTEL_NUM, STAFF_NUMBER, HOTEL_NAME, HOTEL_PRICE,
 		HOTEL_CHECKIN,
 		HOTEL_CHECKOUT, HOTEL_BREAKFAST, HOTEL_GRADE, HOTEL_CATE, HOTEL_TEL,
@@ -65,7 +69,10 @@
 	</insert>
 	
 	<insert id="insertRestore" parameterType="Restore">
-         INSERT INTO restore VALUES(res_seq.nextval,#{hotelNum},#{fold},#{fileName},sysdate,#{etc})
+          INSERT INTO restore(FILE_NO, RES_NUM, FOLD, STORED_FILE_NAME, 
+         FILE_NAME, CRE_DATE, ETC) 
+         VALUES(res_seq.nextval,#{resNum},#{fold},#{storedFileName},
+         #{fileName},sysdate,#{etc})
      </insert>
      
 	<select id="selectHotelOne" parameterType="Hotel" resultMap="hotelMap">

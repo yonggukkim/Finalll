@@ -13,15 +13,32 @@ import model.Restore;
 public class ActivityRepository extends AbstractRepository{
 	private final String namespace = "repository.mapper.ActivityMapper";
 	
-	public Integer insertActivity(Activitys activity) {
+	public Integer insertActivity(Activitys activity, List<Restore> list) {
 		SqlSession sqlSession = getSqlSessionFactory().openSession();
 		try {
 			String statement = namespace + ".insertActivity";
+			String statement1 = namespace + ".selectNum";
+			String statement2 = namespace + ".insertRestore";
 			System.out.println("Repositorybefor" + activity.getActivityContent());
 			System.out.println("Repositorybefor" + activity.getActivityName());
 //			activity.setActivityRegdate(Calendar.getInstance().getTime());
 //			activity.setActivityUptdate(Calendar.getInstance().getTime());
+			String s = sqlSession.selectOne(statement1);
+			activity.setActivityNum(s);
+			System.out.println("insertAct" + s);
 			Integer result = sqlSession.insert(statement, activity);
+			System.out.println(list.size());
+			int cnt = 0;
+			for(Restore a : list) {
+				a.setResNum(s);
+				System.out.println("count"+ cnt++);
+				System.out.println("a" + a.getFileNo());
+				System.out.println("a" + a.getFold());
+				System.out.println("a" + a.getStoredFileName());
+				System.out.println("a" + a.getFileName());
+				System.out.println("a" + a.getEtc());
+				sqlSession.insert(statement2, a);
+			}
 			System.out.println("Repositoryafter" + activity.getActivityNum());
 			System.out.println("Repositoryafter" + activity.getActivityName());
 			if (result > 0)

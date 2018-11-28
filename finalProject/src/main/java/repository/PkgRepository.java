@@ -151,6 +151,22 @@ public class PkgRepository extends AbstractRepository{
 		}
 	}
 
+	public String hotelRes(Hotel hotel) {
+		SqlSession sqlSession = getSqlSessionFactory().openSession();
+		try {
+//			System.out.println("Repository3"+activity.getContinentName());
+//			System.out.println("Repository3"+activity.getCountryNum());
+//			System.out.println("Repository3"+activity.getCityNum());
+			System.out.println("repo activitySelect getActivityNum : " + hotel.getHotelNum());
+			String statement = namespace + ".hotelRes";
+			String lt = sqlSession.selectOne(statement, hotel);
+				System.out.println("repo activitySelect getActivityNum : " + lt);
+			return lt;
+		} finally {
+			sqlSession.close();
+		}
+	}
+
 //	public void insertRestore(Restore res) {
 //		SqlSession sqlSession = getSqlSessionFactory().openSession();
 //		try {

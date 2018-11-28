@@ -11,6 +11,9 @@ public class Restore implements Serializable{
 	private String storedFileName;
 	private Date creDate;
 	private String etc;
+	public Restore() {
+		super();
+	}
 	public Restore(String fold, String fileName, String storedFileName, String etc) {
 		super();
 		this.fold = fold;

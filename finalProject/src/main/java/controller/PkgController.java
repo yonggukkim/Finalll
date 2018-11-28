@@ -83,12 +83,12 @@ public class PkgController {
 	}
 	
 	@RequestMapping(value="/pactivity_modify", method=RequestMethod.POST)
-	public String activity(Activitys activity, Model model) {
+	public String activity(Activitys activity, Model model, HttpSession session) {
 		System.out.println("controller3 "+activity.getCountryNum());
 		System.out.println("controller3 "+activity.getContinentName());
 		System.out.println("controller3 "+activity.getCityNum());
 		System.out.println("controller3 "+activity.getActivityNum());
-		pkgService.activitySelectOnePkg(activity, model);
+		pkgService.activitySelectOnePkg(activity, model, session);
 		return "product/pkg_activity_modify";
 	}
 	

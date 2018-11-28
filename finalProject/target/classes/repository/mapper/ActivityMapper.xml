@@ -5,10 +5,13 @@
 
 <mapper namespace="repository.mapper.ActivityMapper">
 	<cache />
+	<select id="selectNum" resultType="String">
+		SELECT ('a'||activity_num.nextval) FROM dual
+	</select>
 	<insert id="insertActivity" parameterType="Activity">
-         <selectKey resultType="string" keyProperty="activityNum" order="BEFORE">
+        <!--  <selectKey resultType="string" keyProperty="activityNum" order="BEFORE">
              SELECT ('a'||activity_num.nextval) FROM dual
-         </selectKey>
+         </selectKey> -->
          INSERT INTO activity(activity_num, staff_number, activity_name, activity_price, activity_cate, activity_content, activity_company, activity_tel, activity_president, activity_regdate, activity_uptdate, continent_name, country_num, city_num)
          VALUES(#{activityNum},#{staffNumber},#{activityName},#{activityPrice},
          #{activityCate},#{activityContent},#{activityCompany},#{activityTel},
@@ -16,7 +19,10 @@
      </insert>
 
     <insert id="insertRestore" parameterType="Restore">
-         INSERT INTO restore VALUES(res_seq.nextval,#{activityNum},#{fold},#{fileName},sysdate,#{etc})
+         INSERT INTO restore(FILE_NO, RES_NUM, FOLD, STORED_FILE_NAME, 
+         FILE_NAME, CRE_DATE, ETC) 
+         VALUES(res_seq.nextval,#{resNum},#{fold},#{storedFileName},
+         #{fileName},sysdate,#{etc})
      </insert>
      <resultMap type="Activity" id="activityMap">
      	<id column="activity_num" jdbcType="VARCHAR" property="activityNum"/>

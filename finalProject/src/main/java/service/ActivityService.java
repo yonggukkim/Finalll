@@ -2,10 +2,9 @@ package service;
 
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.nio.file.StandardCopyOption;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import javax.servlet.http.HttpSession;
 
@@ -45,46 +44,42 @@ public class ActivityService implements ApplicationContextAware {
 		act.setActivityPrice(activity.getActivityPrice());
 		act.setActivityContent(activity.getActivityContent());
 		act.setContinentName(activity.getContinentName());
-		act.setActivityFile(activity.getActivityFile());
-		Integer result = activityRepository.insertActivity(act);
-		for (MultipartFile mf : act.getActivityFile()) {
-			System.out.println("dddddadfs"+mf.getOriginalFilename());
-		}
-		upload(act);
+		List<Restore> list = upload(activity.getActivityFile(), activity.getActivityName());
+		System.out.println("sdads adadsasdsda : "+list.size());
+		Integer result = activityRepository.insertActivity(act, list);
 		model.addAttribute("activity",act);
 		return result;
 	}
 
-	private void upload(Activitys act) {
-//		String cpath = "C:/Users/HKEDU/eclipse-workspace2/.metadata/.plugins/org.eclipse.wst.server.core/tmp1/wtpwebapps/finalProject/WEB-INF/view/files";
-		String cpath = "C:\\Users\\kook7\\eclipse-workspace\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\finalProject\\files";
-		String path = context.getServletContext().getRealPath("files");
+	private List<Restore> upload(MultipartFile[] a, String b) {
+		String path = context.getServletContext().getRealPath("WEB-INF\\view\\files");
 		System.out.println("path dddd"+ path);
 		File file;
 		Restore res;
-
-		for (MultipartFile mf : act.getActivityFile()) {	
-
-			file = new File(path, mf.getOriginalFilename());
-			res = new Restore(act.getActivityNum(), path, mf.getOriginalFilename(), act.getActivityName()); // res의 vo객체 만들어짐 (경로, 파일명, 설명)
-
+		String storedFileName;
+		String originalFile;
+		String originalFileExtension;
+		List<Restore> list = new ArrayList<Restore>();
+		System.out.println("a size : " +a.length);
+		for (MultipartFile mf : a) {	
+			originalFile = mf.getOriginalFilename();
+			originalFileExtension = originalFile.substring(originalFile.lastIndexOf("."));
+			storedFileName = UUID.randomUUID().toString().replaceAll("-", "") + originalFileExtension;
+			file = new File(path, storedFileName);
+			res = new Restore( path, mf.getOriginalFilename(), storedFileName, b); // res의 vo객체 만들어짐 (경로, 파일명, 설명)
 			// stream 형식의 파일 -> 실제파일로 전환하면 저장
 			try {
-				mf.transferTo(file);
-				// 파일 정보 입력
-				 Files.copy(Paths.get( path+"/"+mf.getOriginalFilename()),
-	                        Paths.get(cpath+"/"+mf.getOriginalFilename()),
-	                        StandardCopyOption.REPLACE_EXISTING);
-				 activityRepository.insertRestore(res);
-
+				mf.transferTo(file);				
+				list.add(res);
 			} catch (IllegalStateException e) {
 				e.printStackTrace();
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-
 		}
+		return list;
 	}
+	
 	public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
         
         this.context = (WebApplicationContext) applicationContext;

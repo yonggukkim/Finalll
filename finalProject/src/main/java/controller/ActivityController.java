@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import command.ActivityCommand;
+import command.PkgCommand;
 import model.Activitys;
 import model.Continent;
 import model.Country;
@@ -27,7 +28,8 @@ public class ActivityController {
 	private ActivityService activityService;
 	
 	@RequestMapping(value = "/activity_insert", method = RequestMethod.GET)
-	public String activityInsertGet(Activitys activity, Model model, HttpSession session) {
+	public String activityInsertGet(Model model) {
+		ActivityCommand activity = new ActivityCommand();
 		System.out.println("controller1");
 		categoryService.continentSelect(model);
 		model.addAttribute("activity", activity);
@@ -51,7 +53,6 @@ public class ActivityController {
 		System.out.println("controller getActivityPrice"+ activity.getActivityPrice());
 		System.out.println("controller"+ activity.getActivityContent());
 		System.out.println("controller getContinentName"+ activity.getContinentName());
-		System.out.println("controller getActivityFile"+ activity.getActivityFile());
 		result = activityService.insertActivity(activity, model, session);
 		if(result != null) {
 			System.out.println("result"+result);

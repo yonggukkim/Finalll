@@ -32,15 +32,31 @@ public class HotelRepository extends AbstractRepository {
 		}
 	}
 
-	public Integer insertHotel(Hotel tel) {
+	public Integer insertHotel(Hotel tel, List<Restore> list) {
 		SqlSession sqlSession = getSqlSessionFactory().openSession();
 		try {
 			String statement = namespace + ".insertHotel";
+			String statement1 = namespace + ".selectNum";
+			String statement2 = namespace + ".insertRestore";
 			System.out.println("Repositorybefor" + tel.getContinentName());
 			System.out.println("Repositorybefor" + tel.getHotelPrice());
 //			activity.setActivityRegdate(Calendar.getInstance().getTime());
 //			activity.setActivityUptdate(Calendar.getInstance().getTime());
+			String s = sqlSession.selectOne(statement1);
+			tel.setHotelNum(s);
 			Integer result = sqlSession.insert(statement, tel);
+			System.out.println(list.size());
+			int cnt = 0;
+			for(Restore a : list) {
+				a.setResNum(s);
+				System.out.println("count"+ cnt++);
+				System.out.println("a" + a.getFileNo());
+				System.out.println("a" + a.getFold());
+				System.out.println("a" + a.getStoredFileName());
+				System.out.println("a" + a.getFileName());
+				System.out.println("a" + a.getEtc());
+				sqlSession.insert(statement2, a);
+			}
 			System.out.println("Repositoryafter" + tel.getContinentName());
 			System.out.println("Repositoryafter" + tel.getHotelPrice());
 			if (result > 0)

@@ -54,7 +54,7 @@
 
 											$("#addfile")
 													.append(
-															"<a href='#' class='cancel'>&nbsp;X&nbsp;</a><input type='file' name='files'/><br>");
+															"<a href='#' class='cancel'>&nbsp;X&nbsp;</a><input type='file' name='hotelFile'/><br>");
 
 											$(".cancel").click(function() {
 

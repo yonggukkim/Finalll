@@ -24,13 +24,6 @@ public class Hotel implements Serializable{
 	private String continentName; // 대륙이름
 	private String countryNum; // 나라번호
 	private String cityNum; // 도시번호
-	private MultipartFile[] hotelFile; // 호텔 파일 이름
-	public MultipartFile[] getHotelFile() {
-		return hotelFile;
-	}
-	public void setHotelFile(MultipartFile[] hotelFile) {
-		this.hotelFile = hotelFile;
-	}
 	public String getHotelNum() {
 		return hotelNum;
 	}

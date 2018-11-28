@@ -28,7 +28,8 @@ public class PkgController {
 	private PkgService pkgService;
 	
 	@RequestMapping(value = "/pkg_insert", method = RequestMethod.GET)
-	public String pkgInsertGet(PkgCommand pkg, Model model, HttpSession session) {
+	public String pkgInsertGet( Model model) {
+		PkgCommand pkg = new PkgCommand();
 		System.out.println("controller1");
 		categoryService.continentSelectPkg(model);
 		model.addAttribute("pkg", pkg);
@@ -72,12 +73,12 @@ public class PkgController {
 	}
 	
 	@RequestMapping(value="/photel_modify", method=RequestMethod.POST)
-	public String hotel(Hotel hotel, Model model) {
+	public String hotel(Hotel hotel, Model model, HttpSession session) {
 		System.out.println("controller3 "+hotel.getCountryNum());
 		System.out.println("controller3 "+hotel.getContinentName());
 		System.out.println("controller3 "+hotel.getCityNum());
 		System.out.println("controller3 "+hotel.getHotelNum());
-		pkgService.hotelSelectOnePkg(hotel, model);
+		pkgService.hotelSelectOnePkg(hotel, model, session);
 		return "product/pkg_hotel_modify";
 	}
 	

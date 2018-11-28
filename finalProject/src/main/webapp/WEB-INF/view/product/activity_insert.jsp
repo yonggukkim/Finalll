@@ -48,7 +48,7 @@
 		    
 	        $("#add").click(function(){
 	            
-	            $("#addfile").append("<a href='#' class='cancel'>&nbsp;X&nbsp;</a><input type='file' name='files'/><br>");
+	            $("#addfile").append("<a href='#' class='cancel'>&nbsp;X&nbsp;</a><input type='file' name='activityFile'/><br>");
 	            
 	            $(".cancel").click(function(){
 	                

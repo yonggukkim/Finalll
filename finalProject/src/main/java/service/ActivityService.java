@@ -7,7 +7,6 @@ import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.BeansException;
@@ -18,9 +17,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.MultipartRequest;
-
-import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 import command.ActivityCommand;
 import command.LoginSession;
@@ -49,41 +45,46 @@ public class ActivityService implements ApplicationContextAware {
 		act.setActivityPrice(activity.getActivityPrice());
 		act.setActivityContent(activity.getActivityContent());
 		act.setContinentName(activity.getContinentName());
+		act.setActivityFile(activity.getActivityFile());
 		Integer result = activityRepository.insertActivity(act);
-		
-//		upload(act);
+		for (MultipartFile mf : act.getActivityFile()) {
+			System.out.println("dddddadfs"+mf.getOriginalFilename());
+		}
+		upload(act);
 		model.addAttribute("activity",act);
 		return result;
 	}
 
-//	private void upload(Activitys activity) {
+	private void upload(Activitys act) {
 //		String cpath = "C:/Users/HKEDU/eclipse-workspace2/.metadata/.plugins/org.eclipse.wst.server.core/tmp1/wtpwebapps/finalProject/WEB-INF/view/files";
-//		String path = context.getServletContext().getRealPath("files");
-//		File file;
-//		Restore res;
-//
-//		for (MultipartFile mf : activity.getActivityFile()) {
-//
-//			file = new File(path, mf.getOriginalFilename());
-//			res = new Restore(path, mf.getOriginalFilename(), activity.getActivityName()); // res의 vo객체 만들어짐 (경로, 파일명, 설명)
-//
-//			// stream 형식의 파일 -> 실제파일로 전환하면 저장
-//			try {
-//				mf.transferTo(file);
-//				// 파일 정보 입력
-//				 Files.copy(Paths.get( path+"/"+mf.getOriginalFilename()),
-//	                        Paths.get(cpath+"/"+mf.getOriginalFilename()),
-//	                        StandardCopyOption.REPLACE_EXISTING);
-//				 activityRepository.insertRestore(res);
-//
-//			} catch (IllegalStateException e) {
-//				e.printStackTrace();
-//			} catch (IOException e) {
-//				e.printStackTrace();
-//			}
-//
-//		}
-//	}
+		String cpath = "C:\\Users\\kook7\\eclipse-workspace\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\finalProject\\files";
+		String path = context.getServletContext().getRealPath("files");
+		System.out.println("path dddd"+ path);
+		File file;
+		Restore res;
+
+		for (MultipartFile mf : act.getActivityFile()) {	
+
+			file = new File(path, mf.getOriginalFilename());
+			res = new Restore(act.getActivityNum(), path, mf.getOriginalFilename(), act.getActivityName()); // res의 vo객체 만들어짐 (경로, 파일명, 설명)
+
+			// stream 형식의 파일 -> 실제파일로 전환하면 저장
+			try {
+				mf.transferTo(file);
+				// 파일 정보 입력
+				 Files.copy(Paths.get( path+"/"+mf.getOriginalFilename()),
+	                        Paths.get(cpath+"/"+mf.getOriginalFilename()),
+	                        StandardCopyOption.REPLACE_EXISTING);
+				 activityRepository.insertRestore(res);
+
+			} catch (IllegalStateException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+
+		}
+	}
 	public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
         
         this.context = (WebApplicationContext) applicationContext;

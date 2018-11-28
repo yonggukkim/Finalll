@@ -5,20 +5,26 @@
 
 <mapper namespace="repository.mapper.PkgMapper">
 	<cache />
+	<select id="selectNum" resultType="String">
+		SELECT ('p'||pkg_num.nextval) FROM dual
+	</select>
 	
 	<insert id="insertPkg" parameterType="Pkg">
-         <selectKey resultType="string" keyProperty="pkgNum" order="BEFORE">
+         <!-- <selectKey resultType="string" keyProperty="pkgNum" order="BEFORE">
              SELECT ('p'||pkg_num.nextval) FROM dual
-         </selectKey>
+         </selectKey> -->
          INSERT INTO pkg(PKG_NUM, GUIDE_NUM, staff_number, PKG_NAME, PKG_THEME, PKG_PRICE, PKG_PERIOD, PKG_CONTENT, PKG_MEMBER_MIN, PKG_MEMBER_CUR, PKG_MEMBER_MAX, PKG_REVIEW, PKG_CAUTION, PKG_REFERENCE, PKG_WEATHER_INFO, PKG_MEETING_PLACE, PKG_CATE, PKG_REGDATE, PKG_UPTDATE, continent_name, country_num, city_num)
-         VALUES(#{pkgNum},#{guideNum},#{staffNumber},#{pkgName},#{pkgTheme},#{pkgPrice},#{pkgPeriod},#{pkgContent},
+         VALUES(#{pkgNum},'gui1',#{staffNumber},#{pkgName},#{pkgTheme},#{pkgPrice},#{pkgPeriod},#{pkgContent},
          #{pkgMemberMin},#{pkgMemberCur},#{pkgMemberMax},#{pkgReview},#{pkgCaution},#{pkgReference},#{pkgWeatherInfo},
          #{pkgMeetingPlace},#{pkgCate},sysdate,sysdate,'아시아','ca1','ca101')
      </insert>
 
-    <!-- <insert id="insertRestore" parameterType="Restore">
-         INSERT INTO restore VALUES(res_seq.nextval,activity_num.currval,#{fold},#{fileName},sysdate,#{etc})
-     </insert> -->
+    <insert id="insertRestore" parameterType="Restore">
+         INSERT INTO restore(FILE_NO, RES_NUM, FOLD, STORED_FILE_NAME, 
+         FILE_NAME, CRE_DATE, ETC) 
+         VALUES(res_seq.nextval,#{resNum},#{fold},#{storedFileName},
+         #{fileName},sysdate,#{etc})
+     </insert>
      
 	<resultMap type="Pkg" id="pkgMap">
 		<id column="PKG_NUM" jdbcType="VARCHAR" property="pkgNum" />

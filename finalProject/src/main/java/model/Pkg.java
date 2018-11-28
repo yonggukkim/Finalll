@@ -28,7 +28,13 @@ public class Pkg implements Serializable{
 	private String cityNum; // 도시번호
 	private String continentName; // 대륙이름
 	private String countryNum; // 나라번호
-//	private MultipartFile[] pkgFile; // 여행상품 이미지파일이름
+	private MultipartFile[] pkgFile; // 여행상품 이미지파일이름
+	public MultipartFile[] getPkgFile() {
+		return pkgFile;
+	}
+	public void setPkgFile(MultipartFile[] pkgFile) {
+		this.pkgFile = pkgFile;
+	}
 	public Date getPkgRegdate() {
 		return pkgRegdate;
 	}

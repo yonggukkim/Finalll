@@ -51,6 +51,7 @@ public class ActivityController {
 		System.out.println("controller getActivityPrice"+ activity.getActivityPrice());
 		System.out.println("controller"+ activity.getActivityContent());
 		System.out.println("controller getContinentName"+ activity.getContinentName());
+		System.out.println("controller getActivityFile"+ activity.getActivityFile());
 		result = activityService.insertActivity(activity, model, session);
 		if(result != null) {
 			System.out.println("result"+result);

@@ -1,7 +1,8 @@
 package command;
 
 import java.io.Serializable;
-import java.util.Date;
+
+import org.springframework.web.multipart.MultipartFile;
 
 @SuppressWarnings("serial")
 public class HotelCommand implements Serializable{
@@ -19,7 +20,13 @@ public class HotelCommand implements Serializable{
 	private String continentName; // 대륙이름
 	private String countryNum; // 나라번호
 	private String cityNum; // 도시번호
-//	private MultipartFile[] hotelFile; // 호텔 파일 이름
+	private MultipartFile[] hotelFile; // 호텔 파일 이름
+	public MultipartFile[] getHotelFile() {
+		return hotelFile;
+	}
+	public void setHotelFile(MultipartFile[] hotelFile) {
+		this.hotelFile = hotelFile;
+	}
 	public String getHotelName() {
 		return hotelName;
 	}

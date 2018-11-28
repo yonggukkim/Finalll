@@ -9,6 +9,7 @@ import model.Activitys;
 import model.City;
 import model.Hotel;
 import model.Pkg;
+import model.Restore;
 
 @Repository
 public class PkgRepository extends AbstractRepository{
@@ -33,15 +34,32 @@ public class PkgRepository extends AbstractRepository{
 		}
 	}
 
-	public Integer insertPkg(Pkg p) {
+	public Integer insertPkg(Pkg p, List<Restore> list) {
 		SqlSession sqlSession = getSqlSessionFactory().openSession();
 		try {
 			String statement = namespace + ".insertPkg";
+			String statement1 = namespace + ".selectNum";
+			String statement2 = namespace + ".insertRestore";
 			System.out.println("Repositorybefor" + p.getContinentName());
 			System.out.println("Repositorybefor" + p.getPkgPrice());
 //			activity.setActivityRegdate(Calendar.getInstance().getTime());
 //			activity.setActivityUptdate(Calendar.getInstance().getTime());
+			String s = sqlSession.selectOne(statement1);
+			p.setPkgNum(s);
+			System.out.println("insertPkg" + s);
 			Integer result = sqlSession.insert(statement, p);
+			System.out.println(list.size());
+			int cnt = 0;
+			for(Restore a : list) {
+				a.setResNum(s);
+				System.out.println("count"+ cnt++);
+				System.out.println("a" + a.getFileNo());
+				System.out.println("a" + a.getFold());
+				System.out.println("a" + a.getStoredFileName());
+				System.out.println("a" + a.getFileName());
+				System.out.println("a" + a.getEtc());
+				sqlSession.insert(statement2, a);
+			}
 			System.out.println("Repositoryafter" + p.getContinentName());
 			System.out.println("Repositoryafter" + p.getPkgPrice());
 			if (result > 0)
@@ -132,5 +150,22 @@ public class PkgRepository extends AbstractRepository{
 			sqlSession.close();
 		}
 	}
+
+//	public void insertRestore(Restore res) {
+//		SqlSession sqlSession = getSqlSessionFactory().openSession();
+//		try {
+//			String statement = namespace + ".insertRestore";
+//			System.out.println("Repository" + res.getFileNo());
+//			System.out.println("Repository" + res.getFileName());
+//			/* res.setCreDate(Calendar.getInstance().getTime()); */
+//			Integer result = sqlSession.insert(statement, res);
+//			if (result > 0)
+//				sqlSession.commit();
+//			else
+//				sqlSession.rollback();
+//		} finally {
+//			sqlSession.close();
+//		}
+//	}
 	
 }

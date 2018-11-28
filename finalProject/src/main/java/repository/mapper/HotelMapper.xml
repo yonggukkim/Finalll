@@ -64,6 +64,10 @@
 		#{hotelCate},#{hotelTel},#{hotelPresident},#{hotelContent},#{hotelCompany},sysdate,sysdate,'아시아','ca1','ca101')
 	</insert>
 	
+	<insert id="insertRestore" parameterType="Restore">
+         INSERT INTO restore VALUES(res_seq.nextval,#{hotelNum},#{fold},#{fileName},sysdate,#{etc})
+     </insert>
+     
 	<select id="selectHotelOne" parameterType="Hotel" resultMap="hotelMap">
      	SELECT HOTEL_NUM, STAFF_NUMBER, HOTEL_NAME, HOTEL_PRICE, HOTEL_CHECKIN,
 		HOTEL_CHECKOUT, HOTEL_BREAKFAST, HOTEL_GRADE, HOTEL_CATE, HOTEL_TEL,

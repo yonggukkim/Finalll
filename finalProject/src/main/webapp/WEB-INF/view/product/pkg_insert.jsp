@@ -109,7 +109,7 @@
 	}
 	$(document).ready(function() {
 		$("#add").click(function() {
-			$("#addfile").append("<a href='#' class='cancel'>&nbsp;X&nbsp;</a><input type='file' name='files'/><br>");
+			$("#addfile").append("<a href='#' class='cancel'>&nbsp;X&nbsp;</a><input type='file' name='pkgFile'/><br>");
 				$(".cancel").click(function() {
 					$(this).next().next().remove();
 					$(this).next().remove();
@@ -165,14 +165,12 @@
 		<div class="container">
 			<div class="row justify-content-center">
 				<div class="col-lg-6 mx-auto">
-					<form:form commandName="pkg" action="pkg_insert">
+					<form:form commandName="pkg" action="pkg_insert" enctype="Multipart/form-data">
 						<table class="table table-bordered">
 							<thead>
 								<h2>패키지여행상품등록</h2>
 							</thead>
 							<tbody>
-								<%-- enctype="Multipart/form-data" --%>
-
 								<tr>
 									<td><div>
 											<select id="pkgcontinent" name="continentName"
@@ -223,10 +221,10 @@
 									<td colspan="2"><form:input path="pkgPeriod" /></td>
 								</tr>
 								<tr>
-									<!-- <tr>
+								<tr>
 									<th>첨부파일추가 <a href="#" id="add">(클릭)</a></th>
-                					<td colspan="2" id="addfile" ><a href="#" class="cancel">&nbsp;X&nbsp;</a><input type="file" name="files"/><br></td>
-								</tr> -->
+                					<td colspan="2" id="addfile" ><a href="#" class="cancel">&nbsp;X&nbsp;</a><input type="file" name="pkgFile"/><br></td>
+								</tr>
 								<tr>
 									<th>종류 :</th>
 									<td colspan="2"><form:select path="pkgCate">

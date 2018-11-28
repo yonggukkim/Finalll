@@ -16,7 +16,7 @@
 		<typeAlias type="model.Activitys" alias="Activity" />
 		<typeAlias type="model.Hotel" alias="Hotel" />
 		<typeAlias type="model.Pkg" alias="Pkg" />
-		<!-- <typeAlias type="model.Restore" alias="Restore" /> -->
+		<typeAlias type="model.Restore" alias="Restore" />
 	</typeAliases>
 	<!-- db컨넥션 -->
 	<environments default="development">

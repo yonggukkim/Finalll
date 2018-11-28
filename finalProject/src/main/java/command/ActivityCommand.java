@@ -1,6 +1,8 @@
 package command;
 
 import java.io.Serializable;
+
+import org.springframework.web.multipart.MultipartFile;
 @SuppressWarnings("serial")
 public class ActivityCommand implements Serializable{
 	private String activityName; // 액티비티 이름
@@ -13,7 +15,13 @@ public class ActivityCommand implements Serializable{
 	private String continentName; // 대륙이름
 	private String countryNum; // 나라번호
 	private String cityNum; // 도시번호
-//	private MultipartFile[] activityFile; // 액티비티 상품이미지 파일이름
+	private MultipartFile[] activityFile; // 액티비티 상품이미지 파일이름
+	public MultipartFile[] getActivityFile() {
+		return activityFile;
+	}
+	public void setActivityFile(MultipartFile[] activityFile) {
+		this.activityFile = activityFile;
+	}
 	public String getActivityName() {
 		return activityName;
 	}

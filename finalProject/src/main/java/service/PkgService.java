@@ -1,17 +1,23 @@
 package service;
 
 import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.ApplicationContextAware;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.web.context.WebApplicationContext;
+import org.springframework.web.multipart.MultipartFile;
 
+import command.HotelCommand;
 import command.LoginSession;
 import command.PkgCommand;
 import model.Activitys;
@@ -21,7 +27,7 @@ import model.Pkg;
 import model.Restore;
 import repository.PkgRepository;
 @Service
-public class PkgService /*implements ApplicationContextAware*/ {
+public class PkgService implements ApplicationContextAware {
 	private WebApplicationContext context = null;
 	
 	@Autowired
@@ -45,6 +51,9 @@ public class PkgService /*implements ApplicationContextAware*/ {
 		p.setPkgCaution(pkg.getPkgCaution());
 		p.setPkgContent(pkg.getPkgContent());
 		p.setPkgMeetingPlace(pkg.getPkgMeetingPlace());
+		p.setPkgMemberMin(pkg.getPkgMemberMin());
+		p.setPkgMemberMax(pkg.getPkgMemberMax());
+		p.setPkgMemberCur(pkg.getPkgMemberCur());
 		p.setPkgName(pkg.getPkgName());
 		p.setPkgPeriod(pkg.getPkgPeriod());
 		p.setPkgPrice(pkg.getPkgPrice());
@@ -52,40 +61,42 @@ public class PkgService /*implements ApplicationContextAware*/ {
 		p.setPkgReview(pkg.getPkgReview());
 		p.setPkgTheme(pkg.getPkgTheme());
 		p.setPkgWeatherInfo(pkg.getPkgWeatherInfo());
-		Integer result = pkgRepository.insertPkg(p);
+		List<Restore> list = upload(pkg.getPkgFile(), pkg.getPkgName());
+		System.out.println("sdads adadsasdsda : "+list.size());
+		Integer result = pkgRepository.insertPkg(p,list);
 
-//		upload(hotel);
+		
 		model.addAttribute("pkg", p);
 		return result;
 	}
 
-	private void upload(Pkg pkg) {
-		String cpath = "C:/a01_prg/workspace/javaexp/springboard/WebContent/z01_upload";
-		String path = context.getServletContext().getRealPath("z01_upload");
+	private List<Restore> upload(MultipartFile[] a, String b) {
+//		String cpath = "C:\\Users\\kook7\\eclipse-workspace\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\finalProject\\files";
+		String path = context.getServletContext().getRealPath("files");
 		File file;
 		Restore res;
-
-//		for (MultipartFile mf : activity.getActivityFile()) {
-//
-//			file = new File(path, mf.getOriginalFilename());
-//			res = new Restore(path, mf.getOriginalFilename(), activity.getActivityName()); // res의 vo객체 만들어짐 (경로, 파일명, 설명)
-//
-//			// stream 형식의 파일 -> 실제파일로 전환하면 저장
-//			try {
-//				mf.transferTo(file);
-//				// 파일 정보 입력
-//				 Files.copy(Paths.get( path+"/"+mf.getOriginalFilename()),
-//	                        Paths.get(cpath+"/"+mf.getOriginalFilename()),
-//	                        StandardCopyOption.REPLACE_EXISTING);
-//				 activityRepository.insertRestore(res);
-//
-//			} catch (IllegalStateException e) {
-//				e.printStackTrace();
-//			} catch (IOException e) {
-//				e.printStackTrace();
-//			}
-//
-//		}
+		String storedFileName;
+		String originalFile;
+		String originalFileExtension;
+		List<Restore> list = new ArrayList<Restore>();
+		System.out.println("a size : " +a.length);
+		for (MultipartFile mf : a) {
+			originalFile = mf.getOriginalFilename();
+			originalFileExtension = originalFile.substring(originalFile.lastIndexOf("."));
+			storedFileName = UUID.randomUUID().toString().replaceAll("-", "") + originalFileExtension;
+			file = new File(path, storedFileName);
+			res = new Restore( path, mf.getOriginalFilename(), storedFileName, b); // res의 vo객체 만들어짐 (경로, 파일명, 설명)
+			// stream 형식의 파일 -> 실제파일로 전환하면 저장
+			try {
+				mf.transferTo(file);				
+				list.add(res);
+			} catch (IllegalStateException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		return list;
 	}
 
 	public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
@@ -119,11 +130,34 @@ public class PkgService /*implements ApplicationContextAware*/ {
 		model.addAttribute("list", list);
 	}
 
-	public void hotelSelectOnePkg(Hotel hotel, Model model) {
+	public void hotelSelectOnePkg(Hotel hotel, Model model, HttpSession session) {
 		System.out.println("service3 " + hotel.getCountryNum());
 		System.out.println("service3 " + hotel.getContinentName());
 		System.out.println("service3 " + hotel.getCityNum());
 		Hotel list = pkgRepository.hotelSelectOnePkg(hotel);
+		List hotelcart = (List)session.getAttribute("hotelcart");
+		if(hotelcart == null) {
+			hotelcart = new ArrayList();
+		}
+		HotelCommand command = null;
+		boolean newCart = true;
+		for(int i = 0; i < hotelcart.size(); i++) {
+			command = (HotelCommand)hotelcart.get(i);
+			if(list.getHotelName().equals(command.getHotelName())) {
+				newCart = false;
+//				command.setHotelPrice(command.getHotelPrice()+command.getHotelPrice());
+				System.out.println("cart yes");
+			}
+		}
+		if(newCart) {
+			command = new HotelCommand();
+			command.setHotelName(list.getHotelName());
+			command.setHotelPrice(list.getHotelPrice());
+			command.setHotelGrade(list.getHotelGrade());
+			hotelcart.add(command);
+		}
+		session.setAttribute("hotelcart", hotelcart);
+		
 		System.out.println("test"+list);
 		model.addAttribute("list", list);
 	}

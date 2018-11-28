@@ -15,9 +15,9 @@
          #{activityPresident},sysdate,sysdate,'아시아','ca1','ca101')
      </insert>
 
-    <!-- <insert id="insertRestore" parameterType="Restore">
-         INSERT INTO restore VALUES(res_seq.nextval,activity_num.currval,#{fold},#{fileName},sysdate,#{etc})
-     </insert> -->
+    <insert id="insertRestore" parameterType="Restore">
+         INSERT INTO restore VALUES(res_seq.nextval,#{activityNum},#{fold},#{fileName},sysdate,#{etc})
+     </insert>
      <resultMap type="Activity" id="activityMap">
      	<id column="activity_num" jdbcType="VARCHAR" property="activityNum"/>
      	<result column="staff_number" jdbcType="VARCHAR" property="staffNumber"/>

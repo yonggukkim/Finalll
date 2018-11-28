@@ -43,19 +43,10 @@
 		#{giftCate},#{giftContent},#{giftCompany},#{giftTel},#{giftPresident},#{continentName},#{countryNum},#{cityNum})
 	</insert>
 
-<!-- 	<insert id="giftRestoreInsert" parameterType="GR">
-		<selectKey resultType="string" keyProperty="gfileNum"
-			order="BEFORE">
-			SELECT ('GF'||gfile_num.nextval) FROM dual
-		</selectKey>
-
-
-		INSERT INTO GITF_RESTORE
-		(gfile_num,gfile_name,gfile_path)
-		VALUES
-		('333',#{gfileName},#{gfilePath})
-
-	</insert> -->
+	<!-- <insert id="giftRestoreInsert" parameterType="GR"> <selectKey resultType="string" 
+		keyProperty="gfileNum" order="BEFORE"> SELECT ('GF'||gfile_num.nextval) FROM 
+		dual </selectKey> INSERT INTO GITF_RESTORE (gfile_num,gfile_name,gfile_path) 
+		VALUES ('333',#{gfileName},#{gfilePath}) </insert> -->
 
 
 	<select id="giftSelect" parameterType="Gift" resultMap="giftMap">
@@ -72,6 +63,17 @@
 		GIFT_CATE,GIFT_CONTENT,GIFT_COMPANY,GIFT_TEL,GIFT_PRESIDENT,CONTINENT_NAME,COUNTRY_NUM,CITY_NUM
 		FROM gift
 		WHERE GIFT_NUM = #{giftNum}
+
+	</select>
+
+
+	<select id="giftSelectByName" parameterType="Gift"
+		resultMap="giftMap">
+		SELECT
+		GIFT_NUM,GIFT_NAME,GIFT_PRICE,GIFT_CATE,GIFT_CONTENT,GIFT_COMPANY,GIFT_TEL,GIFT_PRESIDENT,CONTINENT_NAME,COUNTRY_NUM,CITY_NUM
+		FROM gift
+		WHERE GIFT_NAME LIKE '%'||#{giftName}||'%'
+
 
 	</select>
 

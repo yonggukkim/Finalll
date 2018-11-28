@@ -20,8 +20,10 @@ public class Gift implements Serializable {
 	private String cityNum; // 도시번호
 
 	private MultipartFile[] files;
-	public Gift() {
-	}
+	
+	
+	/*public Gift() {
+	}*/
 	// for 파일 등록
 
 
@@ -30,7 +32,7 @@ public class Gift implements Serializable {
 	
 	
 
-	public Gift(String giftNum, String giftName, Long giftPrice,/* String giftFile,*/ String giftCate, String giftContent,
+/*	public Gift(String giftNum, String giftName, Long giftPrice, String giftFile, String giftCate, String giftContent,
 			String giftCompany, String giftTel, String giftPresident, String continentName, String countryNum,
 			String cityNum, MultipartFile[] files) {
 		super();
@@ -47,7 +49,7 @@ public class Gift implements Serializable {
 		this.countryNum = countryNum;
 		this.cityNum = cityNum;
 		this.files = files;
-	}
+	}*/
 //
 	public MultipartFile[] getFiles() {
 		return files;

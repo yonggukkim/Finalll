@@ -17,6 +17,7 @@
 		<typeAlias type="model.Hotel" alias="Hotel" />
 		<typeAlias type="model.Pkg" alias="Pkg" />
 		<typeAlias type="model.Restore" alias="Restore" />
+		<typeAlias type="model.Gift" alias="Gift" />
 	</typeAliases>
 	<!-- db컨넥션 -->
 	<environments default="development">
@@ -39,5 +40,6 @@
  		<mapper resource="repository/mapper/ActivityMapper.xml" />
  		<mapper resource="repository/mapper/HotelMapper.xml" />
  		<mapper resource="repository/mapper/PkgMapper.xml" />
+ 		 		<mapper resource="repository/mapper/GiftMapper.xml" />
 	</mappers>
 </configuration>

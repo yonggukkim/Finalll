@@ -17,11 +17,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.multipart.MultipartFile;
 
-import command.ActivityCommand;
-import command.HotelCommand;
+import command.ActivityListSession;
 import command.HotelListSession;
 import command.LoginSession;
 import command.PkgCommand;
+import command.PkgMainListCommand;
 import model.Activitys;
 import model.City;
 import model.Hotel;
@@ -43,6 +43,8 @@ public class PkgService implements ApplicationContextAware {
 
 	public Integer insertPkg(PkgCommand pkg, Model model, HttpSession session) {
 		Pkg p = new Pkg();
+		List<HotelListSession> hs = (List<HotelListSession>) session.getAttribute("hotelcart");
+		List<ActivityListSession> as = (List<ActivityListSession>) session.getAttribute("activitycart");
 		LoginSession loginSession = (LoginSession) session.getAttribute("info");
 		p.setStaffNumber(loginSession.getCommandNum());
 		p.setCityNum(pkg.getCityNum());
@@ -65,7 +67,7 @@ public class PkgService implements ApplicationContextAware {
 		p.setPkgWeatherInfo(pkg.getPkgWeatherInfo());
 		List<Restore> list = upload(pkg.getPkgFile(), pkg.getPkgName());
 		System.out.println("sdads adadsasdsda : "+list.size());
-		Integer result = pkgRepository.insertPkg(p,list);
+		Integer result = pkgRepository.insertPkg(p,list, hs, as);
 
 		
 		model.addAttribute("pkg", p);
@@ -173,15 +175,16 @@ public class PkgService implements ApplicationContextAware {
 		System.out.println("service3 " + activity.getCountryNum());
 		System.out.println("service3 " + activity.getContinentName());
 		System.out.println("service3 " + activity.getCityNum());
+		String res = pkgRepository.activityRes(activity);
 		Activitys list = pkgRepository.activitySelectOnePkg(activity);
 		List activitycart = (List)session.getAttribute("activitycart");
 		if(activitycart == null) {
 			activitycart = new ArrayList();
 		}
-		ActivityCommand command = null;
+		ActivityListSession command = null;
 		boolean newCart = true;
 		for(int i = 0; i < activitycart.size(); i++) {
-			command = (ActivityCommand)activitycart.get(i);
+			command = (ActivityListSession)activitycart.get(i);
 			if(list.getActivityName().equals(command.getActivityName())) {
 				newCart = false;
 //				command.setActivityPrice(command.getActivityPrice()+list.getActivityPrice());
@@ -189,15 +192,31 @@ public class PkgService implements ApplicationContextAware {
 			}
 		}
 		if(newCart) {
-			command = new ActivityCommand();
+			command = new ActivityListSession();
+			command.setActivityNum(list.getActivityNum());
+			command.setActivityImage(res);
 			command.setActivityName(list.getActivityName());
-			command.setActivityPrice(list.getActivityPrice());
 			command.setActivityCate(list.getActivityCate());
+			command.setActivityCompany(list.getActivityCompany());
+			command.setActivityTel(list.getActivityTel());
 			activitycart.add(command);
 		}
 		session.setAttribute("activitycart", activitycart);
 		
 		System.out.println("test"+list);
 		model.addAttribute("list", list);
+	}
+
+	public String selectPkgproduct(Model model, PkgMainListCommand pkg) {
+		List<PkgMainListCommand> pkglist = pkgRepository.selectPkgproduct(pkg);
+		String result = null;
+		if(pkglist.size() != 0) {
+			model.addAttribute("pkglist",pkglist);
+			model.addAttribute("bodyPage","pkg/pkgmain.jsp");
+			result = "main";
+		}else {
+			result = "redirect:main";
+		}
+		return result;
 	}
 }

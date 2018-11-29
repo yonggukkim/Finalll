@@ -7,7 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-<header>
       <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
         <ol class="carousel-indicators">
           <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
@@ -46,15 +45,14 @@
           <span class="sr-only">Next</span>
         </a>
       </div>
-    </header>
 	<div class="container">
 	<h1 class="my-4 text-center text-lg-left">여행상품</h1>
 
       <div class="row text-center text-lg-left">
 
         <div class="col-lg-4 mb-4">
-          <a href="selfMain" class="d-block mb-4 h-100">패키지여행
-            <img class="img-fluid img-thumbnail" src="http://placehold.it/400x300" alt="">
+          <a href="pkgMain" class="d-block mb-4 h-100">패키지여행
+            <img class="img-fluid img-thumbnail" src="/finalProject/img/group-hero.jpg" width="400" height="300" alt="pkg">
           </a>
         </div>
         <div class="col-lg-4 mb-4">

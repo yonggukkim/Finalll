@@ -18,6 +18,9 @@
 		<typeAlias type="model.Pkg" alias="Pkg" />
 		<typeAlias type="model.Restore" alias="Restore" />
 		<typeAlias type="model.Gift" alias="Gift" />
+		<typeAlias type="model.HotelList" alias="HotelList"/>
+		<typeAlias type="model.ActivityList" alias="ActivityList"/>
+		<typeAlias type="command.PkgMainListCommand" alias="PkgMainListCommand"/>
 	</typeAliases>
 	<!-- db컨넥션 -->
 	<environments default="development">

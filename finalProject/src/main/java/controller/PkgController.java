@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import command.PkgCommand;
+import command.PkgMainListCommand;
 import model.Activitys;
 import model.City;
 import model.Continent;
@@ -142,5 +143,12 @@ public class PkgController {
 		pkgService.selectPkgOne(pkg, model);
 		model.addAttribute("bodyPage","product/pkg_detail.jsp");
 		return "main";
+	}
+	
+	@RequestMapping(value="/pkgMain", method=RequestMethod.GET)
+	public String pkgMainGet(Model model, PkgMainListCommand pkg) {
+		System.out.println("controller pkgmain");
+		String s = pkgService.selectPkgproduct(model, pkg);
+		return s;
 	}
 }

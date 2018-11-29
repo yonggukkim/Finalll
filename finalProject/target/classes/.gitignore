@@ -1,5 +1,5 @@
-/service/
 /command/
-/model/
 /controller/
+/service/
 /repository/
+/model/

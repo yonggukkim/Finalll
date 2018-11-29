@@ -16,12 +16,12 @@
         </ol>
         <div class="carousel-inner" role="listbox">
           <!-- Slide One - Set the background image for this slide in the line below -->
-          <div class="carousel-item active" style="background-image: url('/finalProject/mainPage/mainImages/main1.jpg')">
+          <a href=""><div class="carousel-item active" style="background-image: url('/finalProject/mainPage/mainImages/main1.jpg')">
             <!-- <div class="carousel-caption d-none d-md-block">
               <h3>First Slide</h3>
               <p>This is a description for the first slide.</p>
             </div> -->
-          </div>
+          </div></a>
           <!-- Slide Two - Set the background image for this slide in the line below -->
           <div class="carousel-item" style="background-image: url('/finalProject/mainPage/mainImages/main2.jpg')">
             <!-- <div class="carousel-caption d-none d-md-block">

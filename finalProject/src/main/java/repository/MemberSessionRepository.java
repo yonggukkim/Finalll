@@ -60,8 +60,6 @@ public class MemberSessionRepository extends AbstractRepository {
 	 * return (name ==null)?false:true; }
 	 */
 
-
-	
 	public Integer deleteMember(String memberNum) {
 		SqlSession sqlSession = getSqlSessionFactory().openSession();
 		try {
@@ -77,6 +75,26 @@ public class MemberSessionRepository extends AbstractRepository {
 			sqlSession.close();
 		}
 	}
-	
-	
+
+	public String idFind(Member member) {
+		SqlSession sqlSession = getSqlSessionFactory().openSession();
+		try {
+			System.out.println("idFind");
+			String statement = namespace + ".idFind";
+			return sqlSession.selectOne(statement, member);
+		} finally {
+			sqlSession.close();
+		}
+	}
+		public String passwordFind(Member member) {
+			SqlSession sqlSession = getSqlSessionFactory().openSession();
+			try {
+				System.out.println("passwordFind");
+				String statement = namespace + ".passwordFind";
+				return sqlSession.selectOne(statement, member);
+			} finally {
+				sqlSession.close();
+			}
+	}
+
 }

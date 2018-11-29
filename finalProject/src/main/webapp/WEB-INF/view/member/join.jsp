@@ -31,6 +31,15 @@
             alert("비밀번호를 입력하세요.");
             return false;
         }
+        if(!form.memberPw1.value){
+            alert("비밀번호를 입력하세요.");
+            return false;00
+        }
+        if(form.memberPw.value != form.memberPw1.value){
+            alert("비밀번호가 틀렸습니다");
+            return false;        
+        }
+        
 
         if(!form.memberName.value){
             alert("이름을 입력하세요.");
@@ -256,7 +265,7 @@ function sample6_execDaumPostcode() {
 			</tr>
 			<tr>
 				<th>패스워드 확인 :</th>
-				<td><form:password path="" /></td>
+				<td><input type="password" name="memberPw1" /></td>
 			</tr>
 			<tr>
 				<th>이름 :</th>

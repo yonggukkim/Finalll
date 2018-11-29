@@ -1,5 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8" import="model.*, java.util.*"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%
+	request.setCharacterEncoding("utf-8");
+	Member member = (Member) request.getAttribute("member");
+%>
+	
+	
 <!DOCTYPE html>
 <html lang="en">
 
@@ -52,49 +59,41 @@
 
 
 <body>
-<div style="margin-top: 70px">
-  <div class="container">
-    <div class="row">
-      <div class="col-sm-5 col-md-5 col-lg-5 mx-auto">
-        <div class="card card-signin my-5">
-          <div class="card-body">
-            <h5 class="card-title text-center">비밀번호 찾기</h5>
-
-<div class="form-label-group">
-              <label for="inputId">Id</label>
-                <input type="text" id="inputId" class="form-control" placeholder="아이디를 입력해 주세요" required autofocus>
-                
-              </div>
-
-
-              <div class="form-label-group">
-              <label for="inputName">이름</label>
-                <input type="text" id="inputName" class="form-control" placeholder="이름을 입력해 주세요" required autofocus>
-                
-              </div>
-
-              <div class="form-label-group">
-              <label for="inputMail">이메일</label>
-                <input type="password" id="inputMail" class="form-control" placeholder="이메일을 입력 해주세요" required>
-                
-              </div>
-              
-                          <div class="form-label-group">
-                          <label for="inputPassword">전화번호</label>
-                <input type="password" id="newPassword" class="form-control" placeholder="전화번호를 입력하세요" required>
-                </div>
-                </div>
-                
-
-
-
-              <button class="btn btn-lg btn-primary btn-block text-uppercase" >비밀번호 찾기</button>
-              </div>
-				</div>	
+<section id="services" class="bg-light">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-8 mx-auto">
+					<table class="table table-bordered">
+						<thead>
+							<h2>비밀번호 찾기</h2>
+						</thead>
+						<tbody>
+							<form:form commandName="member" action="passwordfind" method="POST">
+								
+								<tr>
+									<th>아이디 : </th>
+									<td><form:input path="memberId" placeholder="아이디를 입력하세요" /></td>
+								</tr>
+					
+								<tr>
+									<th>이메일 : </th>
+									<td><form:input path="memberEmail" placeholder="이메일을 입력하세요" /></td>
+								</tr> 	
+								<tr>
+									<th>전화번호 : </th>
+									<td><form:input path="memberPhone" placeholder="전화번호를 입력하세요" /></td>
+								</tr> 
+								<tr>
+									<td colspan="2"><input type="submit" value="삭제" /> <a
+										href="member_list"><input type="button" value="취소" /></a></td>
+								</tr>
+							</form:form>
+					</table>
+				</div>
 			</div>
-          </div>
-        </div>
-    
+		</div>
+	</section>
+
 </body>
 
 

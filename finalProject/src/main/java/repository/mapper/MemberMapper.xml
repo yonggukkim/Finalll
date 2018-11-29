@@ -126,9 +126,23 @@
 		delete from member where
 		MEMBER_NUM=#{memberNum}
 	</delete>
+	
+	
+<select id="idFind" resultType="String">
+		SELECT MEMBER_ID
+		FROM MEMBER
+		where member_name=#{memberName} and member_email=#{memberEmail}
+		
+	</select>
+	
+ <select id="passwordFind" resultType="String">
+		SELECT MEMBER_PW
+		FROM MEMBER
+		where member_id=#{memberId} and member_email=#{memberEmail} and member_phone=#{memberPhone}
 
+	</select> 
    
-   
+
    
 
 </mapper>

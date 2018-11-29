@@ -1,5 +1,4 @@
-/service/
-/command/
-/model/
 /controller/
+/service/
 /repository/
+/passwordfindresult.class

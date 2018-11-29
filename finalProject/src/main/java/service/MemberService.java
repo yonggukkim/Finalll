@@ -31,6 +31,18 @@ public class MemberService {
 		return memberRepository.deleteMember(memberNum);
 	}
 	
+	public String idFind(Member member) {
+		System.out.println("Service idfind" + member);
+		return memberRepository.idFind(member);
+	}
+	
+	public String passwordFind(Member member) {
+		System.out.println("Service passwordfind" + member);
+		return memberRepository.passwordFind(member);
+	}
+	
+	
+	
 	
 /*	public boolean loginCheck(Member member,HttpSession session ) {
 	      

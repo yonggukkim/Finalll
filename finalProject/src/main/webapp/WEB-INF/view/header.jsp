@@ -34,7 +34,7 @@
               <a class="nav-link" href="login">로그인</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="join">회원가입</a>
+              <a class="nav-link" href="memberTerms">회원가입</a>
             </li>
           </ul>
         </div>
@@ -87,7 +87,7 @@
               <a class="nav-link" href="logout">로그아웃</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">회원가입</a>
+              <a class="nav-link" href="memberTerms">회원가입</a>
             </li>
           </ul>
         </div>

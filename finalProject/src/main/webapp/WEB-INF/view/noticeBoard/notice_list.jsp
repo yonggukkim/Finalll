@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8" import="model.Notice, java.util.*"%>
+<%
+	request.setCharacterEncoding("utf-8");
+	List list = (List) request.getAttribute("list3");
+%>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -52,20 +56,21 @@
 			</tr>
 		</thead>
 		<tbody>
-			<%-- <%
+			<%
 				for (int i = 0; i < list.size(); i++) {
-					Qna qna = (Qna) list.get(i);
+					Notice notice = (Notice) list.get(i);
 			%>
 			<tr>
-				<th scope="row"><%=qna.getQnaNum()%></th>
-				<td><%=qna.getMemberNum()%></td>
-				<td><a href="qna_detail?qnaSubject=<%=qna.getQnaSubject()%>"><%=qna.getQnaSubject()%></a></td>
-				<td><%=qna.getQnaDate()%></td>
-				<td><%=qna.getQnaCount()%></td>
+				<th scope="row"><%=notice.getNoticeNum()%></th>
+				<td><%=notice.getStaffNumber()%></td>
+				<td><a
+					href="notice_detail?noticeNum=<%=notice.getNoticeNum()%>"><%=notice.getNoticeSubject()%></a></td>
+				<td><%=notice.getNoticeDate()%></td>
+				<td><%=notice.getNoticeCount()%></td>
 			</tr>
 			<%
 				}
-			%> --%>
+			%>
 		</tbody>
 	</table>
 	<div class="container">
@@ -78,7 +83,7 @@
 		</ul>
 	</div>
 	<div class="form-button">
-		<a href="qna_insert">
+		<a href="notice_insert">
 			<button type="button" class="button float-right">글쓰기</button>
 		</a>
 	</div>

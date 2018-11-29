@@ -26,4 +26,6 @@
 	<bean id="pkgRepository" class="repository.PkgRepository" />
 	<bean id="giftService" class="service.GiftService" />
 	<bean id="giftRepository" class="repository.GiftRepository"/>
+	<bean id="memberRepository" class="repository.MemberSessionRepository" />
+	<bean id="memberService" class="service.MemberService" />
 </beans>	

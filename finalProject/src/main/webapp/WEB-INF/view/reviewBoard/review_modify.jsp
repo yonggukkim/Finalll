@@ -1,6 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-
+	pageEncoding="UTF-8" import="model.*"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%
+	request.setCharacterEncoding("utf-8");
+	Review review = (Review) request.getAttribute("review");
+	Member member = (Member) request.getAttribute("member");
+%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -15,15 +20,27 @@
 <title>review_modify.jsp</title>
 
 <!-- Bootstrap core CSS -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css"
+	integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M"
+	crossorigin="anonymous">
 
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+	integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+	crossorigin="anonymous"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"
+	integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh"
+	crossorigin="anonymous"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"
+	integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1"
+	crossorigin="anonymous"></script>
 
 
 <!-- Custom styles for this template -->
-<link href="http://localhost:8080/finalProject/css/scrolling-nav.css" rel="stylesheet">
+<link href="http://localhost:8080/finalProject/css/scrolling-nav.css"
+	rel="stylesheet">
 
 </head>
 
@@ -55,42 +72,34 @@
 	<section id="services" class="bg-light">
 		<div class="container">
 			<div class="row">
-				<!--<div class="col-lg-8 mx-auto">  -->
-				<table class="table table-bordered">
-					<thead>
-						<h2>후기글수정</h2>
-					</thead>
-					<tbody>
-						<form action="" method="post" encType="multiplart/form-data">
-							<tr>
-								<th>제목 :</th>
-								<td><input type="text" placeholder="제목을 입력하세요. "
-									name="subject" class="" /></td>
-							</tr>
-							<tr>
-								<th>내용 :</th>
-								<td><textarea cols="30" placeholder="내용을 입력하세요. "
-										name="content" class=""></textarea></td>
-							</tr>
-							<tr>
-								<th>첨부파일 :</th>
-								<td><input type="file" placeholder="파일을 선택하세요. "
-									name="filename" class="" /></td>
-							</tr>
-							<tr>
-								<th>비밀번호 :</th>
-								<td><input type="password" placeholder="비밀번호를 입력하세요"
-									class="" /></td>
-							</tr>
-							<tr>
-								<td colspan="2"><input type="button" value="수정" onclick=""
-									class="" /> <input type="button" value="글 목록" class=" "
-									onclick="" /></td>
-							</tr>
-						</form>
-				</table>
+				<div class="col-lg-8 mx-auto">
+					<table class="table table-bordered">
+						<thead>
+							<h2>후기글수정</h2>
+						</thead>
+						<tbody>
+							<form:form commandName="review" action="review_modify"
+								method="post" encType="multiplart/form-data">
+								<form:hidden path="reviewNum" value="<%=review.getReviewNum()%>" />
+								<tr>
+									<th>내용 :</th>
+									<td><textarea cols="30" placeholder="내용을 입력하세요. "
+											name="reviewContent" class=""></textarea></td>
+								</tr>
+								<tr>
+									<th>첨부파일 :</th>
+									<td><input type="text" placeholder="파일을 선택하세요. "
+										name="reviewFile" class="" /></td>
+								</tr>
+								<tr>
+									<td colspan="2"><input type="submit" value="수정" /><a
+										href="review_list"> <input type="button" value="글 목록" /></a></td>
+								</tr>
+							</form:form>
+					</table>
+				</div>
 			</div>
-			<!--</div>-->
+		</div>
 	</section>
 
 	<!-- Footer -->
@@ -103,7 +112,7 @@
 	</footer>
 
 	<!-- Bootstrap core JavaScript -->
-<!-- 	<script
+	<!-- 	<script
 		src="http://localhost:8080/finalProject/vendor/jquery/jquery.min.js"></script>
 	<script
 		src="http://localhost:8080/finalProject/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>

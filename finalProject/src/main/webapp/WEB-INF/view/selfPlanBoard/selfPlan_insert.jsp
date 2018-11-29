@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -67,42 +68,43 @@
 	<section id="services" class="bg-light">
 		<div class="container">
 			<div class="row">
-				<!--<div class="col-lg-8 mx-auto">  -->
-				<table class="table table-bordered">
-					<thead>
-						<h2>자유여행글쓰기</h2>
-					</thead>
-					<tbody>
-						<form action="" method="post" encType="multiplart/form-data">
-							<tr>
-								<th>제목 :</th>
-								<td><input type="text" placeholder="제목을 입력하세요. "
-									name="subject" class="" /></td>
-							</tr>
-							<tr>
-								<th>내용 :</th>
-								<td><textarea cols="30" placeholder="내용을 입력하세요. "
-										name="content" class=""></textarea></td>
-							</tr>
-							<tr>
-								<th>첨부파일 :</th>
-								<td><input type="file" placeholder="파일을 선택하세요. "
-									name="filename" class="" /></td>
-							</tr>
-							<tr>
-								<th>비밀번호 :</th>
-								<td><input type="password" placeholder="비밀번호를 입력하세요"
-									class="" /></td>
-							</tr>
-							<tr>
-								<td colspan="2"><input type="button" value="등록" /> <a
-									href="selfPlan_list"><input type="button" value="글 목록" /></a></td>
-
-							</tr>
-						</form>
-				</table>
+				<div class="col-lg-8 mx-auto">
+					<table class="table table-bordered">
+						<thead>
+							<h2>자유여행글쓰기</h2>
+						</thead>
+						<tbody>
+							<form:form commandName="selfPlanNumber" action="selfPlan_insert"
+								method="post" encType="multiplart/form-data">
+								<tr>
+									<th>제목 :</th>
+									<td><input type="text" placeholder="제목을 입력하세요. "
+										name="subject" class="" /></td>
+								</tr>
+								<tr>
+									<th>내용 :</th>
+									<td><textarea cols="30" placeholder="내용을 입력하세요. "
+											name="content" class=""></textarea></td>
+								</tr>
+								<tr>
+									<th>첨부파일 :</th>
+									<td><input type="text" placeholder="파일을 선택하세요. "
+										name="filename" class="" /></td>
+								</tr>
+								<tr>
+									<th>비밀번호 :</th>
+									<td><input type="password" placeholder="비밀번호를 입력하세요"
+										class="" /></td>
+								</tr>
+								<tr>
+									<td colspan="2"><input type="submit" value="등록" /> <a
+										href="selfPlan_list"><input type="button" value="글 목록" /></a></td>
+								</tr>
+							</form:form>
+					</table>
+				</div>
 			</div>
-			<!--</div>-->
+		</div>
 	</section>
 
 	<!-- Footer -->

@@ -6,40 +6,218 @@
 <mapper namespace="repository.mapper.BoardMapper">
 	<cache />
 
- 
+
 	<resultMap type="Qna" id="qnaMap">
 		<id column="qna_num" jdbcType="VARCHAR" property="qnaNum" />
-		<id column="member_num" jdbcType="VARCHAR"  property="memberNum" />
-		<id column="staff_number" jdbcType="VARCHAR"  property="staffNumber" />
-		<result column="qna_date" jdbcType="TIMESTAMP" property="qnaDate" />
-		<result column="qna_subject" jdbcType="VARCHAR" 
+		<id column="member_num" jdbcType="VARCHAR" property="memberNum" />
+		<id column="staff_number" jdbcType="VARCHAR" property="staffNumber" />
+		<result column="qna_date" jdbcType="TIMESTAMP"
+			property="qnaDate" />
+		<result column="qna_subject" jdbcType="VARCHAR"
 			property="qnaSubject" />
-		<result column="qna_content" jdbcType="VARCHAR" 
+		<result column="qna_content" jdbcType="VARCHAR"
 			property="qnaContent" />
-		<result column="qna_file" jdbcType="VARCHAR"  property="qnaFile" />
-		<result column="qna_pw" jdbcType="VARCHAR"  property="qnaPw" />
-		<result column="qna_Count" jdbcType="INTEGER"  property="qnaCount" />
+		<result column="qna_file" jdbcType="VARCHAR" property="qnaFile" />
+		<result column="qna_pw" jdbcType="VARCHAR" property="qnaPw" />
+		<result column="qna_Count" jdbcType="INTEGER"
+			property="qnaCount" />
 	</resultMap>
 
-<select id="selectQnaByConditionOne" parameterType="Qna" resultMap="qnaMap">
+	<resultMap type="Review" id="reviewMap">
+		<id column="review_num" jdbcType="VARCHAR" property="reviewNum" />
+		<id column="pkg_num" jdbcType="VARCHAR" property="pkgNum" />
+		<id column="member_num" jdbcType="VARCHAR" property="memberNum" />
+		<result column="review_date" jdbcType="TIMESTAMP"
+			property="reviewDate" />
+		<result column="review_content" jdbcType="VARCHAR"
+			property="reviewContent" />
+		<result column="review_file" jdbcType="VARCHAR"
+			property="reviewFile" />
+		<result column="review_pw" jdbcType="VARCHAR"
+			property="reviewPw" />
+		<result column="review_count" jdbcType="BIGINT"
+			property="reviewCount" />
+		<result column="review_rating" jdbcType="BIGINT"
+			property="reviewRating" />
+	</resultMap>
+
+	<resultMap type="Notice" id="noticeMap">
+		<id column="notice_num" jdbcType="VARCHAR" property="noticeNum" />
+		<id column="staff_number" jdbcType="VARCHAR" property="staffNumber" />
+		<result column="notice_date" jdbcType="TIMESTAMP"
+			property="noticeDate" />
+		<result column="notice_subject" jdbcType="BIGINT"
+			property="noticeSubject" />
+		<result column="notice_content" jdbcType="VARCHAR"
+			property="noticeContent" />
+		<result column="notice_file" jdbcType="VARCHAR"
+			property="noticeFile" />
+		<result column="notice_pw" jdbcType="VARCHAR"
+			property="noticePw" />
+		<result column="notice_count" jdbcType="BIGINT"
+			property="noticeCount" />
+	</resultMap>
+
+	<select id="selectQnaByConditionList" parameterType="Qna"
+		resultMap="qnaMap">
+		SELECT QNA_NUM, MEMBER_NUM, STAFF_NUMBER, QNA_DATE,
+		QNA_SUBJECT, QNA_CONTENT, QNA_FILE, QNA_PW, QNA_COUNT FROM QNA
+	</select>
+
+	<select id="selectReviewByConditionList" parameterType="Review"
+		resultMap="reviewMap">
+		SELECT REVIEW_NUM, PKG_NUM, MEMBER_NUM, REVIEW_DATE,
+		REVIEW_CONTENT, REVIEW_FILE, REVIEW_PW, REVIEW_COUNT, REVIEW_RATING
+		FROM REVIEW
+	</select>
+
+	<select id="selectNoticeByConditionList" parameterType="Notice"
+		resultMap="noticeMap">
+		SELECT NOTICE_NUM, STAFF_NUMBER, NOTICE_DATE,
+		NOTICE_SUBJECT,
+		NOTICE_CONTENT,
+		NOTICE_FILE, NOTICE_PW, NOTICE_COUNT
+		FROM NOTICE
+	</select>
+
+	<insert id="insertQna" parameterType="Qna">
+		insert into
+		QNA(QNA_NUM,
+		MEMBER_NUM, STAFF_NUMBER, QNA_DATE, QNA_SUBJECT, QNA_CONTENT,
+		QNA_FILE, QNA_PW, QNA_COUNT)
+		values((select count(qna_num)+1 from QNA),
+		#{memberNum}, #{staffNumber}, #{qnaDate}, #{qnaSubject},
+		#{qnaContent}, #{qnaFile}, #{qnaPw},#{qnaCount})
+	</insert>
+
+	<insert id="insertReview" parameterType="Review">
+		insert into
+		REVIEW(REVIEW_NUM,
+		PKG_NUM, MEMBER_NUM, REVIEW_DATE, REVIEW_CONTENT,
+		REVIEW_FILE,
+		REVIEW_PW, REVIEW_COUNT, REVIEW_RATING)
+		values((select
+		count(REVIEW_NUM)+1 from REVIEW),
+		#{pkgNum}, #{memberNum},
+		#{reviewDate}, #{reviewContent},
+		#{reviewFile}, #{reviewPw},
+		#{reviewCount},#{reviewRating})
+	</insert>
+
+	<insert id="insertNotice" parameterType="Notice">
+		insert into
+		NOTICE(NOTICE_NUM,
+		STAFF_NUMBER, NOTICE_DATE, NOTICE_SUBJECT,
+		NOTICE_CONTENT,
+		NOTICE_FILE,
+		NOTICE_PW, NOTICE_COUNT)
+		values((select
+		count(NOTICE_NUM)+1 from NOTICE),
+		#{staffNumber},
+		#{noticeDate},
+		#{noticeSubject}, #{noticeContent},
+		#{noticeFile},
+		#{noticePw},
+		#{noticeCount})
+	</insert>
+
+	<select id="selectQnaByConditionOne" parameterType="Qna"
+		resultMap="qnaMap">
 		SELECT
-		QNA_NUM, MEMBER_NUM, STAFF_NUMBER, QNA_DATE, QNA_SUBJECT, QNA_CONTENT, QNA_FILE, QNA_PW, QNA_COUNT FROM QNA
+		QNA_NUM, MEMBER_NUM, STAFF_NUMBER, QNA_DATE, QNA_SUBJECT,
+		QNA_CONTENT, QNA_FILE, QNA_PW, QNA_COUNT FROM QNA
 		<where>
-			<if test="qnaSubject != null">
-				qna_subject = #{qnaSubject}
+			<if test="qnaNum != null">
+				qna_num = #{qnaNum}
 			</if>
 		</where>
 	</select>
-	
-<select id="selectQnaByConditionList" parameterType="Qna" resultMap="qnaMap">
-		SELECT QNA_NUM, MEMBER_NUM, STAFF_NUMBER, QNA_DATE, QNA_SUBJECT, QNA_CONTENT, QNA_FILE, QNA_PW, QNA_COUNT FROM QNA
-</select>
-	
- 	<insert id="insertQna" parameterType="Qna">
-		insert into
-		QNA(QNA_NUM, MEMBER_NUM, STAFF_NUMBER, QNA_DATE, QNA_SUBJECT, QNA_CONTENT, QNA_FILE, QNA_PW, QNA_COUNT)
-		values((select count(qna_num)+1 from QNA), #{memberNum}, #{staffNumber}, #{qnaDate}, #{qnaSubject}, #{qnaContent}, #{qnaFile}, #{qnaPw},#{qnaCount})
-	</insert>
- 
+
+	<select id="selectReviewByConditionOne" parameterType="Review"
+		resultMap="reviewMap">
+		SELECT REVIEW_NUM, PKG_NUM, MEMBER_NUM, REVIEW_DATE,
+		REVIEW_CONTENT,
+		REVIEW_FILE, REVIEW_PW, REVIEW_COUNT, REVIEW_RATING
+		FROM REVIEW
+		<where>
+			<if test="reviewNum != null">
+				review_num = #{reviewNum}
+			</if>
+		</where>
+	</select>
+
+	<select id="selectNoticeByConditionOne" parameterType="Notice"
+		resultMap="noticeMap">
+		SELECT NOTICE_NUM, STAFF_NUMBER, NOTICE_DATE, NOTICE_SUBJECT,
+		NOTICE_CONTENT,
+		NOTICE_FILE, NOTICE_PW, NOTICE_COUNT
+		FROM NOTICE
+		<where>
+			<if test="noticeNum != null">
+				notice_num = #{noticeNum}
+			</if>
+		</where>
+	</select>
+
+	<delete id="deleteQna" parameterType="String">
+		delete from qna where
+		qna_num=#{qnaNum}
+	</delete>
+
+	<delete id="deleteReview" parameterType="String">
+		delete from
+		review where
+		review_num = #{reviewNum}
+	</delete>
+
+	<delete id="deleteNotice" parameterType="String">
+		delete from notice where
+		notice_num = #{noticeNum}
+	</delete>
+
+	<update id="updateQna" parameterType="Qna">
+		update qna
+		<trim prefix="SET" suffixOverrides=",">
+			<if test="qnaSubject!=null">
+				qna_subject = #{qnaSubject},
+			</if>
+			<if test="qnaContent!=null">
+				qna_content = #{qnaContent},
+			</if>
+			<if test="qnaFile!=null">
+				qna_file = #{qnaFile}
+			</if>
+		</trim>
+		where qna_num = #{qnaNum}
+	</update>
+
+	<update id="updateReview" parameterType="Review">
+		update review
+		<trim prefix="SET" suffixOverrides=",">
+			<if test="reviewContent!=null">
+				review_content = #{reviewContent},
+			</if>
+			<if test="reviewFile != null">
+				review_file = #{reviewFile},
+			</if>
+		</trim>
+		where review_num = #{reviewNum}
+	</update>
+
+	<update id="updateNotice" parameterType="Notice">
+		update notice
+		<trim prefix="SET" suffixOverrides=",">
+			<if test="noticeSubject!=null">
+				notice_subject = #{noticeSubject},
+			</if>
+			<if test="noticeContent!=null">
+				notice_content = #{noticeContent},
+			</if>
+			<if test="noticeFile != null">
+				notice_file = #{noticeFile},
+			</if>
+		</trim>
+		where notice_num = #{noticeNum}
+	</update>
 
 </mapper>

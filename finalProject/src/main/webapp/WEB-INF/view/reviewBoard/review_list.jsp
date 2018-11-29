@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8" import="model.Review, java.util.*"%>
+<%
+	request.setCharacterEncoding("utf-8");
+	List list = (List) request.getAttribute("list2");
+%>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -46,26 +50,27 @@
 			<tr>
 				<th scope="col">글번호</th>
 				<th scope="col">글쓴이</th>
-				<th scope="col">제목</th>
+				<th scope="col">내용</th>
 				<th scope="col">작성일</th>
 				<th scope="col">조회수</th>
 			</tr>
 		</thead>
 		<tbody>
-			<%-- <%
+			<%
 				for (int i = 0; i < list.size(); i++) {
-					Qna qna = (Qna) list.get(i);
+					Review review = (Review) list.get(i);
 			%>
 			<tr>
-				<th scope="row"><%=qna.getQnaNum()%></th>
-				<td><%=qna.getMemberNum()%></td>
-				<td><a href="qna_detail?qnaSubject=<%=qna.getQnaSubject()%>"><%=qna.getQnaSubject()%></a></td>
-				<td><%=qna.getQnaDate()%></td>
-				<td><%=qna.getQnaCount()%></td>
+				<th scope="row"><%=review.getReviewNum()%></th>
+				<td><%=review.getMemberNum()%></td>
+				<td><a
+					href="review_detail?reviewNum=<%=review.getReviewNum()%>"><%=review.getReviewContent()%></a></td>
+				<td><%=review.getReviewDate()%></td>
+				<td><%=review.getReviewCount()%></td>
 			</tr>
 			<%
 				}
-			%> --%>
+			%>
 		</tbody>
 	</table>
 	<div class="container">
@@ -78,7 +83,7 @@
 		</ul>
 	</div>
 	<div class="form-button">
-		<a href="qna_insert">
+		<a href="review_insert">
 			<button type="button" class="button float-right">글쓰기</button>
 		</a>
 	</div>

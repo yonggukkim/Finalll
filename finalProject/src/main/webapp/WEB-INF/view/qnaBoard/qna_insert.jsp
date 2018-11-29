@@ -1,7 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8" import="command.*"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%
+	LoginSession login = (LoginSession) session.getAttribute("info");
+%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,6 +12,7 @@
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="description" content="">
+
 <meta name="author" content="">
 
 <title>qna_insert.jsp</title>
@@ -37,44 +41,45 @@
 </head>
 <body>
 	<section id="services" class="bg-light">
-	<div class="container">
-		<div class="row justify-content-center">
-			<div class="col-lg-6 mx-auto">
-				<table class="table table-bordered">
-					<thead>
-						<h2>질문글쓰기</h2>
-					</thead>
-					<tbody>
-						<form:form commandName="qna" action="qna_insert">
-							<form:hidden path="qnaNum" />
-							<form:hidden path="memberNum" value="2" />
-							<form:hidden path="staffNumber" value="2" />
-							<form:hidden path="qnaCount" value="2" />
-							<tr>
-								<th>제목 :</th>
-								<td><form:input path="qnaSubject" /></td>
-							</tr>
-							<tr>
-								<th>내용 :</th>
-								<td><form:textarea path="qnaContent" rows="5" cols="22" /></td>
-							</tr>
-							<tr>
-								<th>첨부파일 :</th>
-								<td><form:input path="qnaFile" /></td>
-							</tr>
-							<tr>
-								<th>비밀번호 :</th>
-								<td><form:password path="qnaPw" /></td>
-							</tr>
-							<tr>
-								<td colspan="2"><input type="submit" value="등록" /> <a
-									href="qna_list"><input type="button" value="글 목록" /></a></td>
-							</tr>
-						</form:form>
-				</table>
+		<div class="container">
+			<div class="row justify-content-center">
+				<div class="col-lg-8 mx-auto">
+					<table class="table table-bordered">
+						<thead>
+							<h2>질문글쓰기</h2>
+						</thead>
+						<tbody>
+							<form:form commandName="qna" action="qna_insert">
+								<form:hidden path="qnaNum" />
+								<form:hidden path="memberNum" value="<%=login.getCommandId()%>" />
+								<form:hidden path="staffNumber" value="2" />
+								<form:hidden path="qnaCount" value="2" />
+								<tr>
+									<th>제목 :</th>
+									<td><form:input path="qnaSubject" /></td>
+
+								</tr>
+								<tr>
+									<th>내용 :</th>
+									<td><form:textarea path="qnaContent" rows="5" cols="22" /></td>
+								</tr>
+								<tr>
+									<th>첨부파일 :</th>
+									<td><form:input path="qnaFile" /></td>
+								</tr>
+								<tr>
+									<th>비밀번호 :</th>
+									<td><form:password path="qnaPw" /></td>
+								</tr>
+								<tr>
+									<td colspan="2"><input type="submit" value="등록" /> <a
+										href="qna_list"><input type="button" value="글 목록" /></a></td>
+								</tr>
+							</form:form>
+					</table>
+				</div>
 			</div>
 		</div>
-	</div>
 	</section>
 </body>
 

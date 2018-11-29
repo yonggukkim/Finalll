@@ -17,6 +17,7 @@ public class Review implements Serializable {
 
 	public Review(String reviewNum, String pkgNum, String memberNum, Date reviewDate, String reviewContent,
 			String reviewFile, String reviewPw, Long reviewCount, Long reviewRating) {
+		super();
 		this.reviewNum = reviewNum;
 		this.pkgNum = pkgNum;
 		this.memberNum = memberNum;

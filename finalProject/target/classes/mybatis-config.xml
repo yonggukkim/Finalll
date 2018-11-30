@@ -19,8 +19,13 @@
 		<typeAlias type="model.Restore" alias="Restore" />
 		<typeAlias type="model.Gift" alias="Gift" />
 		<typeAlias type="model.HotelList" alias="HotelList"/>
-		<typeAlias type="model.ActivityList" alias="ActivityList"/>
+ 		<typeAlias type="model.ActivityList" alias="ActivityList"/>
 		<typeAlias type="command.PkgMainListCommand" alias="PkgMainListCommand"/>
+ 		<typeAlias type="command.PkgDeteilCommand" alias="PkgDeteilCommand"/>
+ 		<typeAlias type="command.AllSelectHotel" alias="AllSelectHotel"/>
+ 		<typeAlias type="command.AllSelectActivity" alias="AllSelectActivity"/>
+ 		<typeAlias type="command.AllSelectPkg" alias="AllSelectPkg"/>
+		<typeAlias type="model.Member" alias="Member"/>
 	</typeAliases>
 	<!-- db컨넥션 -->
 	<environments default="development">
@@ -42,7 +47,8 @@
  		<mapper resource="repository/mapper/CategoryMapper.xml" />
  		<mapper resource="repository/mapper/ActivityMapper.xml" />
  		<mapper resource="repository/mapper/HotelMapper.xml" />
- 		<mapper resource="repository/mapper/PkgMapper.xml" />
- 		 		<mapper resource="repository/mapper/GiftMapper.xml" />
+  		<mapper resource="repository/mapper/PkgMapper.xml" />
+ 		<mapper resource="repository/mapper/GiftMapper.xml" />
+ 		<mapper resource="repository/mapper/MemberMapper.xml" />
 	</mappers>
 </configuration>

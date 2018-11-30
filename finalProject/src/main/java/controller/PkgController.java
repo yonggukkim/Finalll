@@ -157,7 +157,15 @@ public class PkgController {
 	public String pkgDeteilGet(@RequestParam("pkg_num") String pkgNum ,Model model) {
 		System.out.println("pkgnum : " + pkgNum);
 		String s = pkgService.selectPkgProductOne(model, pkgNum);
-		System.out.println("controller pkgmain");
+		System.out.println("controller pkgdeteil");
+		return s;
+	}
+	
+	@RequestMapping(value="/pkgOrder", method=RequestMethod.GET)
+	public String pkgOrderGet(@RequestParam("pkg_num") String pkgNum ,Model model) {
+		System.out.println("pkgnum : " + pkgNum);
+		String s = pkgService.selectPkgProductList(model, pkgNum);
+		System.out.println("controller pkgorder");
 		return s;
 	}
 }

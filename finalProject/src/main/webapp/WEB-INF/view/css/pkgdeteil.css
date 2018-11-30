@@ -18,10 +18,10 @@ body {
   height: 35vh;
   min-height: 300px;
   background: no-repeat center center scroll;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
+  -webkit-background-size: 1115px auto;
+  -moz-background-size: 1115px auto;
+  -o-background-size: 1115px auto;
+  background-size: 1115px auto;
 }
 
 .portfolio-item {

@@ -1,5 +1,7 @@
+/command/
 /controller/
 /exception/
 /interceptor/
 /model/
+/service/
 /repository/

@@ -205,6 +205,11 @@
 		SELECT STORED_FILE_NAME FROM(select stored_file_name from restore where res_num = #{hotelNum}) where rownum=1
 	</select>
 
+	<select id="activityRes" parameterType="Activity"
+		resultType="string">
+		SELECT STORED_FILE_NAME FROM(select stored_file_name from restore where res_num = #{activityNum}) where rownum=1
+	</select>
+
 
 	<select id="activitySelectOnePkg" parameterType="Activity"
 		resultMap="activityMap">
@@ -213,5 +218,57 @@
 		activity_content, activity_company, activity_tel, activity_president, activity_regdate,
 		activity_uptdate, continent_name, country_num, city_num FROM activity
 		WHERE activity_num = #{activityNum}
+	</select>
+	
+	<insert id="insertHotelList" parameterType="HotelList">
+		INSERT INTO hotel_list(HOTEL_LIST_NUM, PKG_HOTEL_NUM) values(#{hotelListNum},#{pkgHotelNum})
+	</insert>
+	
+	<insert id="insertActivityList" parameterType="ActivityList">
+		INSERT INTO activity_list(ACTIVITY_LIST_NUM, PKG_ACTIVITY_NUM) values(#{activityListNum},#{pkgActivityNum})
+	</insert>
+	<resultMap type="PkgMainListCommand" id="pkgMainListCommandMap">
+		<id column="pkg_num" jdbcType="VARCHAR" property="pkgNum"/>
+		<result column="guide_num" jdbcType="VARCHAR" property="guideNum"/>
+		<result column="staff_number" jdbcType="VARCHAR" property="staffNumber"/>
+		<result column="pkg_name" jdbcType="VARCHAR" property="pkgName"/>
+		<result column="pkg_theme" jdbcType="VARCHAR" property="pkgTheme"/>
+		<result column="pkg_price" jdbcType="BIGINT" property="pkgPrice"/>
+		<result column="pkg_period" jdbcType="VARCHAR" property="pkgPeriod"/>
+		<result column="pkg_content" jdbcType="VARCHAR" property="pkgContent"/>
+		<result column="pkg_member_min" jdbcType="INTEGER" property="pkgMemberMin"/>
+		<result column="pkg_member_cur" jdbcType="INTEGER" property="pkgMemberCur"/>
+		<result column="pkg_member_max" jdbcType="INTEGER" property="pkgMemberMax"/>
+		<result column="pkg_cate" jdbcType="VARCHAR" property="pkgCate"/>
+		<result column="city_num" jdbcType="VARCHAR" property="cityNum"/>
+		<result column="continent_name" jdbcType="VARCHAR" property="continentName"/>
+		<result column="country_num" jdbcType="VARCHAR" property="countryNum"/>
+		<collection property="restores" ofType="Restore">
+			<id property="fileNo" column="file_no"/>
+			<result property="resNum" column="res_num"/>
+			<result property="fold" column="fold"/>
+			<result property="fileName" column="file_name"/>
+			<result property="storedFileName" column="stored_file_name"/>
+			<result property="creDate" column="cre_date"/>
+			<result property="etc" column="etc"/>
+		</collection>
+	</resultMap>
+	<select id="selectPkgproduct" parameterType="PkgMainListCommand" resultMap="pkgMainListCommandMap">
+		SELECT p.PKG_NUM, p.GUIDE_NUM, p.STAFF_NUMBER, p.PKG_NAME, p.PKG_THEME, p.PKG_PRICE,
+			p.PKG_PERIOD, p.PKG_CONTENT, p.PKG_MEMBER_MIN, p.PKG_MEMBER_CUR,
+			p.PKG_MEMBER_MAX, p.PKG_CATE, p.CONTINENT_NAME, p.COUNTRY_NUM, p.CITY_NUM, 
+			r.file_no, r.res_num, r.fold, r.file_name, r.stored_file_name, r.cre_date, r.etc
+			FROM pkg p, restore r WHERE p.PKG_NUM = r.RES_NUM
+	</select>
+	
+	<select id="selectPkgProductOne" parameterType="Pkg" resultMap="pkgMap">
+		SELECT PKG_NUM, GUIDE_NUM, STAFF_NUMBER, PKG_NAME, PKG_THEME, PKG_PRICE,
+		PKG_PERIOD, PKG_CONTENT, PKG_MEMBER_MIN, PKG_MEMBER_CUR,
+		PKG_MEMBER_MAX,
+		PKG_REVIEW, PKG_CAUTION, PKG_REFERENCE,
+		PKG_WEATHER_INFO, PKG_MEETING_PLACE,
+		PKG_CATE, PKG_REGDATE,
+		PKG_UPTDATE, CONTINENT_NAME, COUNTRY_NUM, CITY_NUM FROM pkg WHERE
+		pkg_num = #{pkgNum}
 	</select>
 </mapper>

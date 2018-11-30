@@ -165,4 +165,15 @@ public class GiftController {
 		return "main";
 	}
 	
+	@RequestMapping(value="/gift_sale_page", method=RequestMethod.GET)
+	public String giftTest(Gift gift, Model model) {
+		System.out.println("giftTest 진입");
+		model.addAttribute("bodyPage","gift/gift_sale_page.jsp");
+		List<Gift> list = giftService.giftSelect(gift);
+		System.out.println("list null 여부확인" + list);
+		model.addAttribute("list", list);
+
+		return "main";
+	}
+	
 }

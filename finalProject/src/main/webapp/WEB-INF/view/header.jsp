@@ -44,7 +44,7 @@
 <% if(info.getCommandDvice().equals("s")) { %>
 	<nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark fixed-top">
       <div class="container">
-        <a class="navbar-brand" href="index.html">GIFTRIP 기프트립</a>
+        <a class="navbar-brand" href="main">GIFTRIP 기프트립</a>
         <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -70,7 +70,7 @@
  <% }else if(info.getCommandDvice().equals("m")) { %>   
     <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark fixed-top">
       <div class="container">
-        <a class="navbar-brand" href="index.html">GIFTRIP 기프트립</a>
+        <a class="navbar-brand" href="main">GIFTRIP 기프트립</a>
         <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>

@@ -4,18 +4,18 @@ import java.io.Serializable;
 import java.util.List;
 @SuppressWarnings("serial")
 public class ActivityList implements Serializable{
-	private List<Activitys> ActivityNum; // 액티비티 등록번호
-	private List<Pkg> pkgNum; // 여행상품등록번호
-	public List<Activitys> getActivityNum() {
-		return ActivityNum;
+	private String activityListNum; // 액티비티 등록번호
+	private String pkgActivityNum; // 여행상품등록번호
+	public String getActivityListNum() {
+		return activityListNum;
 	}
-	public void setActivityNum(List<Activitys> activityNum) {
-		ActivityNum = activityNum;
+	public void setActivityListNum(String activityListNum) {
+		this.activityListNum = activityListNum;
 	}
-	public List<Pkg> getPkgNum() {
-		return pkgNum;
+	public String getPkgActivityNum() {
+		return pkgActivityNum;
 	}
-	public void setPkgNum(List<Pkg> pkgNum) {
-		this.pkgNum = pkgNum;
+	public void setPkgActivityNum(String pkgActivityNum) {
+		this.pkgActivityNum = pkgActivityNum;
 	}
 }

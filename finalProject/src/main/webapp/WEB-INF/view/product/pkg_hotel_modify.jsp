@@ -21,7 +21,7 @@
 	</tr>
 	<%
 		for(int i = 0; i < hotelcart.size(); i++) {
-		HotelListSession hotel = (HotelListSession)hotelcart.get(i);
+			HotelListSession hotel = (HotelListSession)hotelcart.get(i);
 		%>
 	<tr>	
 		<%-- <td><%= hotel.getHotelNum() %></td> --%>

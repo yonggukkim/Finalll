@@ -18,7 +18,9 @@
 		<typeAlias type="model.Pkg" alias="Pkg" />
 		<typeAlias type="model.Restore" alias="Restore" />
 		<typeAlias type="model.Gift" alias="Gift" />
-		<typeAlias type="model.Member" alias="Member" />
+		<typeAlias type="model.HotelList" alias="HotelList"/>
+		<typeAlias type="model.ActivityList" alias="ActivityList"/>
+		<typeAlias type="command.PkgMainListCommand" alias="PkgMainListCommand"/>
 	</typeAliases>
 	<!-- db컨넥션 -->
 	<environments default="development">
@@ -41,7 +43,6 @@
  		<mapper resource="repository/mapper/ActivityMapper.xml" />
  		<mapper resource="repository/mapper/HotelMapper.xml" />
  		<mapper resource="repository/mapper/PkgMapper.xml" />
- 		<mapper resource="repository/mapper/GiftMapper.xml" />
- 		<mapper resource="repository/mapper/MemberMapper.xml" />
+ 		 		<mapper resource="repository/mapper/GiftMapper.xml" />
 	</mappers>
 </configuration>

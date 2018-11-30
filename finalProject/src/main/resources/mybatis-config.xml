@@ -21,6 +21,7 @@
 		<typeAlias type="model.HotelList" alias="HotelList"/>
 		<typeAlias type="model.ActivityList" alias="ActivityList"/>
 		<typeAlias type="command.PkgMainListCommand" alias="PkgMainListCommand"/>
+		<typeAlias type="model.Member" alias="Member"/>
 	</typeAliases>
 	<!-- db컨넥션 -->
 	<environments default="development">
@@ -44,5 +45,6 @@
  		<mapper resource="repository/mapper/HotelMapper.xml" />
  		<mapper resource="repository/mapper/PkgMapper.xml" />
  		 		<mapper resource="repository/mapper/GiftMapper.xml" />
+ 		<mapper resource="repository/mapper/MemberMapper.xml" />
 	</mappers>
 </configuration>

@@ -1,9 +1,12 @@
 package service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import model.Member;
+import model.Qna;
 import repository.MemberSessionRepository;
 
 @Service
@@ -40,6 +43,18 @@ public class MemberService {
 		System.out.println("Service passwordfind" + member);
 		return memberRepository.passwordFind(member);
 	}
+	
+	public List<Member> selectMemberList(Member member) {
+		System.out.println("Service selectMemberList memberNum " + member.getMemberNum());
+		return memberRepository.memberList(member);
+	}
+	
+	public Member memberDetail(String memberNum) {
+		System.out.println("Service memberDetail memberNum " + memberNum);
+		return memberRepository.memberDetail(memberNum);
+	}
+	
+	
 	
 	
 	

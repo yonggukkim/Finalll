@@ -8,16 +8,16 @@
 
 	<resultMap type="Member" id="memberMap">
 		<id column="MEMBER_NUM" jdbcType="VARCHAR" property="memberNum" />
-		<id column="MEMBER_ID" jdbcType="VARCHAR" property="memberId" />
-		<id column="MEMBER_PW" jdbcType="VARCHAR" property="memberPw" />
-		<id column="MEMBER_NAME" jdbcType="VARCHAR" property="memberName" />
-		<id column="MEMBER_BIRTH" jdbcType="TIMESTAMP"
+		<result column="MEMBER_ID" jdbcType="VARCHAR" property="memberId" />
+		<result column="MEMBER_PW" jdbcType="VARCHAR" property="memberPw" />
+		<result column="MEMBER_NAME" jdbcType="VARCHAR" property="memberName" />
+		<result column="MEMBER_BIRTH" jdbcType="TIMESTAMP"
 			property="memberBirth" />
-		<id column="MEMBER_GENDER" jdbcType="VARCHAR"
+		<result column="MEMBER_GENDER" jdbcType="VARCHAR"
 			property="memberGender" />
-		<id column="MEMBER_PHONE" jdbcType="VARCHAR" property="memberPhone" />
-		<id column="MEMBER_EMAIL" jdbcType="VARCHAR" property="memberEmail" />
-		<id column="MEMBER_DVICE" jdbcType="VARCHAR" property="memberDvice" />
+		<result column="MEMBER_PHONE" jdbcType="VARCHAR" property="memberPhone" />
+		<result column="MEMBER_EMAIL" jdbcType="VARCHAR" property="memberEmail" />
+		<result column="MEMBER_DVICE" jdbcType="VARCHAR" property="memberDvice" />
 
 		<result column="MEMBER_COUNTRY_NUM" jdbcType="VARCHAR"
 			property="memberCountryNum" />
@@ -46,6 +46,34 @@
 		<result column="MEMBER_MILEAGE" jdbcType="BIGINT"
 			property="memberMileage" />
 	</resultMap>
+	
+<resultMap type="Member" id="memberMap22">
+		<id column="MEMBER_NUM" jdbcType="VARCHAR" property="memberNum" />
+		<result column="MEMBER_ID" jdbcType="VARCHAR" property="memberId" />
+		<result column="MEMBER_NAME" jdbcType="VARCHAR" property="memberName" />
+		<result column="MEMBER_PHONE" jdbcType="VARCHAR" property="memberPhone" />
+		<result column="MEMBER_EMAIL" jdbcType="VARCHAR" property="memberEmail" />
+		<result column="MEMBER_REG_DATE" jdbcType="TIMESTAMP" property="memberRegDate" />
+	</resultMap>
+	
+<resultMap type="Member" id="memberMap33">
+		<id column="MEMBER_ID" jdbcType="VARCHAR" property="memberId" />
+		<result column="MEMBER_NAME" jdbcType="VARCHAR" property="memberName" />
+		<result column="MEMBER_BIRTH" jdbcType="TIMESTAMP" property="memberBirth" />
+		<result column="MEMBER_GENDER" jdbcType="VARCHAR" property="memberGender" />
+		<result column="MEMBER_COUNTRY_NUM" jdbcType="VARCHAR" property="memberCountryNum" />
+		<result column="MEMBER_PHONE" jdbcType="VARCHAR" property="memberPhone" />
+		<result column="MEMBER_EMAIL" jdbcType="VARCHAR" property="memberEmail" />
+		<result column="MEMBER_POSTCODE" jdbcType="VARCHAR" property="memberPostcode" />
+		<result column="MEMBER_ADDR1" jdbcType="VARCHAR" property="memberAddr1" />
+		<result column="MEMBER_ADDR2" jdbcType="VARCHAR" property="memberAddr2" />
+		<result column="MEMBER_TEL" jdbcType="VARCHAR" property="memberTel" />
+		<result column="MEMBER_MARRIGE" jdbcType="VARCHAR" property="memberMarrige" />
+		<result column="MEMBER_JOB" jdbcType="VARCHAR" property="memberJob" />
+		
+	</resultMap>
+		
+	
 
 	<insert id="insertMember" parameterType="Member">
 		insert into
@@ -127,7 +155,7 @@
 		MEMBER_NUM=#{memberNum}
 	</delete>
 	
-	
+	 
 <select id="idFind" resultType="String">
 		SELECT MEMBER_ID
 		FROM MEMBER
@@ -142,7 +170,20 @@
 
 	</select> 
    
+<select id="memberList" parameterType="Member" resultMap="memberMap22">
+		SELECT MEMBER_NUM,MEMBER_ID,MEMBER_NAME,MEMBER_PHONE,MEMBER_EMAIL,MEMBER_REG_DATE
+		FROM member
+ 
+</select>
 
+<select id="memberDetail" parameterType="Member" resultMap="memberMap33">
+		SELECT MEMBER_ID, MEMBER_NAME, MEMBER_BIRTH, MEMBER_GENDER, MEMBER_COUNTRY_NUM, 
+		MEMBER_PHONE, MEMBER_EMAIL, MEMBER_POSTCODE, 
+		MEMBER_ADDR1, MEMBER_ADDR2, MEMBER_TEL, MEMBER_MARRIGE, MEMBER_JOB
+		FROM MEMBER
+		WHERE member_num = #{memberNum}
+</select>
+   
    
 
 </mapper>

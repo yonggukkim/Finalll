@@ -6,7 +6,11 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import command.ActivityListSession;
+import command.AllSelectActivity;
+import command.AllSelectHotel;
+import command.AllSelectPkg;
 import command.HotelListSession;
+import command.PkgDeteilCommand;
 import command.PkgMainListCommand;
 import model.ActivityList;
 import model.Activitys;
@@ -216,12 +220,12 @@ public class PkgRepository extends AbstractRepository{
 		}
 	}
 
-	public Pkg selectPkgProductOne(String pkgNum) {
+	public PkgDeteilCommand selectPkgProductOne(String pkgNum) {
 		SqlSession sqlSession = getSqlSessionFactory().openSession();
 		try {
 			String statement = namespace + ".selectPkgProductOne";
 			System.out.println("Repository list : " + pkgNum);
-			Pkg p = sqlSession.selectOne(statement, pkgNum);
+			PkgDeteilCommand p = sqlSession.selectOne(statement, pkgNum);
 			System.out.println("Repository list : " + p.getPkgNum());
 			return p;
 		} finally {
@@ -229,21 +233,44 @@ public class PkgRepository extends AbstractRepository{
 		}
 	}
 
-//	public void insertRestore(Restore res) {
-//		SqlSession sqlSession = getSqlSessionFactory().openSession();
-//		try {
-//			String statement = namespace + ".insertRestore";
-//			System.out.println("Repository" + res.getFileNo());
-//			System.out.println("Repository" + res.getFileName());
-//			/* res.setCreDate(Calendar.getInstance().getTime()); */
-//			Integer result = sqlSession.insert(statement, res);
-//			if (result > 0)
-//				sqlSession.commit();
-//			else
-//				sqlSession.rollback();
-//		} finally {
-//			sqlSession.close();
-//		}
-//	}
+	public AllSelectPkg AllSelectPkgList(String pkgNum) {
+		SqlSession sqlSession = getSqlSessionFactory().openSession();
+		try {
+			String statement = namespace + ".AllSelectPkgList";
+			System.out.println("Repository list : " + pkgNum);
+			AllSelectPkg p = sqlSession.selectOne(statement, pkgNum);
+			System.out.println("Repository list : " + p.getPkgNum());
+			return p;
+		} finally {
+			sqlSession.close();
+		}
+	}
+
+	public AllSelectHotel AllSelectHotelList(String pkgNum) {
+		SqlSession sqlSession = getSqlSessionFactory().openSession();
+		try {
+			String statement = namespace + ".AllSelectHotelList";
+			System.out.println("Repository list : " + pkgNum);
+			AllSelectHotel p = sqlSession.selectOne(statement, pkgNum);
+			System.out.println("Repository list : " + p.getPkgNum());
+			return p;
+		} finally {
+			sqlSession.close();
+		}
+	}
+
+	public AllSelectActivity AllSelectActivityList(String pkgNum) {
+		SqlSession sqlSession = getSqlSessionFactory().openSession();
+		try {
+			String statement = namespace + ".AllSelectActivityList";
+			System.out.println("Repository list : " + pkgNum);
+			AllSelectActivity p = sqlSession.selectOne(statement, pkgNum);
+			System.out.println("Repository list : " + p.getPkgNum());
+			return p;
+		} finally {
+			sqlSession.close();
+		}
+	}
+	
 	
 }

@@ -18,9 +18,13 @@ import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.multipart.MultipartFile;
 
 import command.ActivityListSession;
+import command.AllSelectActivity;
+import command.AllSelectHotel;
+import command.AllSelectPkg;
 import command.HotelListSession;
 import command.LoginSession;
 import command.PkgCommand;
+import command.PkgDeteilCommand;
 import command.PkgMainListCommand;
 import model.Activitys;
 import model.City;
@@ -221,7 +225,7 @@ public class PkgService implements ApplicationContextAware {
 	}
 
 	public String selectPkgProductOne(Model model, String pkgNum) {
-		Pkg pkgone = pkgRepository.selectPkgProductOne(pkgNum);
+		PkgDeteilCommand pkgone = pkgRepository.selectPkgProductOne(pkgNum);
 		String result = null;
 		if(pkgone != null) {
 			model.addAttribute("pkgone",pkgone);
@@ -229,6 +233,23 @@ public class PkgService implements ApplicationContextAware {
 			result = "main";
 		}else {
 			result = "redirect:pkgMain";
+		}
+		return result;
+	}
+
+	public String selectPkgProductList(Model model, String pkgNum) {
+		AllSelectActivity activitys = pkgRepository.AllSelectActivityList(pkgNum);
+		AllSelectHotel hotels = pkgRepository.AllSelectHotelList(pkgNum);
+		AllSelectPkg pkgone = pkgRepository.AllSelectPkgList(pkgNum);
+		String result = null;
+		if(pkgone != null) {
+			model.addAttribute("hotels",hotels);
+			model.addAttribute("activitys",activitys);
+			model.addAttribute("pkgone",pkgone);
+			model.addAttribute("bodyPage","pkg/pkgorder.jsp");
+			result = "main";
+		}else {
+			result = "redirect:pkgDeteil";
 		}
 		return result;
 	}

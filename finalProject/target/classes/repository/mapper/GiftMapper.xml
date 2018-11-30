@@ -40,7 +40,7 @@
 		(GIFT_NUM,GIFT_NAME,GIFT_PRICE,<!-- GIFT_FILE, -->
 		GIFT_CATE,GIFT_CONTENT,GIFT_COMPANY,GIFT_TEL,GIFT_PRESIDENT,CONTINENT_NAME,COUNTRY_NUM,CITY_NUM)
 		VALUES (#{giftNum},#{giftName},#{giftPrice},<!-- #{giftFile}, -->
-		#{giftCate},#{giftContent},#{giftCompany},#{giftTel},#{giftPresident},#{continentName},#{countryNum},#{cityNum})
+		#{giftCate},#{giftContent},#{giftCompany},#{giftTel},#{giftPresident},'아시아','ca1','ca101')
 	</insert>
 
 	<!-- <insert id="giftRestoreInsert" parameterType="GR"> <selectKey resultType="string" 

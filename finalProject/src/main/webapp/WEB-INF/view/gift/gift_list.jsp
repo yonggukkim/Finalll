@@ -57,7 +57,7 @@
 	<%
 		} else {
 	%>
-	<table align="center" border="1">
+	<table align="center">
 		<tr>
 			<th>상품번호</th>
 			<th>상품분류</th>
@@ -92,6 +92,8 @@
 	<%
 		}
 	%>
+
+
 
 	<%
 		}

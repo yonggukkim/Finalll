@@ -209,6 +209,20 @@ public class PkgRepository extends AbstractRepository{
 			System.out.println("Repository list : " + pkg.getPkgNum());
 			/* res.setCreDate(Calendar.getInstance().getTime()); */
 			List<PkgMainListCommand> p = sqlSession.selectList(statement, pkg);
+			System.out.println("Repository list : " + p.size());
+			return p;
+		} finally {
+			sqlSession.close();
+		}
+	}
+
+	public Pkg selectPkgProductOne(String pkgNum) {
+		SqlSession sqlSession = getSqlSessionFactory().openSession();
+		try {
+			String statement = namespace + ".selectPkgProductOne";
+			System.out.println("Repository list : " + pkgNum);
+			Pkg p = sqlSession.selectOne(statement, pkgNum);
+			System.out.println("Repository list : " + p.getPkgNum());
 			return p;
 		} finally {
 			sqlSession.close();

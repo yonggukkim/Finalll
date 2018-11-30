@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import command.PkgCommand;
 import command.PkgMainListCommand;
@@ -149,6 +150,14 @@ public class PkgController {
 	public String pkgMainGet(Model model, PkgMainListCommand pkg) {
 		System.out.println("controller pkgmain");
 		String s = pkgService.selectPkgproduct(model, pkg);
+		return s;
+	}
+	
+	@RequestMapping(value="/pkgDeteil", method=RequestMethod.GET)
+	public String pkgDeteilGet(@RequestParam("pkg_num") String pkgNum ,Model model) {
+		System.out.println("pkgnum : " + pkgNum);
+		String s = pkgService.selectPkgProductOne(model, pkgNum);
+		System.out.println("controller pkgmain");
 		return s;
 	}
 }

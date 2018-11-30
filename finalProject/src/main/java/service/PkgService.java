@@ -219,4 +219,17 @@ public class PkgService implements ApplicationContextAware {
 		}
 		return result;
 	}
+
+	public String selectPkgProductOne(Model model, String pkgNum) {
+		Pkg pkgone = pkgRepository.selectPkgProductOne(pkgNum);
+		String result = null;
+		if(pkgone != null) {
+			model.addAttribute("pkgone",pkgone);
+			model.addAttribute("bodyPage","pkg/pkgdeteil.jsp");
+			result = "main";
+		}else {
+			result = "redirect:pkgMain";
+		}
+		return result;
+	}
 }

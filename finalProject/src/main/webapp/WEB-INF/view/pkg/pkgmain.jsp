@@ -529,12 +529,15 @@ a:visited {
 						 src="/finalProject/files/<%= restore.getStoredFileName() %>" alt=""></a> 
 					<div class="card-body">
 						<h4 class="card-title">
-							<a href="#">Project One</a>
+							<a href="pkgDeteil?pkg_num=<%= pkg.getPkgNum() %>" ><%= pkg.getPkgName() %></a>
 						</h4>
-						<p class="card-text">Lorem ipsum dolor sit amet, consectetur
-							adipisicing elit. Amet numquam aspernatur eum quasi sapiente
-							nesciunt? Voluptatibus sit, repellat sequi itaque deserunt,
-							dolores in, nesciunt, illum tempora ex quae? Nihil, dolorem!</p>
+						<p class="card-text"><%= pkg.getPkgContent() %></p>
+						<p class="card-text"><%= pkg.getPkgPeriod() %></p>
+						<p class="card-text"><%= pkg.getPkgTheme() %></p>
+						<p class="card-text"><%= pkg.getPkgPrice() %></p>
+						<p class="card-text"><%= pkg.getPkgMemberMin() %></p>
+						<p class="card-text"><%= pkg.getPkgMemberCur() %></p>
+						<p class="card-text"><%= pkg.getPkgMemberMax() %></p>
 					</div>
 				</div>
 			</div>

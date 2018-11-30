@@ -21,7 +21,7 @@
 	</tr>
 	<%
 		for(int i = 0; i < activitycart.size(); i++) {
-		ActivityListSession activity = (ActivityListSession)activitycart.get(i);
+			ActivityListSession activity = (ActivityListSession)activitycart.get(i);
 		%>
 	<tr>
 		<td><img alt="activity" src="files/<%= activity.getActivityImage() %>" width="50" height="50"></td>

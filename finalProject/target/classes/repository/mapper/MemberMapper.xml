@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC 
+	"-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="repository.mapper.MemberMapper">
+	<cache />
+
+	<resultMap type="Member" id="memberMap">
+		<id column="MEMBER_NUM" jdbcType="VARCHAR" property="memberNum" />
+		<id column="MEMBER_ID" jdbcType="VARCHAR" property="memberId" />
+		<id column="MEMBER_PW" jdbcType="VARCHAR" property="memberPw" />
+		<id column="MEMBER_NAME" jdbcType="VARCHAR" property="memberName" />
+		<id column="MEMBER_BIRTH" jdbcType="TIMESTAMP"
+			property="memberBirth" />
+		<id column="MEMBER_GENDER" jdbcType="VARCHAR"
+			property="memberGender" />
+		<id column="MEMBER_PHONE" jdbcType="VARCHAR" property="memberPhone" />
+		<id column="MEMBER_EMAIL" jdbcType="VARCHAR" property="memberEmail" />
+		<id column="MEMBER_DVICE" jdbcType="VARCHAR" property="memberDvice" />
+
+		<result column="MEMBER_COUNTRY_NUM" jdbcType="VARCHAR"
+			property="memberCountryNum" />
+		<result column="MEMBER_POSTCODE" jdbcType="VARCHAR"
+			property="memberPostcode" />
+		<result column="MEMBER_ADDR1" jdbcType="VARCHAR"
+			property="memberAddr1" />
+		<result column="MEMBER_ADDR2" jdbcType="VARCHAR"
+			property="memberAddr2" />
+		<result column="MEMBER_TEL" jdbcType="TIMESTAMP"
+			property="memberTel" />
+		<result column="MEMBER_MARRIGE" jdbcType="VARCHAR"
+			property="memberMarrige" />
+		<result column="MEMBER_JOB" jdbcType="VARCHAR"
+			property="memberJob" />
+		<result column="MEMBER_AGREE_MAILING" jdbcType="VARCHAR"
+			property="memberAgreeMailing" />
+		<result column="MEMBER_AGREE_SMS" jdbcType="VARCHAR"
+			property="memberAgreeSms" />
+		<result column="MEMBER_AGREE_TEL" jdbcType="VARCHAR"
+			property="memberAgreeTel" />
+		<result column="MEMBER_AGREE_POST" jdbcType="VARCHAR"
+			property="memberAgreePost" />
+		<result column="MEMBER_REG_DATE" jdbcType="TIMESTAMP"
+			property="memberRegDate" />
+		<result column="MEMBER_MILEAGE" jdbcType="BIGINT"
+			property="memberMileage" />
+	</resultMap>
+
+	<insert id="insertMember" parameterType="Member">
+		insert into
+		MEMBER(MEMBER_NUM,
+		MEMBER_ID, MEMBER_PW, MEMBER_NAME,
+		MEMBER_BIRTH,
+		MEMBER_GENDER,
+		MEMBER_COUNTRY_NUM, MEMBER_PHONE, MEMBER_EMAIL,
+		MEMBER_POSTCODE, MEMBER_ADDR1, MEMBER_ADDR2,
+		MEMBER_TEL,
+		MEMBER_MARRIGE, MEMBER_JOB, MEMBER_AGREE_MAILING, MEMBER_AGREE_SMS,
+		MEMBER_AGREE_TEL, MEMBER_AGREE_POST, MEMBER_REG_DATE, MEMBER_MILEAGE,
+		MEMBER_DVICE)
+		values((select
+		count(MEMBER_NUM)+1 from MEMBER),
+		#{memberId},
+		#{memberPw},
+		#{memberName}, #{memberBirth},
+		#{memberGender},
+		#{memberCountryNum},
+		#{memberPhone}, #{memberEmail},
+		#{memberPostcode}, #{memberAddr1},
+		#{memberAddr2}, #{memberTel},
+		#{memberMarrige}, #{memberJob},
+		#{memberAgreeMailing},
+		#{memberAgreeSms}, #{memberAgreeTel}, #{memberAgreePost},
+		#{memberRegDate}, #{memberMileage}, #{memberDvice})
+	</insert>
+	
+	<update id="updateMember" parameterType="Member">
+	update member
+	<trim prefix="SET" suffixOverrides=",">
+		<if test="memberPw!=null">
+			MEMBER_PW = #{memberPw},
+		</if>
+		 <if test="memberCountryNum!=null">
+			MEMBER_COUNTRY_NUM = #{memberCountryNum},
+		</if>
+		<if test="memberPhone!=null">
+			MEMBER_PHONE = #{memberPhone},
+		</if>
+		<if test="memberEmail!=null">
+			MEMBER_EMAIL = #{memberEmail},
+		</if>
+<!-- 		<if test="memberPostcode!=null">
+			MEMBER_POSTCODE = #{memberPostcode},
+		</if> -->
+		 <if test="memberAddr1!=null">
+			MEMBER_ADDR1 = #{memberAddr1},
+		</if>
+		<if test="memberAddr2!=null">
+			MEMBER_ADDR2 = #{memberAddr2},
+		</if>
+		<if test="memberTel!=null">
+			MEMBER_TEL = #{memberTel},
+		</if>
+		<if test="memberMarrige!=null">
+			MEMBER_MARRIGE = #{memberMarrige},
+		</if>		
+		<if test="memberAgreeMailing!=null">
+			MEMBER_AGREE_MAILING = #{memberAgreeMailing},
+		</if>		
+		<if test="memberAgreeSms!=null">
+			MEMBER_AGREE_SMS = #{memberAgreeSms},
+		</if>
+		<if test="memberAgreePost!=null">
+			MEMBER_AGREE_POST = #{memberAgreePost},
+		</if>	
+		<if test="memberAgreeTel!=null">
+			MEMBER_AGREE_TEL = #{memberAgreeTel}
+		</if>				
+	</trim>
+	where MEMBER_NUM= #{memberNum}
+</update>
+
+
+	<delete id="deleteMember" parameterType="String">
+		delete from member where
+		MEMBER_NUM=#{memberNum}
+	</delete>
+	
+	
+<select id="idFind" resultType="String">
+		SELECT MEMBER_ID
+		FROM MEMBER
+		where member_name=#{memberName} and member_email=#{memberEmail}
+		
+	</select>
+	
+ <select id="passwordFind" resultType="String">
+		SELECT MEMBER_PW
+		FROM MEMBER
+		where member_id=#{memberId} and member_email=#{memberEmail} and member_phone=#{memberPhone}
+
+	</select> 
+   
+
+   
+
+</mapper>

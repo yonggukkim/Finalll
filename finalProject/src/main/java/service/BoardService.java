@@ -7,7 +7,9 @@ import org.springframework.stereotype.Service;
 
 import model.Notice;
 import model.Qna;
+import model.QnaReply;
 import model.Review;
+import model.ReviewReply;
 import repository.BoardSessionRepository;
 
 @Service
@@ -94,4 +96,25 @@ public class BoardService {
 		return boardRepository.updateNotice(notice);
 	}
 
+	public Integer replyQna(QnaReply reply) {
+		System.out.println("Service replyQna replyQnaNum " + reply.getReplyQnaNum());
+		System.out.println("Service replyQna replyQnaSubject " + reply.getReplyQnaSubject());
+		return boardRepository.replyQna(reply);
+	}
+
+	public Integer replyReview(ReviewReply reply) {
+		System.out.println("Service replyReview replyReviewNum " + reply.getReplyReviewNum());
+		System.out.println("Service replyReview replyReviewSubject " + reply.getReplyReviewSubject());
+		return boardRepository.replyReview(reply);
+	}
+
+	public List<QnaReply> selectQnaReplyList(QnaReply reply) {
+		System.out.println("Service selectQnaReplyList replyQnaNum " + reply.getReplyQnaNum());
+		return boardRepository.selectQnaReplyByConditionList(reply);
+	}
+
+	public List<ReviewReply> selectReviewReplyList(ReviewReply reply) {
+		System.out.println("Service selectReviewReplyList replyReviewNum " + reply.getReplyReviewNum());
+		return boardRepository.selectReviewReplyByConditionList(reply);
+	}
 }

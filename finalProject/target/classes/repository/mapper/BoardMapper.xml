@@ -58,6 +58,35 @@
 			property="noticeCount" />
 	</resultMap>
 
+	<resultMap type="QnaReply" id="qnaReplyMap">
+		<result column="MEMBER_NUM" jdbcType="VARCHAR"
+			property="memberNum" />
+		<result column="QNA_NUM" jdbcType="VARCHAR" property="qnaNum" />
+		<result column="REPLY_QNA_NUM" jdbcType="VARCHAR"
+			property="replyQnaNum" />
+		<result column="REPLY_QNA_SUBJECT" jdbcType="VARCHAR"
+			property="replyQnaSubject" />
+		<result column="REPLY_QNA_CONTENT" jdbcType="VARCHAR"
+			property="replyQnaContent" />
+		<result column="REPLY_QNA_DATE" jdbcType="TIMESTAMP"
+			property="replyQnaDate" />
+	</resultMap>
+
+	<resultMap type="ReviewReply" id="reviewReplyMap">
+		<result column="MEMBER_NUM" jdbcType="VARCHAR"
+			property="memberNum" />
+		<result column="REVIEW_NUM" jdbcType="VARCHAR"
+			property="reviewNum" />
+		<result column="REPLY_REVIEW_NUM" jdbcType="VARCHAR"
+			property="replyReviewNum" />
+		<result column="REPLY_REVIEW_SUBJECT" jdbcType="VARCHAR"
+			property="replyReviewSubject" />
+		<result column="REPLY_REVIEW_CONTENT" jdbcType="VARCHAR"
+			property="replyReviewContent" />
+		<result column="REPLY_REVIEW_DATE" jdbcType="TIMESTAMP"
+			property="replyReviewDate" />
+	</resultMap>
+
 	<select id="selectQnaByConditionList" parameterType="Qna"
 		resultMap="qnaMap">
 		SELECT QNA_NUM, MEMBER_NUM, STAFF_NUMBER, QNA_DATE,
@@ -219,5 +248,37 @@
 		</trim>
 		where notice_num = #{noticeNum}
 	</update>
+
+	<insert id="replyQna" parameterType="QnaReply">
+		insert into qna_reply
+		(MEMBER_NUM,QNA_NUM,REPLY_QNA_NUM,REPLY_QNA_SUBJECT,REPLY_QNA_CONTENT,REPLY_QNA_DATE)
+		values(#{memberNum},#{qnaNum},(select
+		count(reply_qna_num)+1 from
+		qna_reply),#{replyQnaSubject},#{replyQnaContent},#{replyQnaDate})
+	</insert>
+
+	<insert id="replyReview" parameterType="ReviewReply">
+		insert into review_reply
+		(MEMBER_NUM,REVIEW_NUM,REPLY_REVIEW_NUM,REPLY_REVIEW_SUBJECT,REPLY_REVIEW_CONTENT,REPLY_REVIEW_DATE)
+		values(#{memberNum},#{reviewNum},(select
+		count(reply_review_num)+1 from
+		review_reply),#{replyReviewSubject},#{replyReviewContent},#{replyReviewDate})
+	</insert>
+
+	<select id="selectQnaReplyByConditionList"
+		parameterType="QnaReply" resultMap="qnaReplyMap">
+		SELECT
+		MEMBER_NUM,QNA_NUM,REPLY_QNA_NUM,REPLY_QNA_SUBJECT,REPLY_QNA_CONTENT,REPLY_QNA_DATE
+		FROM QNA_REPLY
+		WHERE QNA_NUM = #{qnaNum}
+	</select>
+
+	<select id="selectReviewReplyByConditionList"
+		parameterType="ReviewReply" resultMap="reviewReplyMap">
+		SELECT
+		MEMBER_NUM,REVIEW_NUM,REPLY_REVIEW_NUM,REPLY_REVIEW_SUBJECT,REPLY_REVIEW_CONTENT,REPLY_REVIEW_DATE
+		FROM REVIEW_REPLY
+		WHERE REVIEW_NUM = #{reviewNum}
+	</select>
 
 </mapper>

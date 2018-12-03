@@ -8,7 +8,9 @@ import org.springframework.stereotype.Repository;
 
 import model.Notice;
 import model.Qna;
+import model.QnaReply;
 import model.Review;
+import model.ReviewReply;
 
 @Repository
 public class BoardSessionRepository extends AbstractRepository {
@@ -242,6 +244,81 @@ public class BoardSessionRepository extends AbstractRepository {
 			else
 				sqlSession.rollback();
 			return result;
+		} finally {
+			sqlSession.close();
+		}
+	}
+
+	public Integer replyQna(QnaReply reply) {
+		SqlSession sqlSession = getSqlSessionFactory().openSession();
+		try {
+			String statement = namespace + ".replyQna";
+			System.out.println("Repository replyQna replyQnaNum " + reply.getReplyQnaNum());
+			System.out.println("Repository replyQna replyQnaSubject " + reply.getReplyQnaSubject());
+			reply.setReplyQnaDate(Calendar.getInstance().getTime());
+			Integer result = sqlSession.insert(statement, reply);
+			if (result > 0)
+				sqlSession.commit();
+			else
+				sqlSession.rollback();
+			return result;
+		} finally {
+			sqlSession.close();
+		}
+	}
+
+	public Integer replyReview(ReviewReply reply) {
+		SqlSession sqlSession = getSqlSessionFactory().openSession();
+		try {
+			String statement = namespace + ".replyReview";
+			System.out.println("Repository replyReview replyReviewNum " + reply.getReplyReviewNum());
+			System.out.println("Repository replyReview replyReviewSubject " + reply.getReplyReviewSubject());
+			reply.setReplyReviewDate(Calendar.getInstance().getTime());
+			Integer result = sqlSession.insert(statement, reply);
+			if (result > 0)
+				sqlSession.commit();
+			else
+				sqlSession.rollback();
+			return result;
+		} finally {
+			sqlSession.close();
+		}
+	}
+
+	public List<QnaReply> selectQnaReplyByConditionList(QnaReply reply) {
+		SqlSession sqlSession = getSqlSessionFactory().openSession();
+		try {
+			System.out.println("Repository selectQnaReplyByConditionList 입력 replyQnaNum " + reply.getReplyQnaNum());
+			String statement = namespace + ".selectQnaReplyByConditionList";
+			List<QnaReply> list = sqlSession.selectList(statement, reply);
+			for (Object o : list) {
+				QnaReply reply1 = (QnaReply) o;
+				System.out.println(
+						"Repository selectQnaReplyByConditionList replyQnaSubject " + reply1.getReplyQnaSubject());
+				System.out
+						.println("Repository selectQnaReplyByConditionList 출력 replyQnaNum " + reply1.getReplyQnaNum());
+			}
+			return list;
+		} finally {
+			sqlSession.close();
+		}
+	}
+
+	public List<ReviewReply> selectReviewReplyByConditionList(ReviewReply reply) {
+		SqlSession sqlSession = getSqlSessionFactory().openSession();
+		try {
+			System.out.println(
+					"Repository selectReviewReplyByConditionList 입력 replyReviewNum " + reply.getReplyReviewNum());
+			String statement = namespace + ".selectReviewReplyByConditionList";
+			List<ReviewReply> list = sqlSession.selectList(statement, reply);
+			for (Object o : list) {
+				ReviewReply reply1 = (ReviewReply) o;
+				System.out.println("Repository selectReviewReplyByConditionList replyReviewSubject "
+						+ reply1.getReplyReviewSubject());
+				System.out.println(
+						"Repository selectReviewReplyByConditionList 출력 replyReviewNum " + reply1.getReplyReviewNum());
+			}
+			return list;
 		} finally {
 			sqlSession.close();
 		}

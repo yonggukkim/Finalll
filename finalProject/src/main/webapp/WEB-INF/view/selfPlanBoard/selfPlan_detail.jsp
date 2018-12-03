@@ -99,10 +99,6 @@
 								<td colspan="3">첨부파일입니다</td>
 							</tr>
 							<tr>
-								<th scope="row">댓글</th>
-								<td colspan="3">댓글입니다</td>
-							</tr>
-							<tr>
 								<td colspan="5" scope="row"><a
 									href="selfPlan_modify?selfPlanNumber=<%=selfPlanNumber.getSelfPlanNumber()%>"><input
 										type="button" value="글 수정" /></a><a

@@ -26,6 +26,8 @@
  		<typeAlias type="command.AllSelectActivity" alias="AllSelectActivity"/>
  		<typeAlias type="command.AllSelectPkg" alias="AllSelectPkg"/>
 		<typeAlias type="model.Member" alias="Member"/>
+		<typeAlias type="model.QnaReply" alias="QnaReply" />  
+		<typeAlias type="model.ReviewReply" alias="ReviewReply" />
 	</typeAliases>
 	<!-- db컨넥션 -->
 	<environments default="development">

@@ -1,5 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import="model.*, java.util.*"%>
+<%
+	List activitylist = (List)request.getAttribute("actlist");
+	List hotellist = (List)request.getAttribute("list");
+	List pkglist = (List)request.getAttribute("pkglist");
+	List giftlist = (List)request.getAttribute("giftlist");
+%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -45,7 +51,7 @@
 						<a href="#pkg"
 							class="list-group-item d-flex justify-content-between align-items-center"
 							data-toggle="tab"> 패키지여행상품 <span
-							class="badge badge-primary badge-pill">12</span>
+							class="badge badge-primary badge-pill"><%= pkglist.size() %></span>
 						</a>
 						<a href="#semipkg"
 							class="list-group-item d-flex justify-content-between align-items-center"
@@ -55,18 +61,18 @@
 						<a href="#activity"
 							class="list-group-item d-flex justify-content-between align-items-center"
 							data-toggle="tab"> 액티비티 <span
-							class="badge badge-primary badge-pill">50</span>
+							class="badge badge-primary badge-pill"><%= activitylist.size()  %></span>
 						</a>
 						<a href="#hotel"
 							class="list-group-item d-flex justify-content-between align-items-center"
 							data-toggle="tab"> 호텔 <span
-							class="badge badge-primary badge-pill">99</span>
+							class="badge badge-primary badge-pill"><%= hotellist.size() %></span>
 						</a>
-						<!-- <a href="#gift"
+						<a href="#gift"
 							class="list-group-item d-flex justify-content-between align-items-center"
 							data-toggle="tab"> 특산품 <span
-							class="badge badge-primary badge-pill">99</span>
-						</a> -->
+							class="badge badge-primary badge-pill"><%= giftlist.size() %></span>
+						</a>
 					</ul>
 				</div>
 				<div class="col-lg-8">
@@ -83,9 +89,9 @@
 						<div id="hotel" class="tab-pane container fade">
 							<jsp:include page="hotel_list.jsp"></jsp:include>
 						</div>
-						<%-- <div id="gift" class="tab-pane container fade">
+						<div id="gift" class="tab-pane container fade">
 							<jsp:include page="gift_list.jsp"></jsp:include>
-						</div> --%>
+						</div>
 					</div>
 				</div>
 			</div>

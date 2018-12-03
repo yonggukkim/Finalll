@@ -1,22 +1,18 @@
 package controller;
 
-import java.io.File;
-import java.io.IOException;
 import java.util.List;
 
-import org.springframework.beans.BeansException;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.context.WebApplicationContext;
-import org.springframework.web.multipart.MultipartFile;
 
+import command.GiftCommand;
 import model.Gift;
-import model.GiftRestore;
 import service.CategoryService;
 import service.GiftService;
 
@@ -48,22 +44,22 @@ public class GiftController {
 	}
 
 	@RequestMapping(value = "/gift_insert", method = RequestMethod.POST)
-	public String giftInsert2(Gift gift, Model model/* , GiftRestore gr */) {
+	public String giftInsert2(GiftCommand gift, Model model, HttpSession session) {
 		System.out.println("gift_insert Post 진입");
 		System.out.println("POST" + gift.getGiftNum());
 		// 일반 특산품 등록
-		Integer result = giftService.giftInsert(gift);
+		Integer result = giftService.giftInsert(gift, model, session);
 		// 특산품 파일 업로드
 		/* Integer grResult = giftService.grInsert(gr); */
-		for (MultipartFile s : gift.getFiles()) {
-			System.out.println("테스트세트스ㅌ세트스티발");
-			System.out.println(s.toString());
-		}
+//		for (MultipartFile s : gift.getFiles()) {
+//			System.out.println("테스트세트스ㅌ세트스티발");
+//			System.out.println(s.toString());
+//		}
 
 		if (result > 0) {
-			return "redirect:gift_list";
+			return "redirect:product";
 		} else {
-			return "gift_insert";
+			return "redirect:/gift_insert";
 		}
 
 	}
@@ -71,12 +67,14 @@ public class GiftController {
 	@RequestMapping(value = "/gift_list", method = RequestMethod.GET)
 	public String giftList1(Gift gift, Model model) {
 		System.out.println("gift_list post 진입");
-		model.addAttribute("bodyPage", "gift/gift_list.jsp");
 		List<Gift> list = giftService.giftSelect(gift);
-		System.out.println("list null 여부확인" + list);
-		model.addAttribute("list", list);
-
-		return "main";
+		if(list != null) {
+			model.addAttribute("list",list);
+			System.out.println(list.size());
+			return "product/activity_list";
+		}else {
+			return "product";
+		}
 	}
 
 	@RequestMapping(value = "/gift_detail", method = RequestMethod.GET)

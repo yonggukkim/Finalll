@@ -19,6 +19,7 @@ import model.Continent;
 import model.Country;
 import model.Hotel;
 import model.Pkg;
+import model.PkgTouristInfo;
 import service.CategoryService;
 import service.PkgService;
 
@@ -154,18 +155,36 @@ public class PkgController {
 	}
 	
 	@RequestMapping(value="/pkgDeteil", method=RequestMethod.GET)
-	public String pkgDeteilGet(@RequestParam("pkg_num") String pkgNum ,Model model) {
+	public String pkgDeteilGet(@RequestParam("pkg_num") String pkgNum, Model model, HttpSession session) {
 		System.out.println("pkgnum : " + pkgNum);
-		String s = pkgService.selectPkgProductOne(model, pkgNum);
-		System.out.println("controller pkgdeteil");
+		String s = pkgService.selectPkgProductList(pkgNum, model, session);
+		System.out.println("controller pkgdeteil : " + s);
 		return s;
 	}
 	
 	@RequestMapping(value="/pkgOrder", method=RequestMethod.GET)
-	public String pkgOrderGet(@RequestParam("pkg_num") String pkgNum ,Model model) {
-		System.out.println("pkgnum : " + pkgNum);
-		String s = pkgService.selectPkgProductList(model, pkgNum);
-		System.out.println("controller pkgorder");
-		return s;
+	public String pkgOrderGet(Model model, PkgTouristInfo pkgTouristInfo) {
+		model.addAttribute("pkgTouristInfo", pkgTouristInfo);
+		model.addAttribute("bodyPage","pkg/pkgorder.jsp");
+		return "main";
 	}
+
+	@RequestMapping(value="/pkgOrder", method=RequestMethod.POST)
+	public String pkgOrderPost(Model model, PkgTouristInfo pkgTouristInfo) {
+		
+		model.addAttribute("bodyPage","pkg/pkgpay.jsp");
+		return "main";
+	}
+	
+	@RequestMapping(value="/pkgPay", method=RequestMethod.GET)
+	public String pkgPayGet(Model model) {
+		model.addAttribute("bodyPage","pkg/pkgpay.jsp");
+		return "main";
+	}
+
+	/*@RequestMapping(value="/pkgPay", method=RequestMethod.POST)
+	public String pkgPayPost(Model model) {
+		model.addAttribute("bodyPage","pkg/pkgpay.jsp");
+		return "main";
+	}*/
 }

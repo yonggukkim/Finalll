@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import="model.*, java.util.*"%>
+<%
+	List list = (List)request.getAttribute("giftlist");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,7 +10,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h2>세미패키지 상품</h2>
+	<h2>특산품</h2>
 					<table class="table table-hover">
 						<thead>
 							<tr>
@@ -15,8 +18,19 @@
 								<th scope="col">글쓴이</th>
 								<th scope="col">제목</th>
 								<th scope="col">작성일</th>
-								<th scope="col">조회수</th>
+								<th scope="col">종류</th>
 							</tr>
+							<% for (Object o : list) {
+								Gift gift = (Gift)o;	
+							%>
+							<tr>
+								<td><%= gift.getGiftNum() %></td>
+								<td><%= gift.getGiftName() %></td>
+								<td><%= gift.getGiftContent() %></td>
+								<td><%= gift.getGiftRegdate() %></td>
+								<td><%= gift.getGiftCate() %></td>
+							</tr>
+							<% } %>
 						</thead>
 						<%-- <tbody>
 							<tr>
@@ -41,7 +55,7 @@
 						</ul>
 					</div>
 					<div class="form-button">
-						<a href="qna_insert">
+						<a href="gift_insert">
 							<button type="button" class="button float-right">글쓰기</button>
 						</a>
 					</div>

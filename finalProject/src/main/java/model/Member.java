@@ -28,7 +28,7 @@ public class Member implements Serializable {
 	private Long memberMileage; // 누적마일리지
 	private String memberDvice; // 회원 구분
 
-	public Member(String memberNum, String memberId, String memberPw, String memberName, Date memberBirth,
+/*	public Member(String memberNum, String memberId, String memberPw, String memberName, Date memberBirth,
 			String memberGender, String memberCountryNum, String memberPhone, String memberEmail, String memberPostcode,
 			String memberAddr1, String memberAddr2, String memberTel, String memberMarrige, String memberJob,
 			String memberAgreeMailing, String memberAgreeSms, String memberAgreeTel, String memberAgreePost,
@@ -56,7 +56,7 @@ public class Member implements Serializable {
 		this.memberRegDate = memberRegDate;
 		this.memberMileage = memberMileage;
 		this.memberDvice = memberDvice;
-	}
+	}*/
 
 	public Member() {
 		super();

@@ -1,5 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import="model.*,command.*,java.util.*"%>
+<%
+	AllSelectActivity activitys = (AllSelectActivity)request.getAttribute("activitys");
+	AllSelectHotel hotels = (AllSelectHotel)request.getAttribute("hotels");
+	AllSelectPkg pkgone = (AllSelectPkg)request.getAttribute("pkgone");
+%>
 <!DOCTYPE html>
 <html>
 <script>

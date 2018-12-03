@@ -1,11 +1,14 @@
 package repository;
 
 import java.util.Calendar;
+import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import model.Member;
+import model.Notice;
+import model.Qna;
 
 @Repository
 public class MemberSessionRepository extends AbstractRepository {
@@ -60,8 +63,6 @@ public class MemberSessionRepository extends AbstractRepository {
 	 * return (name ==null)?false:true; }
 	 */
 
-
-	
 	public Integer deleteMember(String memberNum) {
 		SqlSession sqlSession = getSqlSessionFactory().openSession();
 		try {
@@ -77,6 +78,52 @@ public class MemberSessionRepository extends AbstractRepository {
 			sqlSession.close();
 		}
 	}
-	
-	
+
+	public String idFind(Member member) {
+		SqlSession sqlSession = getSqlSessionFactory().openSession();
+		try {
+//			System.out.println("idFind");
+			String statement = namespace + ".idFind";
+			return sqlSession.selectOne(statement, member);
+		} finally {
+			sqlSession.close();
+		}
+	}
+		public String passwordFind(Member member) {
+			SqlSession sqlSession = getSqlSessionFactory().openSession();
+			try {
+//				System.out.println("passwordFind");
+				String statement = namespace + ".passwordFind";
+				return sqlSession.selectOne(statement, member);
+			} finally {
+				sqlSession.close();
+			}
+	}
+		public List<Member> memberList(Member member) {
+			SqlSession sqlSession = getSqlSessionFactory().openSession();
+			try {
+				System.out.println("Repository memberList memberNum 1 " + member.getMemberNum());
+				String statement = namespace + ".memberList";
+				List<Member> list = sqlSession.selectList(statement, member);
+				System.out.println("repository memberList 주입성공");
+				for (Object o : list) {
+					Member member1 = (Member) o;
+					System.out.println("Repository memberList memberNum " + member1.getMemberNum());
+				}
+				return list; 
+			} finally {
+				sqlSession.close();
+			}
+		}
+		
+		public Member memberDetail(String memberNum) {
+			SqlSession sqlSession = getSqlSessionFactory().openSession();
+			try {
+				System.out.println("Repository memberDetail" + memberNum);
+				String statement = namespace + ".memberDetail";
+				return sqlSession.selectOne(statement, memberNum);
+			} finally {
+				sqlSession.close();
+			}
+		}
 }

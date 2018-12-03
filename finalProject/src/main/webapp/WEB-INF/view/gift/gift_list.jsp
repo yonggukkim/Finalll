@@ -37,7 +37,7 @@
 			<tr>
 				<th><select>
 						<option value="byName">상품명으로 검색</option>
-						<option value="byContent">상품내용으로 검색</option>
+						<option value="byContent">상품설명으로 검색</option>
 				</select></th>
 				<td><input type="text" name="giftName" /></td>
 				<td><input type="submit" /></td>
@@ -61,7 +61,8 @@
 		<tr>
 			<th>상품번호</th>
 			<th>상품분류</th>
-			<th>상품명</th>
+			<th width="30%">상품명</th>
+			<th width="30%">상품설명</th>
 		</tr>
 
 		<%
@@ -73,6 +74,7 @@
 			<td><%=gift.getGiftNum()%></td>
 			<td><%=gift.getGiftCate()%></td>
 			<td><a href="gift_detail?giftNum=<%=gift.getGiftNum()%>"><%=gift.getGiftName()%></a></td>
+			<td><%=gift.getGiftContent()%></td>
 		</tr>
 		<%
 			}
@@ -90,6 +92,8 @@
 	<%
 		}
 	%>
+
+
 
 	<%
 		}

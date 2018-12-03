@@ -17,6 +17,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import model.Gift;
 import model.GiftRestore;
+import service.CategoryService;
 import service.GiftService;
 
 @Controller
@@ -24,6 +25,8 @@ public class GiftController {
 
 	@Autowired
 	public GiftService giftService;
+	@Autowired
+	private CategoryService categoryService;
 
 	@RequestMapping(value = "/self_gift_list", method = RequestMethod.GET)
 	public String handleStep1(Model model) {
@@ -40,6 +43,7 @@ public class GiftController {
 	@RequestMapping(value = "/gift_insert", method = RequestMethod.GET)
 	public String giftInsert1(Gift gift, Model model) {
 		model.addAttribute("bodyPage", "gift/gift_insert.jsp");
+		categoryService.continentSelect(model);
 		return "main";
 	}
 
@@ -162,6 +166,17 @@ public class GiftController {
 		List<Gift> searchedList = giftService.giftSelectByName(gift);
 		System.out.println("searchedList null 여부 확인"+ searchedList);
 		model.addAttribute("list", searchedList);
+		return "main";
+	}
+	
+	@RequestMapping(value="/gift_sale_page", method=RequestMethod.GET)
+	public String giftTest(Gift gift, Model model) {
+		System.out.println("giftTest 진입");
+		model.addAttribute("bodyPage","gift/gift_sale_page.jsp");
+		List<Gift> list = giftService.giftSelect(gift);
+		System.out.println("list null 여부확인" + list);
+		model.addAttribute("list", list);
+
 		return "main";
 	}
 	

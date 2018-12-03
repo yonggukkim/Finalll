@@ -86,7 +86,7 @@
 		MEMBER_TEL,
 		MEMBER_MARRIGE, MEMBER_JOB, MEMBER_AGREE_MAILING, MEMBER_AGREE_SMS,
 		MEMBER_AGREE_TEL, MEMBER_AGREE_POST, MEMBER_REG_DATE, MEMBER_MILEAGE,
-		MEMBER_DVICE)
+		MEMBER_DVICE,MEMBER_UPTDATE)
 		values((select
 		count(MEMBER_NUM)+1 from MEMBER),
 		#{memberId},
@@ -100,7 +100,7 @@
 		#{memberMarrige}, #{memberJob},
 		#{memberAgreeMailing},
 		#{memberAgreeSms}, #{memberAgreeTel}, #{memberAgreePost},
-		#{memberRegDate}, #{memberMileage}, #{memberDvice})
+		sysdate, #{memberMileage}, #{memberDvice},sysdate)
 	</insert>
 	
 	<update id="updateMember" parameterType="Member">

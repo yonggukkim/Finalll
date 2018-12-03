@@ -11,7 +11,7 @@ public class Qna implements Serializable {
 	private Date qnaDate; // 질문게시판 작성날짜
 	private String qnaSubject; // 질문게시판 글제목
 	private String qnaContent; // 질문게시판 글내용
-	private String qnaFile; // 질문게시판 첨부이미지파일이름
+//	private String qnaFile; // 질문게시판 첨부이미지파일이름
 	private String qnaPw; // 질문게시판 글 비밀번호
 	private Integer qnaCount; // 질문게시판조회수
 
@@ -24,7 +24,7 @@ public class Qna implements Serializable {
 		this.qnaDate = qnaDate;
 		this.qnaSubject = qnaSubject;
 		this.qnaContent = qnaContent;
-		this.qnaFile = qnaFile;
+//		this.qnaFile = qnaFile;
 		this.qnaPw = qnaPw;
 		this.qnaCount = qnaCount;
 	}
@@ -81,13 +81,13 @@ public class Qna implements Serializable {
 		this.qnaContent = qnaContent;
 	}
 
-	public String getQnaFile() {
+/*	public String getQnaFile() {
 		return qnaFile;
 	}
 
 	public void setQnaFile(String qnaFile) {
 		this.qnaFile = qnaFile;
-	}
+	}*/
 
 	public String getQnaPw() {
 		return qnaPw;

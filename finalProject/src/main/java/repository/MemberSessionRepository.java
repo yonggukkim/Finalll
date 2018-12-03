@@ -24,7 +24,7 @@ public class MemberSessionRepository extends AbstractRepository {
 			 * System.out.println("Repository insertMember memberId " +
 			 * member.getMemberId());
 			 */
-			member.setMemberRegDate(Calendar.getInstance().getTime());
+//			member.setMemberRegDate(Calendar.getInstance().getTime());
 			Integer result = sqlSession.insert(statement, member);
 			if (result > 0)
 				sqlSession.commit();

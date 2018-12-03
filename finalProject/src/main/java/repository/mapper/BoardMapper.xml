@@ -17,7 +17,7 @@
 			property="qnaSubject" />
 		<result column="qna_content" jdbcType="VARCHAR"
 			property="qnaContent" />
-		<result column="qna_file" jdbcType="VARCHAR" property="qnaFile" />
+		<!-- <result column="qna_file" jdbcType="VARCHAR" property="qnaFile" /> -->
 		<result column="qna_pw" jdbcType="VARCHAR" property="qnaPw" />
 		<result column="qna_Count" jdbcType="INTEGER"
 			property="qnaCount" />
@@ -31,8 +31,8 @@
 			property="reviewDate" />
 		<result column="review_content" jdbcType="VARCHAR"
 			property="reviewContent" />
-		<result column="review_file" jdbcType="VARCHAR"
-			property="reviewFile" />
+		<!-- <result column="review_file" jdbcType="VARCHAR"
+			property="reviewFile" /> -->
 		<result column="review_pw" jdbcType="VARCHAR"
 			property="reviewPw" />
 		<result column="review_count" jdbcType="BIGINT"
@@ -50,8 +50,8 @@
 			property="noticeSubject" />
 		<result column="notice_content" jdbcType="VARCHAR"
 			property="noticeContent" />
-		<result column="notice_file" jdbcType="VARCHAR"
-			property="noticeFile" />
+		<!-- <result column="notice_file" jdbcType="VARCHAR"
+			property="noticeFile" /> -->
 		<result column="notice_pw" jdbcType="VARCHAR"
 			property="noticePw" />
 		<result column="notice_count" jdbcType="BIGINT"
@@ -90,13 +90,13 @@
 	<select id="selectQnaByConditionList" parameterType="Qna"
 		resultMap="qnaMap">
 		SELECT QNA_NUM, MEMBER_NUM, STAFF_NUMBER, QNA_DATE,
-		QNA_SUBJECT, QNA_CONTENT, QNA_FILE, QNA_PW, QNA_COUNT FROM QNA
+		QNA_SUBJECT, QNA_CONTENT, <!-- QNA_FILE, --> QNA_PW, QNA_COUNT FROM QNA
 	</select>
 
 	<select id="selectReviewByConditionList" parameterType="Review"
 		resultMap="reviewMap">
 		SELECT REVIEW_NUM, PKG_NUM, MEMBER_NUM, REVIEW_DATE,
-		REVIEW_CONTENT, REVIEW_FILE, REVIEW_PW, REVIEW_COUNT, REVIEW_RATING
+		REVIEW_CONTENT, <!-- REVIEW_FILE, --> REVIEW_PW, REVIEW_COUNT, REVIEW_RATING
 		FROM REVIEW
 	</select>
 
@@ -105,7 +105,7 @@
 		SELECT NOTICE_NUM, STAFF_NUMBER, NOTICE_DATE,
 		NOTICE_SUBJECT,
 		NOTICE_CONTENT,
-		NOTICE_FILE, NOTICE_PW, NOTICE_COUNT
+		<!-- NOTICE_FILE, --> NOTICE_PW, NOTICE_COUNT
 		FROM NOTICE
 	</select>
 
@@ -113,23 +113,23 @@
 		insert into
 		QNA(QNA_NUM,
 		MEMBER_NUM, STAFF_NUMBER, QNA_DATE, QNA_SUBJECT, QNA_CONTENT,
-		QNA_FILE, QNA_PW, QNA_COUNT)
+		<!-- QNA_FILE, --> QNA_PW, QNA_COUNT)
 		values((select count(qna_num)+1 from QNA),
 		#{memberNum}, #{staffNumber}, #{qnaDate}, #{qnaSubject},
-		#{qnaContent}, #{qnaFile}, #{qnaPw},#{qnaCount})
+		#{qnaContent}, <!-- #{qnaFile}, --> #{qnaPw},#{qnaCount})
 	</insert>
 
 	<insert id="insertReview" parameterType="Review">
 		insert into
 		REVIEW(REVIEW_NUM,
 		PKG_NUM, MEMBER_NUM, REVIEW_DATE, REVIEW_CONTENT,
-		REVIEW_FILE,
+		<!-- REVIEW_FILE, -->
 		REVIEW_PW, REVIEW_COUNT, REVIEW_RATING)
 		values((select
 		count(REVIEW_NUM)+1 from REVIEW),
 		#{pkgNum}, #{memberNum},
 		#{reviewDate}, #{reviewContent},
-		#{reviewFile}, #{reviewPw},
+		<!-- #{reviewFile}, --> #{reviewPw},
 		#{reviewCount},#{reviewRating})
 	</insert>
 
@@ -138,7 +138,7 @@
 		NOTICE(NOTICE_NUM,
 		STAFF_NUMBER, NOTICE_DATE, NOTICE_SUBJECT,
 		NOTICE_CONTENT,
-		NOTICE_FILE,
+		<!-- NOTICE_FILE, -->
 		NOTICE_PW, NOTICE_COUNT)
 		values((select
 		count(NOTICE_NUM)+1 from NOTICE),
@@ -154,7 +154,7 @@
 		resultMap="qnaMap">
 		SELECT
 		QNA_NUM, MEMBER_NUM, STAFF_NUMBER, QNA_DATE, QNA_SUBJECT,
-		QNA_CONTENT, QNA_FILE, QNA_PW, QNA_COUNT FROM QNA
+		QNA_CONTENT, <!-- QNA_FILE, --> QNA_PW, QNA_COUNT FROM QNA
 		<where>
 			<if test="qnaNum != null">
 				qna_num = #{qnaNum}
@@ -166,7 +166,7 @@
 		resultMap="reviewMap">
 		SELECT REVIEW_NUM, PKG_NUM, MEMBER_NUM, REVIEW_DATE,
 		REVIEW_CONTENT,
-		REVIEW_FILE, REVIEW_PW, REVIEW_COUNT, REVIEW_RATING
+		<!-- REVIEW_FILE, --> REVIEW_PW, REVIEW_COUNT, REVIEW_RATING
 		FROM REVIEW
 		<where>
 			<if test="reviewNum != null">
@@ -179,7 +179,7 @@
 		resultMap="noticeMap">
 		SELECT NOTICE_NUM, STAFF_NUMBER, NOTICE_DATE, NOTICE_SUBJECT,
 		NOTICE_CONTENT,
-		NOTICE_FILE, NOTICE_PW, NOTICE_COUNT
+		<!-- NOTICE_FILE, --> NOTICE_PW, NOTICE_COUNT
 		FROM NOTICE
 		<where>
 			<if test="noticeNum != null">
@@ -211,11 +211,11 @@
 				qna_subject = #{qnaSubject},
 			</if>
 			<if test="qnaContent!=null">
-				qna_content = #{qnaContent},
+				qna_content = #{qnaContent}
 			</if>
-			<if test="qnaFile!=null">
+			<!-- <if test="qnaFile!=null">
 				qna_file = #{qnaFile}
-			</if>
+			</if> -->
 		</trim>
 		where qna_num = #{qnaNum}
 	</update>
@@ -226,9 +226,9 @@
 			<if test="reviewContent!=null">
 				review_content = #{reviewContent},
 			</if>
-			<if test="reviewFile != null">
+			<!-- <if test="reviewFile != null">
 				review_file = #{reviewFile},
-			</if>
+			</if> -->
 		</trim>
 		where review_num = #{reviewNum}
 	</update>
@@ -242,9 +242,9 @@
 			<if test="noticeContent!=null">
 				notice_content = #{noticeContent},
 			</if>
-			<if test="noticeFile != null">
+			<!-- <if test="noticeFile != null">
 				notice_file = #{noticeFile},
-			</if>
+			</if> -->
 		</trim>
 		where notice_num = #{noticeNum}
 	</update>

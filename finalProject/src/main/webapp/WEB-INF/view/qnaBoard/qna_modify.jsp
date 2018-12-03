@@ -91,11 +91,11 @@
 									<td><textarea cols="30" placeholder="내용을 입력하세요. "
 											name="qnaContent" class=""></textarea></td>
 								</tr>
-								<tr>
+								<!-- <tr>
 									<th>첨부파일 :</th>
 									<td><input type="text" placeholder="파일을 선택하세요. "
 										name="qnaFile" class="" /></td>
-								</tr>
+								</tr> -->
 								<tr>
 									<td colspan="2"><input type="submit" value="수정" /> <a
 										href="qna_list"> <input type="button" value="글 목록" /></a></td>

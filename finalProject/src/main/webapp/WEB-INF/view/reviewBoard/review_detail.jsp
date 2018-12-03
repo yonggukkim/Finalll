@@ -103,7 +103,7 @@
 						<tfoot>
 							<tr>
 								<th scope="row">첨부파일</th>
-								<td colspan="3"><%=review.getReviewFile()%></td>
+								<td colspan="3"><%-- <%=review.getReviewFile()%> --%></td>
 							</tr>
 							<tr>
 								<td colspan="5" scope="row"><a

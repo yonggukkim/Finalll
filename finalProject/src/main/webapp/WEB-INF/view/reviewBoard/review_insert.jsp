@@ -87,10 +87,10 @@
 									<th>내용 :</th>
 									<td><form:textarea path="reviewContent" rows="5" cols="22" /></td>
 								</tr>
-								<tr>
+								<%-- <tr>
 									<th>첨부파일 :</th>
 									<td><form:input path="reviewFile" /></td>
-								</tr>
+								</tr> --%>
 								<tr>
 									<th>비밀번호 :</th>
 									<td><form:password path="reviewPw" /></td>

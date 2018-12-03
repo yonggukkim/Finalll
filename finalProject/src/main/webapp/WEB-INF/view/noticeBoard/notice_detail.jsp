@@ -96,7 +96,7 @@
 						<tfoot>
 							<tr>
 								<th scope="row">첨부파일</th>
-								<td colspan="3"><%=notice.getNoticeFile()%></td>
+								<td colspan="3"><%-- <%=notice.getNoticeFile()%> --%></td>
 							</tr>
 							<tr>
 								<td colspan="5" scope="row"><a

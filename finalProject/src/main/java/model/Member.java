@@ -25,6 +25,7 @@ public class Member implements Serializable {
 	private String memberAgreeTel; // 이벤트유선전화번호수신동의여부
 	private String memberAgreePost; // 이벤트 우편물 수신동의여부
 	private Date memberRegDate; // 회원가입날짜
+	private Date memberUptdate;
 	private Long memberMileage; // 누적마일리지
 	private String memberDvice; // 회원 구분
 
@@ -57,6 +58,14 @@ public class Member implements Serializable {
 		this.memberMileage = memberMileage;
 		this.memberDvice = memberDvice;
 	}*/
+
+	public Date getMemberUptdate() {
+		return memberUptdate;
+	}
+
+	public void setMemberUptdate(Date memberUptdate) {
+		this.memberUptdate = memberUptdate;
+	}
 
 	public Member() {
 		super();

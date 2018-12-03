@@ -63,10 +63,10 @@
 									<th>내용 :</th>
 									<td><form:textarea path="qnaContent" rows="5" cols="22" /></td>
 								</tr>
-								<tr>
+								<%-- <tr>
 									<th>첨부파일 :</th>
 									<td><form:input path="qnaFile" /></td>
-								</tr>
+								</tr> --%>
 								<tr>
 									<th>비밀번호 :</th>
 									<td><form:password path="qnaPw" /></td>

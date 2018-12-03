@@ -6,31 +6,50 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import model.Gift;
-import model.GiftRestore;
+import model.Restore;
 
 @Repository
 public class GiftRepository extends AbstractRepository {
 
 	private final String namespace = "repository.mapper.GiftMapper";
 
-	public Integer giftInsert(Gift gift) {
+	public Integer giftInsert(Gift gift, List<Restore> list) {
 		System.out.println("gift repository 진입");
 		SqlSession sqlSession = getSqlSessionFactory().openSession();
 		try {
 			String statement = namespace + ".giftInsert";
+			String statement1 = namespace + ".selectNum";
+			String statement2 = namespace + ".insertRestore";
+			System.out.println("Repositorybefor" + gift.getGiftContent());
+			System.out.println("Repositorybefor" + gift.getGiftName());
+//			activity.setActivityRegdate(Calendar.getInstance().getTime());
+//			activity.setActivityUptdate(Calendar.getInstance().getTime());
+			String s = sqlSession.selectOne(statement1);
+			gift.setGiftNum(s);
+			System.out.println("insertGift" + s);
 			Integer result = sqlSession.insert(statement, gift);
-			if (result > 0) {
-				sqlSession.commit();
-
-			} else {
-				sqlSession.rollback();
+			System.out.println(list.size());
+			int cnt = 0;
+			for(Restore a : list) {
+				a.setResNum(s);
+				System.out.println("count"+ cnt++);
+				System.out.println("a" + a.getFileNo());
+				System.out.println("a" + a.getFold());
+				System.out.println("a" + a.getStoredFileName());
+				System.out.println("a" + a.getFileName());
+				System.out.println("a" + a.getEtc());
+				sqlSession.insert(statement2, a);
 			}
+			System.out.println("Repositoryafter" + gift.getGiftNum());
+			System.out.println("Repositoryafter" + gift.getGiftName());
+			if (result > 0)
+				sqlSession.commit();
+			else 
+				sqlSession.rollback();	
 			return result;
-
 		} finally {
 			sqlSession.close();
 		}
-
 	}
 
 	public List<Gift> giftSelect(Gift gift) {
@@ -112,6 +131,25 @@ public class GiftRepository extends AbstractRepository {
 			sqlSession.close();
 		}
 		
+	}
+
+	public List<Gift> selectGiftList(Gift gift) {
+		SqlSession sqlSession = getSqlSessionFactory().openSession();
+		try {
+			String statement = namespace + ".selectGiftList";
+			System.out.println("Repository" + gift.getGiftNum());
+			System.out.println("Repository" + gift.getGiftName());
+			/*res.setCreDate(Calendar.getInstance().getTime());*/
+			List<Gift> list = sqlSession.selectList(statement, gift);
+			for(Object o : list) {
+				Gift act = (Gift)o;
+				System.out.println("Repositoryafter"+act.getGiftNum());
+				System.out.println("Repositoryafter"+act.getGiftName());
+			}
+			return list;
+		} finally {
+			sqlSession.close();
+		}
 	}
 
 /*	public Integer grInsert(GiftRestore gr) {

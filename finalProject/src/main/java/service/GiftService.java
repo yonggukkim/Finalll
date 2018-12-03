@@ -1,24 +1,51 @@
 package service;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
+import javax.servlet.http.HttpSession;
+
+import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.ApplicationContextAware;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
+import org.springframework.web.context.WebApplicationContext;
+import org.springframework.web.multipart.MultipartFile;
 
+import command.GiftCommand;
+import command.LoginSession;
 import model.Gift;
+import model.Restore;
 import repository.GiftRepository;
 
 @Service
-public class GiftService /* implements ApplicationContextAware*/{
-/*	private WebApplicationContext context = null;*/
+public class GiftService implements ApplicationContextAware{
+	private WebApplicationContext context = null;
 
 	@Autowired
 	public GiftRepository giftRepository;
 
-	public Integer giftInsert(Gift gift) {
+	public Integer giftInsert(GiftCommand giftCommand, Model model, HttpSession session) {
 		System.out.println("gift service 진입");
-		Integer giftListSelect = giftRepository.giftInsert(gift);
-/*		upload(gift);*/
+		Gift gift = new Gift();
+		LoginSession loginSession = (LoginSession)session.getAttribute("info");
+		gift.setStaffNumber(loginSession.getCommandNum());
+		gift.setGiftName(giftCommand.getGiftName());
+		gift.setGiftPrice(giftCommand.getGiftPrice());
+		gift.setGiftCate(giftCommand.getGiftCate());
+		gift.setGiftContent(giftCommand.getGiftContent());
+		gift.setGiftCompany(giftCommand.getGiftCompany());
+		gift.setGiftTel(giftCommand.getGiftTel());
+		gift.setGiftPresident(giftCommand.getGiftPresident());
+		List<Restore> list = upload(giftCommand.getFiles(), giftCommand.getGiftName());
+		System.out.println("sdads adadsasdsda : "+list.size());
+		Integer giftListSelect = giftRepository.giftInsert(gift, list);
+		model.addAttribute("gift",gift);
 		return giftListSelect;
 	}
 
@@ -70,52 +97,44 @@ public class GiftService /* implements ApplicationContextAware*/{
 		
 	}
 
-/*	private void upload(Gift gift) {
+	public List<Gift> selectGiftList(Gift gift, Model model) {
+			List<Gift> list = giftRepository.selectGiftList(gift);
+			model.addAttribute("giftlist", list);
+			return list;
+	}
 
-		 //1. 물리적으로 stream방식 파일 업로드
-        //1) 파일 서버의 가상경로
-        String cpath = "C:/a01_prg/workspace/javaexp/springboard/WebContent/z01_upload";
-        
-        //2) 웹서버를 구동해서 웹서버 안에 특정한 경로를 지정
-        String path = context.getServletContext().getRealPath("z01_upload");
-        File file;
-        
-        //new File(경로, 파일명);
-        //2. DB 파일 업로드 정보 입력.. fold fname etc
-        GiftRestore gr;
-    
-        for(MultipartFile mf : gift.getFiles()){
-            
-            file = new File(mf.getOriginalFilename(),path);
-            gr = new GiftRestore(mf.getOriginalFilename(),path);    //gr의 vo객체 만들어짐 (파일명,경로,)
-            
-            // stream 형식의 파일 -> 실제파일로 전환하면 저장
-            try{
-                mf.transferTo(file);
-                
-                // eclipse내에 tomcat을 가동할 시만, 처리 필요 (WAS서버가 존재할땐 필요가 없다!!)
-                Files.copy(Paths.get( path+"/"+mf.getOriginalFilename()),
-                        Paths.get(cpath+"/"+mf.getOriginalFilename()),
-                        StandardCopyOption.REPLACE_EXISTING);
-                
-                //파일 정보 입력
-                giftRepository.grInsert(gr);
-                
-            }catch(IllegalStateException e){
-                e.printStackTrace();
-            }catch(IOException e){
-                e.printStackTrace();
-            }
-            
-            
-        }
-        
-        
-    }
+	private List<Restore> upload(MultipartFile[] a, String b) {
+		String path = context.getServletContext().getRealPath("WEB-INF\\view\\files");
+		System.out.println("path dddd"+ path);
+		File file;
+		Restore res;
+		String storedFileName;
+		String originalFile;
+		String originalFileExtension;
+		List<Restore> list = new ArrayList<Restore>();
+		System.out.println("a size : " +a.length);
+		for (MultipartFile mf : a) {	
+			originalFile = mf.getOriginalFilename();
+			originalFileExtension = originalFile.substring(originalFile.lastIndexOf("."));
+			storedFileName = UUID.randomUUID().toString().replaceAll("-", "") + originalFileExtension;
+			file = new File(path, storedFileName);
+			res = new Restore( path, mf.getOriginalFilename(), storedFileName, b); // res의 vo객체 만들어짐 (경로, 파일명, 설명)
+			// stream 형식의 파일 -> 실제파일로 전환하면 저장
+			try {
+				mf.transferTo(file);				
+				list.add(res);
+			} catch (IllegalStateException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		return list;
+	}
 
 	public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
 
 		this.context = (WebApplicationContext) applicationContext;
-	}*/
+	}
 
 }

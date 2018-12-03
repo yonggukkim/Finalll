@@ -5,15 +5,17 @@
 
 <mapper namespace="repository.mapper.GiftMapper">
 	<cache />
-
+	<select id="selectNum" resultType="String">
+		SELECT ('g'||gift_num.nextval) FROM dual
+	</select>
 	<resultMap type="Gift" id="giftMap">
 		<id column="gift_num" jdbcType="VARCHAR" property="giftNum" />
+		<result column="staff_number" jdbcType="VARCHAR"
+			property="staffNumber" />
 		<result column="gift_name" jdbcType="VARCHAR"
 			property="giftName" />
 		<result column="gift_price" jdbcType="INTEGER"
 			property="giftPrice" />
-		<!-- <result column="gift_file" jdbcType="VARCHAR" property="giftFile" 
-			/> -->
 		<result column="gift_cate" jdbcType="VARCHAR"
 			property="giftCate" />
 		<result column="gift_content" jdbcType="CLOB"
@@ -23,6 +25,10 @@
 		<result column="gift_tel" jdbcType="VARCHAR" property="giftTel" />
 		<result column="gift_president" jdbcType="VARCHAR"
 			property="giftPresident" />
+		<result column="gift_regdate" jdbcType="DATE"
+			property="giftRegdate" />
+		<result column="gift_uptdate" jdbcType="DATE"
+			property="giftUptdate" />
 		<result column="continent_name" jdbcType="VARCHAR"
 			property="continentName" />
 		<result column="country_num" jdbcType="VARCHAR"
@@ -32,35 +38,33 @@
 	</resultMap>
 
 	<insert id="giftInsert" parameterType="Gift">
-		<selectKey resultType="string" keyProperty="giftNum"
-			order="BEFORE">
-			SELECT ('G'||gift_num.nextval) FROM dual
-		</selectKey>
 		INSERT INTO GIFT
-		(GIFT_NUM,GIFT_NAME,GIFT_PRICE,<!-- GIFT_FILE, -->
-		GIFT_CATE,GIFT_CONTENT,GIFT_COMPANY,GIFT_TEL,GIFT_PRESIDENT,CONTINENT_NAME,COUNTRY_NUM,CITY_NUM)
-		VALUES (#{giftNum},#{giftName},#{giftPrice},<!-- #{giftFile}, -->
-		#{giftCate},#{giftContent},#{giftCompany},#{giftTel},#{giftPresident},'아시아','ca1','ca101')
+		(GIFT_NUM,STAFF_NUMBER,GIFT_NAME,GIFT_PRICE,<!-- GIFT_FILE, -->
+		GIFT_CATE,GIFT_CONTENT,GIFT_COMPANY,GIFT_TEL,GIFT_PRESIDENT,GIFT_REGDATE,GIFT_UPTDATE,CONTINENT_NAME,COUNTRY_NUM,CITY_NUM)
+		VALUES (#{giftNum},#{staffNumber},#{giftName},#{giftPrice},
+		#{giftCate},#{giftContent},#{giftCompany},#{giftTel},#{giftPresident},sysdate,sysdate,'아시아','ca1','ca101')
 	</insert>
 
-	<!-- <insert id="giftRestoreInsert" parameterType="GR"> <selectKey resultType="string" 
-		keyProperty="gfileNum" order="BEFORE"> SELECT ('GF'||gfile_num.nextval) FROM 
-		dual </selectKey> INSERT INTO GITF_RESTORE (gfile_num,gfile_name,gfile_path) 
-		VALUES ('333',#{gfileName},#{gfilePath}) </insert> -->
+	<insert id="insertRestore" parameterType="Restore">
+         INSERT INTO restore(FILE_NO, RES_NUM, FOLD, STORED_FILE_NAME, 
+         FILE_NAME, CRE_DATE, ETC) 
+         VALUES(res_seq.nextval,#{resNum},#{fold},#{storedFileName},
+         #{fileName},sysdate,#{etc})
+     </insert>
 
 
 	<select id="giftSelect" parameterType="Gift" resultMap="giftMap">
 		SELECT
-		GIFT_NUM,GIFT_NAME,GIFT_PRICE,<!-- GIFT_FILE, -->
-		GIFT_CATE,GIFT_CONTENT,GIFT_COMPANY,GIFT_TEL,GIFT_PRESIDENT,CONTINENT_NAME,COUNTRY_NUM,CITY_NUM
+		GIFT_NUM,STAFF_NUMBER,GIFT_NAME,GIFT_PRICE,<!-- GIFT_FILE, -->
+		GIFT_CATE,GIFT_CONTENT,GIFT_COMPANY,GIFT_TEL,GIFT_PRESIDENT,GIFT_REGDATE,GIFT_UPTDATE,CONTINENT_NAME,COUNTRY_NUM,CITY_NUM
 		FROM gift
 	</select>
 
 	<select id="giftSelectByCondition" parameterType="Gift"
 		resultMap="giftMap">
 		SELECT
-		GIFT_NUM,GIFT_NAME,GIFT_PRICE,<!-- GIFT_FILE, -->
-		GIFT_CATE,GIFT_CONTENT,GIFT_COMPANY,GIFT_TEL,GIFT_PRESIDENT,CONTINENT_NAME,COUNTRY_NUM,CITY_NUM
+		GIFT_NUM,STAFF_NUMBER,GIFT_NAME,GIFT_PRICE,<!-- GIFT_FILE, -->
+		GIFT_CATE,GIFT_CONTENT,GIFT_COMPANY,GIFT_TEL,GIFT_PRESIDENT,GIFT_REGDATE,GIFT_UPTDATE,CONTINENT_NAME,COUNTRY_NUM,CITY_NUM
 		FROM gift
 		WHERE GIFT_NUM = #{giftNum}
 
@@ -70,8 +74,8 @@
 	<select id="giftSelectByName" parameterType="Gift"
 		resultMap="giftMap">
 		SELECT
-		GIFT_NUM,GIFT_NAME,GIFT_PRICE,GIFT_CATE,GIFT_CONTENT,GIFT_COMPANY,GIFT_TEL,GIFT_PRESIDENT,CONTINENT_NAME,COUNTRY_NUM,CITY_NUM
-		FROM gift
+		GIFT_NUM,STAFF_NUMBER,GIFT_NAME,GIFT_PRICE,<!-- GIFT_FILE, -->
+		GIFT_CATE,GIFT_CONTENT,GIFT_COMPANY,GIFT_TEL,GIFT_PRESIDENT,GIFT_REGDATE,GIFT_UPTDATE,CONTINENT_NAME,COUNTRY_NUM,CITY_NUM
 		WHERE GIFT_NAME LIKE '%'||#{giftName}||'%'
 
 
@@ -100,6 +104,12 @@
 		WHERE gift_num = #{giftNum}
 	</update>
 
+	<select id="selectGiftList" parameterType="Gift" resultMap="giftMap">
+     	SELECT
+		GIFT_NUM,STAFF_NUMBER,GIFT_NAME,GIFT_PRICE,<!-- GIFT_FILE, -->
+		GIFT_CATE,GIFT_CONTENT,GIFT_COMPANY,GIFT_TEL,GIFT_PRESIDENT,GIFT_REGDATE,GIFT_UPTDATE,CONTINENT_NAME,COUNTRY_NUM,CITY_NUM
+		FROM gift
+     </select>
 
 </mapper>
 	

@@ -1,12 +1,12 @@
-package model;
+package command;
 
 import java.io.Serializable;
-import java.util.Date;
+
+import org.springframework.web.multipart.MultipartFile;
 
 @SuppressWarnings("serial")
-public class Gift implements Serializable {
+public class GiftCommand implements Serializable {
 	private String giftNum; // 특산품 등록번호
-	private String staffNumber; // 직원번호
 	private String giftName; // 특산품 이름
 	private Long giftPrice; // 특산품 가격
 	private String giftCate; // 특산품 종류
@@ -14,11 +14,10 @@ public class Gift implements Serializable {
 	private String giftCompany; // 특산품 업체이름
 	private String giftTel; // 특산품 업체전화번호
 	private String giftPresident; // 특산품 대표자이름
-	private Date giftRegdate; // 특산품 등록일
-	private Date giftUptdate; // 특산품 수정일
 	private String continentName; // 대륙이름
 	private String countryNum; // 나라번호
 	private String cityNum; // 도시번호
+	private MultipartFile[] files;
 	
 	
 	/*public Gift() {
@@ -49,32 +48,17 @@ public class Gift implements Serializable {
 		this.cityNum = cityNum;
 		this.files = files;
 	}*/
+//
+	public MultipartFile[] getFiles() {
+		return files;
+	}
+
+	public void setFiles(MultipartFile[] files) {
+		this.files = files;
+	}
+//
 	public String getGiftNum() {
 		return giftNum;
-	}
-
-	public Date getGiftRegdate() {
-		return giftRegdate;
-	}
-
-	public void setGiftRegdate(Date giftRegdate) {
-		this.giftRegdate = giftRegdate;
-	}
-
-	public Date getGiftUptdate() {
-		return giftUptdate;
-	}
-
-	public void setGiftUptdate(Date giftUptdate) {
-		this.giftUptdate = giftUptdate;
-	}
-
-	public String getStaffNumber() {
-		return staffNumber;
-	}
-
-	public void setStaffNumber(String staffNumber) {
-		this.staffNumber = staffNumber;
 	}
 
 	public void setGiftNum(String giftNum) {
@@ -96,14 +80,6 @@ public class Gift implements Serializable {
 	public void setGiftPrice(Long giftPrice) {
 		this.giftPrice = giftPrice;
 	}
-
-/*	public String getGiftFile() {
-		return giftFile;
-	}
-
-	public void setGiftFile(String giftFile) {
-		this.giftFile = giftFile;
-	}*/
 
 	public String getGiftCate() {
 		return giftCate;

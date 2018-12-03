@@ -313,7 +313,7 @@
 		</collection>
 	</resultMap>
 	
-	<select id="selectPkgProductOne" parameterType="PkgDeteilCommand" resultMap="deteilMap">
+	<!-- <select id="selectPkgProductOne" parameterType="PkgDeteilCommand" resultMap="deteilMap">
 		SELECT p.PKG_NUM, p.GUIDE_NUM, p.STAFF_NUMBER, p.PKG_NAME, p.PKG_THEME, p.PKG_PRICE,
 		p.PKG_PERIOD, p.PKG_CONTENT, p.PKG_MEMBER_MIN, p.PKG_MEMBER_CUR,
 		p.PKG_MEMBER_MAX, p.PKG_REVIEW, p.PKG_CAUTION, p.PKG_REFERENCE,
@@ -321,7 +321,7 @@
 		p.PKG_UPTDATE, p.CONTINENT_NAME, p.COUNTRY_NUM, p.CITY_NUM, r.file_no, 
 		r.res_num, r.fold, r.file_name, r.stored_file_name, r.cre_date, r.etc
 		FROM pkg p, restore r WHERE p.PKG_NUM = r.RES_NUM AND pkg_num = #{pkgNum}
-	</select>
+	</select> -->
 	
 	<resultMap type="AllSelectPkg" id="allSelectPkgMap">
 		<id column="PKG_NUM" jdbcType="VARCHAR" property="pkgNum" />

@@ -2,7 +2,10 @@
 	pageEncoding="UTF-8" import="java.util.*,command.*,model.*"%>
 <!DOCTYPE html>
 <%
-	PkgDeteilCommand pkgone = (PkgDeteilCommand)request.getAttribute("pkgone");
+	/* PkgDeteilCommand pkgone = (PkgDeteilCommand)request.getAttribute("pkgone"); */
+	AllSelectActivity activitys = (AllSelectActivity)session.getAttribute("activitys");
+	AllSelectHotel hotels = (AllSelectHotel)session.getAttribute("hotels");
+	AllSelectPkg pkgone = (AllSelectPkg)session.getAttribute("pkgone");
 %>
 <html lang="en">
 

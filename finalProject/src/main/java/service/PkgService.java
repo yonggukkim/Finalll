@@ -24,7 +24,6 @@ import command.AllSelectPkg;
 import command.HotelListSession;
 import command.LoginSession;
 import command.PkgCommand;
-import command.PkgDeteilCommand;
 import command.PkgMainListCommand;
 import model.Activitys;
 import model.City;
@@ -80,6 +79,7 @@ public class PkgService implements ApplicationContextAware {
 
 	private List<Restore> upload(MultipartFile[] a, String b) {
 		String path = context.getServletContext().getRealPath("WEB-INF\\view\\files");
+		System.out.println("00000 "+path);
 		File file;
 		Restore res;
 		String storedFileName;
@@ -224,11 +224,15 @@ public class PkgService implements ApplicationContextAware {
 		return result;
 	}
 
-	public String selectPkgProductOne(Model model, String pkgNum) {
-		PkgDeteilCommand pkgone = pkgRepository.selectPkgProductOne(pkgNum);
+	public String selectPkgProductList(String pkgNum, Model model, HttpSession session) {
+		AllSelectActivity activitys = pkgRepository.AllSelectActivityList(pkgNum);
+		AllSelectHotel hotels = pkgRepository.AllSelectHotelList(pkgNum);
+		AllSelectPkg pkgone = pkgRepository.AllSelectPkgList(pkgNum);
 		String result = null;
 		if(pkgone != null) {
-			model.addAttribute("pkgone",pkgone);
+			session.setAttribute("hotels",hotels);
+			session.setAttribute("activitys",activitys);
+			session.setAttribute("pkgone",pkgone);
 			model.addAttribute("bodyPage","pkg/pkgdeteil.jsp");
 			result = "main";
 		}else {
@@ -237,20 +241,20 @@ public class PkgService implements ApplicationContextAware {
 		return result;
 	}
 
-	public String selectPkgProductList(Model model, String pkgNum) {
-		AllSelectActivity activitys = pkgRepository.AllSelectActivityList(pkgNum);
-		AllSelectHotel hotels = pkgRepository.AllSelectHotelList(pkgNum);
-		AllSelectPkg pkgone = pkgRepository.AllSelectPkgList(pkgNum);
-		String result = null;
-		if(pkgone != null) {
-			model.addAttribute("hotels",hotels);
-			model.addAttribute("activitys",activitys);
-			model.addAttribute("pkgone",pkgone);
-			model.addAttribute("bodyPage","pkg/pkgorder.jsp");
-			result = "main";
-		}else {
-			result = "redirect:pkgDeteil";
-		}
-		return result;
-	}
+//	public String selectPkgProductList(Model model, String pkgNum) {
+//		AllSelectActivity activitys = pkgRepository.AllSelectActivityList(pkgNum);
+//		AllSelectHotel hotels = pkgRepository.AllSelectHotelList(pkgNum);
+//		AllSelectPkg pkgone = pkgRepository.AllSelectPkgList(pkgNum);
+//		String result = null;
+//		if(pkgone != null) {
+//			model.addAttribute("hotels",hotels);
+//			model.addAttribute("activitys",activitys);
+//			model.addAttribute("pkgone",pkgone);
+//			model.addAttribute("bodyPage","pkg/pkgorder.jsp");
+//			result = "main";
+//		}else {
+//			result = "redirect:pkgDeteil";
+//		}
+//		return result;
+//	}
 }

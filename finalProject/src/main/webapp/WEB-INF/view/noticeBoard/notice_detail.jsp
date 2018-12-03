@@ -99,10 +99,6 @@
 								<td colspan="3"><%=notice.getNoticeFile()%></td>
 							</tr>
 							<tr>
-								<th scope="row">댓글</th>
-								<td colspan="3">댓글입니다</td>
-							</tr>
-							<tr>
 								<td colspan="5" scope="row"><a
 									href="notice_modify?noticeNum=<%=notice.getNoticeNum()%>"><input
 										type="button" value="글 수정" /></a> <a
@@ -115,40 +111,6 @@
 				</div>
 			</div>
 		</div>
-	</section>
-	<section id="services" class="bg-light">
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-8 mx-auto">
-					<table class="table table-bordered">
-						<thead>
-							<h3>공지사항댓글작성</h3>
-						</thead>
-						<tbody>
-							<form action="" method="post" encType="multiplart/form-data">
-								<tr>
-									<th>아이디 :</th>
-									<td>아이디입니다</td>
-								</tr>
-								<tr>
-									<th>제목 :</th>
-									<td><input type="text" placeholder="제목을 입력하세요. "
-										name="subject" class="" /></td>
-								</tr>
-								<tr>
-									<th>내용 :</th>
-									<td><textarea cols="80" placeholder="내용을 입력하세요. "
-											name="content" class=""></textarea></td>
-								</tr>
-								<tr>
-									<td colspan="2"><input type="button" value="등록" onclick=""
-										class="" /> <input type="button" value="글 목록" class=" "
-										onclick="" /></td>
-								</tr>
-							</form>
-					</table>
-				</div>
-			</div>
 	</section>
 
 	<!-- Footer -->

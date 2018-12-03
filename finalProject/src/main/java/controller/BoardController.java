@@ -13,7 +13,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import model.Notice;
 import model.Qna;
+import model.QnaReply;
 import model.Review;
+import model.ReviewReply;
 import service.BoardService;
 
 @Controller
@@ -158,22 +160,30 @@ public class BoardController {
 	}
 
 	@RequestMapping(value = "/qna_detail", method = RequestMethod.GET)
-	public String qnaDetailGet(Qna qna, @RequestParam(value = "qnaNum", defaultValue = "false") String qnaNum,
-			Model model) {
+	public String qnaDetailGet(QnaReply reply, Qna qna,
+			@RequestParam(value = "qnaNum", defaultValue = "false") String qnaNum, Model model) {
 		System.out.println("Controller qnaDetailGet");
 		model.addAttribute("qna", qna);
 		Qna list = boardService.selectQnaOne(qna);
 		model.addAttribute("qna", list);
+		List<QnaReply> replylist = boardService.selectQnaReplyList(reply);
+		System.out.println("qna-reply-service");
+		model.addAttribute("reply", reply);
+		model.addAttribute("replyList", replylist);
 		return "qnaBoard/qna_detail";
 	}
 
 	@RequestMapping(value = "/review_detail", method = RequestMethod.GET)
-	public String reviewDetailGet(Review review,
+	public String reviewDetailGet(ReviewReply reply, Review review,
 			@RequestParam(value = "reviewNum", defaultValue = "false") String reviewNum, Model model) {
 		System.out.println("Controller reviewDetailGet");
 		model.addAttribute("review", review);
 		Review list = boardService.selectReviewOne(review);
 		model.addAttribute("review", list);
+		List<ReviewReply> replylist = boardService.selectReviewReplyList(reply);
+		System.out.println("review-reply-service");
+		model.addAttribute("reply", reply);
+		model.addAttribute("replyList", replylist);
 		return "reviewBoard/review_detail";
 	}
 
@@ -311,6 +321,38 @@ public class BoardController {
 			return "redirect:notice_list";
 		} else {
 			return "redirect:notice_modify";
+		}
+	}
+
+	@RequestMapping(value = "/qna_reply", method = RequestMethod.POST)
+	public String qnaReplyPost(QnaReply reply, Model model) {
+		System.out.println("Controller qnaReplyPost");
+		Integer result = null;
+		result = boardService.replyQna(reply);
+		if (result > 0) {
+			System.out.println("reply insert 성공");
+			System.out.println("Controller qnaReplyPost replyQnaNum " + reply.getReplyQnaNum());
+			System.out.println("Controller qnaReplyPost replyQnaSubject " + reply.getReplyQnaSubject());
+			System.out.println("Controller qnaReplyPost replyQnaContent " + reply.getReplyQnaContent());
+			return "redirect:qna_list";
+		} else {
+			return "redirect:qna_detail";
+		}
+	}
+
+	@RequestMapping(value = "/review_reply", method = RequestMethod.POST)
+	public String reviewReplyPost(ReviewReply reply, Model model) {
+		System.out.println("Controller reviewReplyPost");
+		Integer result = null;
+		result = boardService.replyReview(reply);
+		if (result > 0) {
+			System.out.println("reply insert 성공");
+			System.out.println("Controller reviewReplyPost replyReviewNum " + reply.getReplyReviewNum());
+			System.out.println("Controller reviewReplyPost replyReviewSubject " + reply.getReplyReviewSubject());
+			System.out.println("Controller reviewReplyPost replyReviewContent " + reply.getReplyReviewContent());
+			return "redirect:review_list";
+		} else {
+			return "redirect:review_detail";
 		}
 	}
 

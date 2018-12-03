@@ -1,8 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8" import="model.Qna, java.util.*"%>
+	pageEncoding="UTF-8" import="model.*,command.*, java.util.*"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%
 	request.setCharacterEncoding("utf-8");
 	Qna qna = (Qna) request.getAttribute("qna");
+	QnaReply reply = (QnaReply) request.getAttribute("reply");
+	List list = (List) request.getAttribute("list");
+	LoginSession login = (LoginSession) session.getAttribute("info");
+	List replyList = (List) request.getAttribute("replyList");
+	System.out.println("qnaReplyList 확인");
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -42,6 +49,28 @@
 
 </head>
 <body id="page-top">
+	<!-- Navigation -->
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top"
+		id="mainNav">
+		<div class="container">
+			<a class="navbar-brand js-scroll-trigger" href="#page-top">기프트립 </a>
+			<button class="navbar-toggler" type="button" data-toggle="collapse"
+				data-target="#navbarResponsive" aria-controls="navbarResponsive"
+				aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarResponsive">
+				<ul class="navbar-nav ml-auto">
+					<li class="nav-item"><a class="nav-link js-scroll-trigger"
+						href="#about">로그인</a></li>
+					<li class="nav-item"><a class="nav-link js-scroll-trigger"
+						href="#services">회원가입</a></li>
+					<li class="nav-item"><a class="nav-link js-scroll-trigger"
+						href="#contact">마이페이지</a></li>
+				</ul>
+			</div>
+		</div>
+	</nav>
 	<section id="services" class="bg-light">
 		<div class="container">
 			<div class="row">
@@ -74,10 +103,6 @@
 								<td colspan="3"><%=qna.getQnaFile()%></td>
 							</tr>
 							<tr>
-								<th scope="row">댓글</th>
-								<td colspan="3">댓글입니다</td>
-							</tr>
-							<tr>
 								<td colspan="5" scope="row"><a
 									href="qna_modify?qnaNum=<%=qna.getQnaNum()%>"><input
 										type="button" value="글 수정" /></a> <a
@@ -91,41 +116,97 @@
 			</div>
 		</div>
 	</section>
-	<section id="services" class="bg-light">
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-8 mx-auto">
-					<table class="table table-bordered">
-						<thead>
-							<h3>질문댓글작성</h3>
-						</thead>
-						<tbody>
-							<form action="" method="post" encType="multiplart/form-data">
-								<tr>
-									<th>아이디 :</th>
-									<td>아이디입니다</td>
-								</tr>
-								<tr>
-									<th>제목 :</th>
-									<td><input type="text" placeholder="제목을 입력하세요. "
-										name="subject" class="" /></td>
-								</tr>
-								<tr>
-									<th>내용 :</th>
-									<td><textarea cols="80" placeholder="내용을 입력하세요. "
-											name="content" class=""></textarea></td>
-								</tr>
-								<tr>
-									<td colspan="2"><input type="button" value="등록" onclick=""
-										class="" /> <input type="button" value="글 목록" class=" "
-										onclick="" /></td>
-								</tr>
-							</form>
-					</table>
-				</div>
+
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-8 mx-auto">
+				<table class="table table-hover">
+					<thead>
+						<h2>질문댓글리스트</h2>
+						<tr>
+							<th scope="col">댓글번호</th>
+							<th scope="col">댓글쓴이</th>
+							<th scope="col">댓글제목</th>
+							<th scope="col">댓글내용</th>
+							<th scope="col">댓글작성일</th>
+						</tr>
+					</thead>
+					<tbody>
+						<%
+							System.out.println("qnaReplyList 댓글출력진입");
+							for (int i = 0; i < replyList.size(); i++) {
+								QnaReply list2 = (QnaReply) replyList.get(i);
+								System.out.println("qnaReplyList 댓글출력진입222");
+						%>
+						<tr>
+							<th scope="row"><%=list2.getReplyQnaNum()%></th>
+							<td><%=list2.getMemberNum()%></td>
+							<td><%=list2.getReplyQnaSubject()%></td>
+							<td><%=list2.getReplyQnaContent()%></td>
+							<td><%=list2.getReplyQnaDate()%></td>
+						</tr>
+						<%
+							}
+						%>
+					</tbody>
+				</table>
 			</div>
 		</div>
-	</section>
+	</div>
+	<br />
+	<br />
+	<br />
+	<br />
+	<br />
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-8 mx-auto">
+				<table class="table table-bordered">
+					<thead>
+						<h3>질문댓글작성</h3>
+					</thead>
+					<tbody>
+						<form action="qna_reply" method="post">
+							<input type="hidden" name="qnaNum" value="<%=qna.getQnaNum()%>" />
+							<input type="hidden" name="replyQnaNum" /> <input type="hidden"
+								name="memberNum" value="<%=login.getCommandId()%>" />
+							<tr>
+								<th>아이디 :</th>
+								<td><%=login.getCommandId()%></td>
+							</tr>
+							<tr>
+								<th>제목 :</th>
+								<td><input type="text" placeholder="댓글제목을 입력하세요. "
+									name="replyQnaSubject" /></td>
+							</tr>
+							<tr>
+								<th>내용 :</th>
+								<td><textarea cols="80" placeholder="댓글내용을 입력하세요. "
+										name="replyQnaContent"></textarea></td>
+							</tr>
+							<tr>
+								<td colspan="2"><input type="submit" value="등록" /> <a
+									href="qna_list"><input type="button" value="글 목록" /></a></td>
+							</tr>
+						</form>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+	<br />
+	<br />
+	<br />
+	<br />
+	<br />
+	<!-- Footer -->
+	<footer class="py-5 bg-dark">
+		<div class="container">
+			<p class="m-0 text-center text-white">Copyright &copy; Your
+				Website 2017</p>
+		</div>
+		<!-- /.container -->
+	</footer>
 </body>
 
 </html>

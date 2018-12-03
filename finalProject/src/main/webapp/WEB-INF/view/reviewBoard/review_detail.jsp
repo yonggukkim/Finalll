@@ -1,8 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8" import="model.Review, java.util.*"%>
+	pageEncoding="UTF-8" import="model.*,command.*, java.util.*"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%
 	request.setCharacterEncoding("utf-8");
 	Review review = (Review) request.getAttribute("review");
+	ReviewReply reply = (ReviewReply) request.getAttribute("reply");
+	List list = (List) request.getAttribute("list");
+	LoginSession login = (LoginSession) session.getAttribute("info");
+	List replyList = (List) request.getAttribute("replyList");
+	System.out.println("reviewReplyList 확인" + replyList.size());
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -99,10 +106,6 @@
 								<td colspan="3"><%=review.getReviewFile()%></td>
 							</tr>
 							<tr>
-								<th scope="row">댓글</th>
-								<td colspan="3">댓글입니다</td>
-							</tr>
-							<tr>
 								<td colspan="5" scope="row"><a
 									href="review_modify?reviewNum=<%=review.getReviewNum()%>"><input
 										type="button" value="글 수정" /></a><a
@@ -116,41 +119,91 @@
 			</div>
 		</div>
 	</section>
-	<section id="services" class="bg-light">
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-8 mx-auto">
-					<table class="table table-bordered">
-						<thead>
-							<h3>후기댓글작성</h3>
-						</thead>
-						<tbody>
-							<form action="" method="post" encType="multiplart/form-data">
-								<tr>
-									<th>아이디 :</th>
-									<td>아이디입니다</td>
-								</tr>
-								<tr>
-									<th>제목 :</th>
-									<td><input type="text" placeholder="제목을 입력하세요. "
-										name="subject" class="" /></td>
-								</tr>
-								<tr>
-									<th>내용 :</th>
-									<td><textarea cols="80" placeholder="내용을 입력하세요. "
-											name="content" class=""></textarea></td>
-								</tr>
-								<tr>
-									<td colspan="2"><input type="button" value="등록" onclick=""
-										class="" /> <input type="button" value="글 목록" class=" "
-										onclick="" /></td>
-								</tr>
-							</form>
-					</table>
-				</div>
+
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-8 mx-auto">
+				<table class="table table-hover">
+					<thead>
+						<h2>후기댓글리스트</h2>
+						<tr>
+							<th scope="col">댓글번호</th>
+							<th scope="col">댓글쓴이</th>
+							<th scope="col">댓글제목</th>
+							<th scope="col">댓글내용</th>
+							<th scope="col">댓글작성일</th>
+						</tr>
+					</thead>
+					<tbody>
+						<%
+							System.out.println("reviewReplyList 댓글출력진입");
+							for (int i = 0; i < replyList.size(); i++) {
+								ReviewReply list2 = (ReviewReply) replyList.get(i);
+								System.out.println("reviewReplyList 댓글출력진입3" + i);
+						%>
+						<tr>
+							<th scope="row"><%=list2.getReplyReviewNum()%></th>
+							<td><%=list2.getMemberNum()%></td>
+							<td><%=list2.getReplyReviewSubject()%></td>
+							<td><%=list2.getReplyReviewContent()%></td>
+							<td><%=list2.getReplyReviewDate()%></td>
+						</tr>
+						<%
+							}
+						%>
+					</tbody>
+				</table>
 			</div>
 		</div>
-	</section>
+	</div>
+	<br />
+	<br />
+	<br />
+	<br />
+	<br />
+
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-8 mx-auto">
+				<table class="table table-bordered">
+					<thead>
+						<h3>후기댓글작성</h3>
+					</thead>
+					<tbody>
+						<form action="review_reply" method="post">
+							<input type="hidden" name="reviewNum"
+								value="<%=review.getReviewNum()%>" /> 
+								<input type="hidden"
+								name="replyReviewNum" /> <input type="hidden" name="memberNum"
+								value="<%=login.getCommandId()%>" />
+							<tr>
+								<th>아이디 :</th>
+								<td><%=login.getCommandId()%></td>
+							</tr>
+							<tr>
+								<th>제목 :</th>
+								<td><input type="text" placeholder="제목을 입력하세요. "
+									name="replyReviewSubject" /></td>
+							</tr>
+							<tr>
+								<th>내용 :</th>
+								<td><textarea cols="80" placeholder="내용을 입력하세요. "
+										name="replyReviewContent" class=""></textarea></td>
+							</tr>
+							<tr>
+								<td colspan="2"><input type="submit" value="등록" /> <a
+									href="review_list"><input type="button" value="글 목록" /></a></td>
+							</tr>
+						</form>
+				</table>
+			</div>
+		</div>
+	</div>
+	<br />
+	<br />
+	<br />
+	<br />
+	<br />
 
 	<!-- Footer -->
 	<footer class="py-5 bg-dark">

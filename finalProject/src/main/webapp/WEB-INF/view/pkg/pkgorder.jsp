@@ -58,6 +58,21 @@ function openWin() {
 	window.open("self_gift_list", "gift", "width=500, height=500");
 }
 
+function ga() {
+	var num = document.getElementById("").value;
+	
+	$.ajax({
+		type : 'post',
+		url : 'ajaxGift',
+		dataType : 'html',
+		data : "cityNum="+num,
+		success : function(result) {
+			$('#country').html(result);
+			$('#city').html("");
+		}
+	});
+}
+
 </script>
 <head>
 <meta charset="utf-8">
@@ -98,7 +113,8 @@ function openWin() {
               <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis et enim aperiam inventore, similique necessitatibus neque non! Doloribus, modi sapiente laboriosam aperiam fugiat laborum. Sequi mollitia, necessitatibus quae sint natus.</p>
               <small class="text-muted">Posted by Anonymous on 3/1/17</small>
               <hr>
-              <a href="#" class="btn" onclick="openWin()">특산품 구매</a>
+              <a href="#" class="btn" id="gift" onclick="javascript:ga()" value="<%= pkgone.getCityNum() %>" >특산품 구매</a>
+              <td><div id="giftList"></div></td>
             </div>
 			<div class="card card-outline-secondary my-4">
 			<form:form commandName="pkgTouristInfo" action="pkgOrder">

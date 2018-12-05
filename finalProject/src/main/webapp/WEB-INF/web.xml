@@ -37,4 +37,36 @@
 		<filter-name>encodingFilter</filter-name>
 		<url-pattern>/*</url-pattern><!-- 모든 파일의 의미 -->
 	</filter-mapping>
+	
+	
+	<error-page>
+
+		<error-code>400</error-code>
+
+		<location>/WEB-INF/error/400Error.jsp</location>
+
+	</error-page>
+	
+	<error-page>
+
+		<error-code>404</error-code>
+
+		<location>/WEB-INF/error/404Error.jsp</location>
+
+	</error-page>
+
+
+
+	<error-page>
+
+		<error-code>500</error-code>
+
+		<location>/WEB-INF/error/500Error.jsp</location>
+
+	</error-page>
+
+
+
+
 </web-app>
+

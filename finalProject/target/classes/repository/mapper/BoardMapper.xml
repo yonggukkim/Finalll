@@ -145,7 +145,7 @@
 		#{staffNumber},
 		#{noticeDate},
 		#{noticeSubject}, #{noticeContent},
-		#{noticeFile},
+		<!-- #{noticeFile}, -->
 		#{noticePw},
 		#{noticeCount})
 	</insert>

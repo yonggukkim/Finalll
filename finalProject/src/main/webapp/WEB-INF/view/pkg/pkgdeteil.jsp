@@ -67,9 +67,9 @@
 					<div class="col-lg-3">
 						<h1 class="my-4">패키지 여행상품</h1>
 						<div class="list-group">
-							<a href="pkgMain" class="list-group-item active">이전 상품 목록</a> <a
+							<a href="pkgMain" class="list-group-item active">이전 상품 목록</a><!--  <a
 								href="#" class="list-group-item">Category 2</a> <a href="#"
-								class="list-group-item">Category 3</a>
+								class="list-group-item">Category 3</a> -->
 						</div>
 					</div>
 					<!-- /.col-lg-3 -->

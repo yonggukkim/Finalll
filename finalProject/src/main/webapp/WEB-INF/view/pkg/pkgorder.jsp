@@ -9,6 +9,10 @@
 %>
 <!DOCTYPE html>
 <html>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script> 
 <script>
 //개인회원 구직정보에서 가족 추가
 
@@ -113,7 +117,7 @@ function ga() {
               <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis et enim aperiam inventore, similique necessitatibus neque non! Doloribus, modi sapiente laboriosam aperiam fugiat laborum. Sequi mollitia, necessitatibus quae sint natus.</p>
               <small class="text-muted">Posted by Anonymous on 3/1/17</small>
               <hr>
-              <a href="#" class="btn" id="gift" onclick="javascript:ga()" value="<%= pkgone.getCityNum() %>" >특산품 구매</a>
+              <button class="btn" id="gift" onclick="javascript:ga()" value="<%= pkgone.getCityNum() %>" >특산품 구매</button>
               <td><div id="giftList"></div></td>
             </div>
 			<div class="card card-outline-secondary my-4">

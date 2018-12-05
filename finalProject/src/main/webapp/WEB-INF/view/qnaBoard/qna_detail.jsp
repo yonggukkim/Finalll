@@ -13,6 +13,23 @@
 %>
 <!DOCTYPE html>
 <html lang="en">
+<script type="text/javascript">
+/* 	$(function() {
+		$("#replyListButton").click(function() {
+			$.ajax({
+				type : 'post',
+				url : '/replyTest',
+				dataType : 'html',
+				success : function(data) {
+					$("#listDiv").html(data);
+				}
+			});
+		})
+	}) */
+
+</script>
+
+
 
 <head>
 
@@ -21,6 +38,7 @@
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="description" content="">
 <meta name="author" content="">
+
 
 <title>qna_detail.jsp</title>
 
@@ -158,6 +176,16 @@
 	<br />
 	<br />
 	<br />
+
+<!-- 	<input type="button" id="replyListButton" value="댓글보기" /> -->
+	
+	
+	
+	<!-- <div id="listDiv"> </div> -->
+
+
+
+
 	<div class="container">
 		<div class="row">
 			<div class="col-lg-8 mx-auto">
@@ -193,7 +221,7 @@
 				</table>
 			</div>
 		</div>
-	</div>
+	</div> 
 	<br />
 	<br />
 	<br />

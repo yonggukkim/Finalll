@@ -109,18 +109,10 @@
 		<!-- /.container -->
 	</footer>
 
-	<!-- Bootstrap core JavaScript -->
-	<script
-		src="http://localhost:8080/finalProject/vendor/jquery/jquery.min.js"></script>
-	<script
-		src="http://localhost:8080/finalProject/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-	<!--Plugin JavaScript-->
-	<script
-		src="http://localhost:8080/finalProject/vendor/jquery-easing/jquery.easing.min.js"></script>
 
 	<!-- Custom JavaScript for this theme-->
-	<script src="http://localhost:8080/finalProject/js/scrolling-nav.js"></script>
+	<script src="/finalProject/js/scrolling-nav.js"></script>
 
 </body>
 

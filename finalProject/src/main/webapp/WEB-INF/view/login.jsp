@@ -65,8 +65,7 @@
 									</td>
 								</tr>
 								<tr>
-									<td colspan="2"><input type="submit" value="등록" /> <a
-										href="join"><input type="button" value="회원가입" /></a></td>
+									<td colspan="2"><input type="submit" value="등록" /></td>
 								</tr>
 							</form:form>
 					</table>

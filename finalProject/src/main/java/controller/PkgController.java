@@ -31,7 +31,9 @@ public class PkgController {
 	private PkgService pkgService;
 	
 	@RequestMapping(value = "/pkg_insert", method = RequestMethod.GET)
-	public String pkgInsertGet( Model model) {
+	public String pkgInsertGet( Model model, HttpSession session) {
+		session.removeAttribute("activitycart");
+		session.removeAttribute("hotelcart");
 		PkgCommand pkg = new PkgCommand();
 		System.out.println("controller1");
 		categoryService.continentSelectPkg(model);
@@ -97,6 +99,8 @@ public class PkgController {
 	
 	@RequestMapping(value = "/pkg_insert", method = RequestMethod.POST)
 	public String pkgInsertPost(PkgCommand pkg, Model model, HttpSession session) {
+		
+		
 		System.out.println("POST INSERT");
 		Integer result = null;
 		System.out.println(pkg.getCityNum());
@@ -120,6 +124,9 @@ public class PkgController {
 		result = pkgService.insertPkg(pkg, model, session);
 		if(result != null) {
 			System.out.println("result"+result);
+			
+			
+			
 			return "redirect:/product";
 		}else {
 			return "redirect:/pkg_insert";

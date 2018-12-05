@@ -14,18 +14,18 @@
 					<table class="table table-hover">
 						<thead>
 							<tr>
-								<th scope="col">글번호</th>
-								<th scope="col">글쓴이</th>
-								<th scope="col">제목</th>
+								<th scope="col">상품번호</th>
+								<th scope="col">상품명</th>
+								<th scope="col">상품설명</th>
 								<th scope="col">작성일</th>
-								<th scope="col">종류</th>
+								<th scope="col">상품분류</th>
 							</tr>
 							<% for (Object o : list) {
 								Gift gift = (Gift)o;	
 							%>
 							<tr>
 								<td><%= gift.getGiftNum() %></td>
-								<td><%= gift.getGiftName() %></td>
+								<td><a href="gift_detail?giftNum=<%=gift.getGiftNum()%>"><%=gift.getGiftName()%></a></td>
 								<td><%= gift.getGiftContent() %></td>
 								<td><%= gift.getGiftRegdate() %></td>
 								<td><%= gift.getGiftCate() %></td>

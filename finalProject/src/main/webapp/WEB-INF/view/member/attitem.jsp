@@ -19,7 +19,7 @@
 
 
     <!-- Custom styles for this template -->
-    <link href="http://localhost:8080/finalProject/css/scrolling-nav.css" rel="stylesheet">
+    <link href="/finalProject/css/scrolling-nav.css" rel="stylesheet">
 
 
   </head>
@@ -106,14 +106,6 @@ function fn_view(code){
       <!-- /.container -->
     </footer>
 
-<!--     Bootstrap core JavaScript
-    <script src="http://localhost:8080/finalProject/jquery/jquery.min.js"></script>
-    <script src="http://localhost:8080/finalProject/js/bootstrap.bundle.min.js"></script>
 
-    Plugin JavaScript
-    <script src="http://localhost:8080/finalProject/jquery-easing/jquery.easing.min.js"></script>
-
-    Custom JavaScript for this theme
-    <script src="http://localhost:8080/finalProject/js/scrolling-nav.js"></script> -->
 
 </html>

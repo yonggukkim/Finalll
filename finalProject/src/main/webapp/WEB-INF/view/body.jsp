@@ -1,8 +1,25 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+
 <html>
-<head>
+<style>
+
+
+#main1,#main2,#main3 {
+  padding: 0.25rem;
+  background-color: #fff;
+  border: 1px solid #dee2e6;
+  border-radius: 0.25rem;
+  max-width: 100%;
+  height : 250px;
+}
+
+
+</style>
+
+
+
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
@@ -15,12 +32,12 @@
         </ol>
         <div class="carousel-inner" role="listbox">
           <!-- Slide One - Set the background image for this slide in the line below -->
-          <a href=""><div class="carousel-item active" style="background-image: url('/finalProject/mainPage/mainImages/main1.jpg')">
+          <div class="carousel-item active" style="background-image: url('/finalProject/mainPage/mainImages/main1.jpg')">
             <!-- <div class="carousel-caption d-none d-md-block">
               <h3>First Slide</h3>
               <p>This is a description for the first slide.</p>
             </div> -->
-          </div></a>
+          </div>
           <!-- Slide Two - Set the background image for this slide in the line below -->
           <div class="carousel-item" style="background-image: url('/finalProject/mainPage/mainImages/main2.jpg')">
             <!-- <div class="carousel-caption d-none d-md-block">
@@ -51,18 +68,17 @@
       <div class="row text-center text-lg-left">
 
         <div class="col-lg-4 mb-4">
-          <a href="pkgMain" class="d-block mb-4 h-100">패키지여행
-            <img class="img-fluid img-thumbnail" src="/finalProject/img/group-hero.jpg" width="400" height="300" alt="pkg">
+            <img id ="main1" class="img-fluid img-thumbnail" onclick="javascript:location.href='pkgMain';" src="/finalProject/img/group-hero.jpg" width="400px" height="300px" alt="pkg">
+           <center><a href="pkgMain" class="d-block mb-4 h-100"><h3>패키지여행</h3></a></center>
+        </div>
+        <div class="col-lg-4 mb-4">
+          <a href="#" class="d-block mb-4 h-100">
+            <img id ="main2" class="img-fluid img-thumbnail" src="/finalProject/img/semiMain.jpg" width="400px" height="300px" alt="semi"><center><h3>세미패키지여행</h3></center>
           </a>
         </div>
         <div class="col-lg-4 mb-4">
-          <a href="#" class="d-block mb-4 h-100">세미패키지여행
-            <img class="img-fluid img-thumbnail" src="http://placehold.it/400x300" alt="">
-          </a>
-        </div>
-        <div class="col-lg-4 mb-4">
-          <a href="selfMain" class="d-block mb-4 h-100">자유여행
-            <img class="img-fluid img-thumbnail" src="http://placehold.it/400x300" alt="">
+          <a href="selfMain" class="d-block mb-4 h-100">
+            <img id="main3" class="img-fluid img-thumbnail" src="/finalProject/img/selfMain.jpg" width="400px" height="300px" alt="self"><center><h3>자유여행</h3></center>
           </a>
         </div>
         

@@ -33,6 +33,9 @@ public class BoardController {
 		model.addAttribute("list2", list2);
 		model.addAttribute("list3", list3);
 		model.addAttribute("bodyPage", "notice_board.jsp");
+		
+		
+		
 		return "main";
 	}
 
@@ -163,6 +166,7 @@ public class BoardController {
 	public String qnaDetailGet(QnaReply reply, Qna qna,
 			@RequestParam(value = "qnaNum", defaultValue = "false") String qnaNum, Model model) {
 		System.out.println("Controller qnaDetailGet");
+		
 		model.addAttribute("qna", qna);
 		Qna list = boardService.selectQnaOne(qna);
 		model.addAttribute("qna", list);
@@ -355,5 +359,17 @@ public class BoardController {
 			return "redirect:review_detail";
 		}
 	}
+	
+	@RequestMapping(value="/replyTest", method=RequestMethod.POST)
+	public String replyTest(QnaReply reply, Model model) {
+		System.out.println("ajax test");
+		
+		return "qnaBoard/qnaReplyList";
+	}
+	
+	
+	
+	
+	
 
 }

@@ -9,6 +9,12 @@
 <!DOCTYPE html>
 <html>
 <head>
+<style>
+@import url('https://fonts.googleapis.com/css?family=Cute+Font|Gamja+Flower');
+body, table, div, p {font-family:  'Gamja Flower', cursive;}
+
+
+</style>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
@@ -19,10 +25,11 @@
  	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 	
 	    <!-- Custom styles for this template -->
-	    <link href="http://localhost:8080/finalProject/css/scrolling-nav.css" rel="stylesheet">
-	    <link href="http://localhost:8080/finalProject/css/modern-business.css" rel="stylesheet">
-	    <link href="http://localhost:8080/finalProject/css/mainPage.css" rel="stylesheet">
+	    <link href="/finalProject/css/scrolling-nav.css" rel="stylesheet">
+	    <link href="/finalProject/css/modern-business.css" rel="stylesheet">
+	    <link href="/finalProject/css/mainPage.css" rel="stylesheet">
 </head>
+
 <body>
 	<div id="header">
 		<jsp:include page="header.jsp" />

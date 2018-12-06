@@ -53,7 +53,7 @@ public class MemberController {
 //	}
 
 	@RequestMapping(value = "/memberJoin", method = RequestMethod.POST)
-	public String memberJoinPost(Member member, Model model, HttpServletResponse response) throws IOException {
+	public String memberJoinPost(Member member, Model model) {
 		/*
 		 * System.out.println("Controller memberJoinPost");
 		 * System.out.println("Controller memberJoinPost memberNum " +
@@ -106,13 +106,6 @@ public class MemberController {
 			model.addAttribute("member", member);
 			System.out.println("Controller memberJoinPost memberNum " + member.getMemberNum());
 
-			response.setContentType("text/html; charset=UTF-8");
-
-			PrintWriter out = response.getWriter();
-
-			out.println("<script>alert('회원가입이 성공적으로 이루어졌습니다..'); </script>");
-
-			out.flush();
 			return "redirect:login";
 		} else {
 			return "member/terms";

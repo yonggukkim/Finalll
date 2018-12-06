@@ -3,10 +3,21 @@
 <!DOCTYPE html>
 <html>
 <head>
+<style>
+body {
+
+   background-image:url(/finalProject/img/500Error.jpg);
+
+   background-repeat:no-repeat;
+
+   background-size:cover;
+}
+
+</style>
+
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
 <body>
-500 Error
 </body>
 </html>

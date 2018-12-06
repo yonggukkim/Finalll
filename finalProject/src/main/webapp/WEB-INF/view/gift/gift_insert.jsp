@@ -98,11 +98,7 @@
 					<td>도시번호</td>
 					<td><form:input path="cityNum" /></td>
 				</tr> --%>
-				<tr>
-					<td>특산품 번호(히든값)</td>
-					<td><form:hidden path="giftNum" /></td>
-
-				</tr>
+				<form:hidden path="giftNum" />
 				<tr>
 					<td>특산품 이름</td>
 					<td><form:input path="giftName" /></td>

@@ -86,11 +86,11 @@
 	
 	</div>
     <!-- Page Content -->
-    <div class="container">
+    <!-- <div class="container">
 
       <h1 class="my-4">추천상품</h1>
 
-      <!-- Marketing Icons Section -->
+      Marketing Icons Section
       <div class="row">
         <div class="col-lg-4 mb-4">
           <div class="card h-100">
@@ -126,9 +126,9 @@
           </div>
         </div>
       </div>
-      <!-- /.row -->
+      /.row
 
-      <!-- Portfolio Section -->
+      Portfolio Section
       <h1>베스트 여행 후기</h2>
 
       <div class="row">
@@ -203,7 +203,7 @@
             </div>
           </div>
         </div>
-      </div>
+      </div> -->
      
 </body>
 </html>

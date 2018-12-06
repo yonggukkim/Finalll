@@ -118,39 +118,65 @@
 								</a>
 							</div>
 							<div class="card-body">
-								<h3 class="card-title">Product Name</h3>
-								<h4>$24.99</h4>
-								<p class="card-text">Lorem ipsum dolor sit amet, consectetur
-									adipisicing elit. Sapiente dicta fugit fugiat hic aliquam
-									itaque facere, soluta. Totam id dolores, sint aperiam sequi
-									pariatur praesentium animi perspiciatis molestias iure,
-									ducimus!</p>
+								<h3 class="card-title">[<%=pkgone.getPkgName() %>]</h3>
+								<h4>₩<%= pkgone.getPkgPrice() %></h4>
+								<br/>
+								<h5><p class="card-text"><%=pkgone.getPkgContent() %></p></h5>
 								<span class="text-warning">&#9733; &#9733; &#9733;
 									&#9733; &#9734;</span> 4.0 stars
 							</div>
 						</div>
 						<!-- /.card -->
+						
+						<div class="card card-outline-hotel my-4">
+							<div class="card-header"><h3>호텔정보</h3></div>
+							<div class="card-body card card-outline-secondary">
+								
+									
+									<% 
+									for(int i=0; i<hotels.getHotels().size(); i++) {
+									Restore hRestore = hotels.getRestores().get(i); 
+									%>
+									
+								<img src="/finalProject/files/<%= hRestore.getStoredFileName() %>" height="350px">
+								
+								<center> [<%= i+1 %>.<%= hotels.getHotels().get(i).getHotelName() %> 사진]</center><br/>
+								
+								<% } %>	
+								<hr>
+							</div>
+						</div>
+						
+						<div class="card card-outline-hotel my-4">
+							<div class="card-header"><h3>액티비티 정보</h3></div>
+							<div class="card-body card card-outline-secondary">
+								
+									
+									<% 
+									for(int i=0; i<activitys.getRestores().size(); i++) {
+									Restore aRestore = activitys.getRestores().get(i); 
+									%>
+									
+								<img src="/finalProject/files/<%= aRestore.getStoredFileName() %>" height="350px">
+								
+								<center> <%= i+1 %>.<%= activitys.getActivitys().get(i).getActivityName() %> 사진</center><br/>
+								
+								<% } %>	
+								<hr>
+							</div>
+						</div>
+						
+						
+						
+						
 
 						<div class="card card-outline-secondary my-4">
-							<div class="card-header">Product Reviews</div>
+							<div class="card-header">해당 상품 후기</div>
 							<div class="card-body card card-outline-secondary">
-								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-									Omnis et enim aperiam inventore, similique necessitatibus neque
-									non! Doloribus, modi sapiente laboriosam aperiam fugiat
-									laborum. Sequi mollitia, necessitatibus quae sint natus.</p>
+								<p>후기란입니다. 추후 추가</p>
+								
 								<small class="text-muted">Posted by Anonymous on 3/1/17</small>
-								<hr>
-								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-									Omnis et enim aperiam inventore, similique necessitatibus neque
-									non! Doloribus, modi sapiente laboriosam aperiam fugiat
-									laborum. Sequi mollitia, necessitatibus quae sint natus.</p>
-								<small class="text-muted">Posted by Anonymous on 3/1/17</small>
-								<hr>
-								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-									Omnis et enim aperiam inventore, similique necessitatibus neque
-									non! Doloribus, modi sapiente laboriosam aperiam fugiat
-									laborum. Sequi mollitia, necessitatibus quae sint natus.</p>
-								<small class="text-muted">Posted by Anonymous on 3/1/17</small>
+								
 								<hr>
 								<a href="#" class="btn btn-secondary" id="menu-toggle">상품추가</a>
 								 <a href="pkgMain" calss="btn">뒤로가기</a>

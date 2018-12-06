@@ -14,21 +14,27 @@
 					<table class="table table-hover">
 						<thead>
 							<tr>
-								<th scope="col">글번호</th>
-								<th scope="col">글쓴이</th>
-								<th scope="col">제목</th>
+								<th scope="col">호텔등록번호</th>
+								<th scope="col">담당자</th>
+								<th scope="col">소재도시번호</th>
+								<th scope="col">호텔명</th>
+								
 								<th scope="col">작성일</th>
 								<th scope="col">종류</th>
+								<th scope="col">썸네일</th>
 							</tr>
 							<% for (Object o : list) {
 								Hotel hotel = (Hotel)o;	
+								
 							%>
 							<tr>
 								<th scope="col"><%= hotel.getHotelNum() %></th>
 								<th scope="col"><%= hotel.getStaffNumber() %></th>
+								<th scope="col"><%= hotel.getCityNum() %></th>
 								<th scope="col"><a href="hotel_detail?hotelNum=<%= hotel.getHotelNum() %>"><%= hotel.getHotelName() %></a></th>
 								<th scope="col"><%= hotel.getHotelRegdate() %></th>
 								<th scope="col"><%= hotel.getHotelCate() %></th>
+								<%-- <td><img alt="hotel" src="files/<%= hotel.getHotelImage() %>" width="50" height="50"></td> --%>		
 							</tr>
 							<% } %>
 						</thead>

@@ -82,6 +82,7 @@ public class HotelController {
 	public String hotelListGet(Hotel hotel, Model model) {
 		System.out.println("Get list");
 		List<Hotel> list = hotelService.selectHotelList(hotel, model);
+		List<Hotel
 		if(list != null) {
 			model.addAttribute("list",list);
 			System.out.println(list.size());

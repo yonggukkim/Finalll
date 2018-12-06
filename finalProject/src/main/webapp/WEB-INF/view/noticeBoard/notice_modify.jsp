@@ -38,7 +38,7 @@
 
 
 <!-- Custom styles for this template -->
-<link href="http://localhost:8080/finalProject/css/scrolling-nav.css"
+<link href="/finalProject/css/scrolling-nav.css"
 	rel="stylesheet">
 
 </head>
@@ -117,17 +117,17 @@
 
 	<!-- Bootstrap core JavaScript -->
 	<script
-		src="http://localhost:8080/finalProject/vendor/jquery/jquery.min.js"></script>
+		src="/finalProject/vendor/jquery/jquery.min.js"></script>
 	<script
-		src="http://localhost:8080/finalProject/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+		src="/finalProject/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
 	<!--Plugin JavaScript-->
 	<script
-		src="http://localhost:8080/finalProject/resources/vendor/jquery-easing/jquery.easing.min.js"></script>
+		src="/finalProject/resources/vendor/jquery-easing/jquery.easing.min.js"></script>
 
 	<!--Custom JavaScript for this theme-->
 	<script
-		src="http://localhost:8080/finalProject/resources/js/scrolling-nav.js"></script>
+		src="/finalProject/resources/js/scrolling-nav.js"></script>
 
 
 </body>

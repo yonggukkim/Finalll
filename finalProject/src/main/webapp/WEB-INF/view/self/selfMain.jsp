@@ -25,9 +25,9 @@
 	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
 
 <!-- Custom styles for this template -->
-<link href="http://localhost:8080/finalProject/css/modern-business.css"
+<link href="/finalProject/css/modern-business.css"
 	rel="stylesheet">
-<link href="http://localhost:8080/finalProject/css/mainPage.css"
+<link href="/finalProject/css/mainPage.css"
 	rel="stylesheet">
 </head>
 <body>

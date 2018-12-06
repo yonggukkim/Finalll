@@ -16,6 +16,7 @@
 							<tr>
 								<th scope="col">상품번호</th>
 								<th scope="col">등록인</th>
+								<th scope="col">소재도시번호</th>
 								<th scope="col">상품명</th>
 								<th scope="col">작성일</th>
 								<th scope="col">종류</th>
@@ -26,6 +27,7 @@
 							<tr>
 								<th scope="col"><%= activity.getActivityNum() %></th>
 								<th scope="col"><%= activity.getStaffNumber() %></th>
+								<th scope="col"><%= activity.getCityNum() %></th>
 								<th scope="col"><a href="activity_detail?activityNum=<%= activity.getActivityNum() %>"><%= activity.getActivityName() %></a></th>
 								<th scope="col"><%= activity.getActivityRegdate() %></th>
 								<th scope="col"><%= activity.getActivityCate() %></th>

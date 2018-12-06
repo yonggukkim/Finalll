@@ -44,7 +44,7 @@
 
 
 <!-- Custom styles for this template -->
-<link href="http://localhost:8080/finalProject/css/scrolling-nav.css"
+<link href="/finalProject/css/scrolling-nav.css"
 	rel="stylesheet">
 
 </head>

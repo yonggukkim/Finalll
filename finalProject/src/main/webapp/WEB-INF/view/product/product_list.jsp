@@ -53,11 +53,11 @@
 							data-toggle="tab"> 패키지여행상품 <span
 							class="badge badge-primary badge-pill"><%= pkglist.size() %></span>
 						</a>
-						<a href="#semipkg"
+						<!-- <a href="#semipkg"
 							class="list-group-item d-flex justify-content-between align-items-center"
 							data-toggle="tab"> 세미패키지여행상품 <span
 							class="badge badge-primary badge-pill">99</span>
-						</a>
+						</a> -->
 						<a href="#activity"
 							class="list-group-item d-flex justify-content-between align-items-center"
 							data-toggle="tab"> 액티비티 <span

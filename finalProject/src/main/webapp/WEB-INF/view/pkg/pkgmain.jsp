@@ -81,7 +81,7 @@ a:visited {
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
 <script
-	src="http://localhost:8080/finalProject/js/bootstrap.bundle.min.js"></script>
+	src="/finalProject/js/bootstrap.bundle.min.js"></script>
 <title>Modern Business - Start Bootstrap Template</title>
 <!-- Bootstrap core CSS -->
 <link rel="stylesheet"
@@ -102,7 +102,7 @@ a:visited {
 	crossorigin="anonymous"></script>
 
 <!-- Custom styles for this template -->
-<link href="http://localhost:8080/finalProject/css/modern-business.css"
+<link href="/finalProject/css/modern-business.css"
 	rel="stylesheet">
 
 </head>
@@ -501,7 +501,7 @@ a:visited {
 				<div class="card h-100">
 					<a href="#"><img class="card-img-top"
 						<%-- src="'${pageContext.request.contextPath}'" alt=""></a> --%>
-						 src="http://192.168.6.125:8080/finalProject/files/<%= restore.getStoredFileName() %>" height="250" alt="사진없음" 
+						 src="/finalProject/files/<%= restore.getStoredFileName() %>" height="250" alt="사진없음" 
 						 onclick="javascript:location.href='pkgDeteil?pkg_num=<%= pkg.getPkgNum() %>';"></a> 
 					<div class="card-body">
 						<h2 class="card-title">

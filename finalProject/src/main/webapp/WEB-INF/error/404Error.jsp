@@ -3,11 +3,23 @@
 <!DOCTYPE html>
 <html>
 <head>
+<style>
+body {
+
+   background-image:url(/finalProject/img/404Error.jpg);
+
+   background-repeat:no-repeat;
+
+   background-size:cover;
+}
+
+</style>
+
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
-<body background="/finalProject/img/404error.jpg">
-404 에러입니다.
+<body background="/finalProject/img/404Error.jpg">
+
 
 
 </body>

@@ -178,7 +178,7 @@
 								<small class="text-muted">Posted by Anonymous on 3/1/17</small>
 								
 								<hr>
-								<a href="#" class="btn btn-secondary" id="menu-toggle">상품추가</a>
+								<a href="#" class="btn btn-secondary" id="menu-toggle">특산품추가</a>
 								 <a href="pkgMain" calss="btn">뒤로가기</a>
 								
 							</div>

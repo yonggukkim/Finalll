@@ -50,11 +50,6 @@ public class MainController {
 		}
 		return "redirect:main";
 	}
-	@RequestMapping(value="/drag", method = RequestMethod.GET)
-	public String drag(Model model ) {
-		System.out.println("drag test");
-		return "selfPlanBoard/ttest";
-		
-	}
+
 	
 }

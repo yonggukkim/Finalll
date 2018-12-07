@@ -104,19 +104,30 @@ function ga() {
 	<div class="container">
 		<div class="row">
 			<div class="col-lg-12 card card-outline-secondary">
+				<h3>주문 패키지</h3>
 				<div class="card-header card card-outline-secondary">
-              <%= pkgone.getPkgName()  %>
+				
+               <% 
+            		for (int i=0; i<pkgone.getRestores().size(); i++) {
+            	
+            	Restore restore = pkgone.getRestores().get(i); %>
+            	
+            	<img src="/finalProject/files/<%= restore.getStoredFileName() %>" width="100px" height="100px">
+            	
+            	
+            	<% }%><%= pkgone.getPkgName()  %> 
+            	<%-- <% Restore restore = pkgone.getRestores().get(0); %>
+            	
+            	<img src="/finalProject/files/<%= restore.getStoredFileName() %>" width="100px" height="100px"> --%>
+            	
             </div>
+            
+            
             <div class="card-body card card-outline-secondary">
               <p><%= pkgone.getPkgContent() %></p>
               <small class="text-muted"><%= pkgone.getPkgPeriod() %></small>
               <hr>
-              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis et enim aperiam inventore, similique necessitatibus neque non! Doloribus, modi sapiente laboriosam aperiam fugiat laborum. Sequi mollitia, necessitatibus quae sint natus.</p>
-              <small class="text-muted">Posted by Anonymous on 3/1/17</small>
-              <hr>
-              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis et enim aperiam inventore, similique necessitatibus neque non! Doloribus, modi sapiente laboriosam aperiam fugiat laborum. Sequi mollitia, necessitatibus quae sint natus.</p>
-              <small class="text-muted">Posted by Anonymous on 3/1/17</small>
-              <hr>
+              
               <button class="btn" id="gift" onclick="javascript:ga()" value="<%= pkgone.getCityNum() %>" >특산품 구매</button>
               <td><div id="giftList"></div></td>
             </div>
@@ -149,14 +160,14 @@ function ga() {
                     <td>
                                </td>
                                <td width="80"></td>
-                                <td><img src=../../../images/mypage/bt_del.gif / onclick=rowdel();></td>
+                                <td><img src="/finalProject/img/xbtn.png" width="20" weight="20" onclick=rowdel();></td>
                                 </tr>
                             </table>
                              <table width="580" border="0" cellspacing="0" cellpadding="0" id="fam_tb1" class="family">
                              </table>
 
                             <div id="fam_add" style="display:;">
-                                여행자 추가시 [추가]버튼을 눌러주세요. <img src="/finalProject/images/mypage/bt_add.gif" align="absmiddle" border="0" onclick="family_add();" /> 
+                                여행자 추가시 + 버튼을 눌러주세요. <img src="/finalProject/img/addbtn.png" width="20" weight="20" align="absmiddle" border="0" onclick="family_add();" /> 
                             </div>
                         <div class="row justify-content-center">
 	          <button type="submit" class="btn" style="margin-bottom:20px">결제하기</button>
